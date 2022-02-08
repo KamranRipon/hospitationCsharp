@@ -22,8 +22,9 @@ RUN apt-get update -y \
     xvfb
 
 RUN curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docker-compose-`uname -s`-`uname -m` -o ./docker-compose
-RUN chmod +x docker-compose
-RUN npm install
 
-RUN $(npm bin)/cypress verify
-RUN npm run CyTest
+RUN chmod +x docker-compose.yml
+RUN npm install
+EXPOSE 5000
+#RUN $(npm bin)/cypress verify
+#RUN npm run CyTest
