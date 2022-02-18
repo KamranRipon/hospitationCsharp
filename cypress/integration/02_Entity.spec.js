@@ -1,6 +1,6 @@
-import { onEntityHinzufuegen } from "../support/page_objects/Entity/01_Entity_Hinzufuegen"
-import { onEntityBearbeiten } from "../support/page_objects/Entity/02_Entity_Bearbeiten"
-import { onEntitySuchen } from "../support/page_objects/Entity/03_Entity_Suchen"
+import { onEntityHinzufuegen } from "../support/page_objects/01_Trainingsdaten/02_Entities/01_Entity_Hinzufuegen"
+import { onEntityBearbeiten } from "../support/page_objects/01_Trainingsdaten/02_Entities/02_Entity_Bearbeiten"
+import { onEntitySuchen } from "../support/page_objects/01_Trainingsdaten/02_Entities/03_Entity_Suchen"
 
 describe("Test Case 5: Entity", () => {
 
@@ -11,7 +11,7 @@ describe("Test Case 5: Entity", () => {
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it("Entity Hinzufuegen", () => {
+    it("Test Case CCI-T10:Entity Hinzufuegen", () => {
         onEntityHinzufuegen.entityHinzufuegen()
         /*
         A. Entity Hinzufügen 
@@ -28,19 +28,19 @@ describe("Test Case 5: Entity", () => {
         */
     })
 
-    it.only("Entity Suchen", () => {
+    it.only("Test Case CCI-T13: Entity Suchen", () => {
         onEntitySuchen.entitySuchen()
         /* 
         C. Entity Suchen
         1. Searching for single specific intent works
         2. Searching for some chars multiple intents has in common filters correctly
         3. Searching for some chars no intent has shows empty table
-        ** Assert All in Intent TAble**
+        ** Assert All in Intent TAble **
         */
 
     })
 
-    it("Entity Bearbeiten", () => {
+    it("Test Case CCI-T12: Entity Bearbeiten", () => {
         onEntityBearbeiten.entityBearbeiten()
         /* 
         B. Entity Bearbeiten

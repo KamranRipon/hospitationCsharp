@@ -5,43 +5,25 @@ export class response_text_anlegen {
 
     responseTexteAnlegen() {
 
-        /* Response Text Anlegen Testing */
+        /* Response Anlegen Testing */
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        // Assert URL after clicking Rules
+        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-            })
-
+        
         // 1. Text Name should not be empty, error message should contain "Texte"; /Currently Bug/
         // 1.1 Response Teste Name
         //     1.1.1 Warning message below input field
         //     1.1.2 Error message after unsuccessful saving  /Currently Bug/
 
         //Enter to first row of Response Table
-        cy.log('Line 631')
         cy.wait(500)
         cy.get('tbody')
             .find('tr')
             .first()
             .click()
-            .wait(500)
+            //.wait(500)
 
         var resName
         // Save Response Name for letar Assertion
@@ -57,47 +39,37 @@ export class response_text_anlegen {
         })
         
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Texte')
             .click()
 
         // Clicking responsetext-create
-        cy.get('[data-cy="responsetext-create"]')
-            .click()
-
-        cy.get('[data-cy="responsetext-text"]')
-            .click({force:true})
+        cy.get('[data-cy="responsetext-create"]').click()
         
         //Assert warning notification
         cy.get('[class="v-messages__wrapper"]')
             .should('have.text','Der Text muss gesetzt sein')
 
         // Clicking Anlegen Button while Text field is empty
-        // Click speichen
-        cy.get('[data-cy="create-button"]')
-            .click()
+        cy.get('[data-cy="create-button"]').click()
 
         // success-remove
-        cy.get('[data-cy="success-remove"]')
-            .click()
+        cy.successRemove()
 
         // Add a valid Text Name
         cy.get('[data-cy="responsetext-create"]')
             .click()
 
         cy.get('[data-cy="responsetext-text"]')
-            .click({force:true})
             .type(addValue+String(txa))
 
         // Click Anlegen
         cy.get('[data-cy="create-button"]')
             .click()
+            .wait(300)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
 
         // 2. Check for successfully saved values
         // 2.1 Assert successfully saved Notification
@@ -122,12 +94,10 @@ export class response_text_anlegen {
         // 2.2 Assert in the Texte table
 
         // Assert in Response Texte Table
-        cy.log('Line 735')
         cy.get('tbody')
             .find('tr')
                 .last()
             .find('td:nth-child(2)').then(function($text) {
-
                 const text = $text.text()
                 cy.wrap($text).should('have.text', addValue+String(txa))
             })
@@ -137,11 +107,9 @@ export class response_text_anlegen {
             .then((tbLength) => {
                 const countRow = tbLength.length
                 
-                cy.get('[data-cy="navDrawerResponses"]')
-                    .click()
+                cy.get('[data-cy="navDrawerResponses"]').click()
                 
                 cy.get('[data-cy="response-table-search"]')
-                    .click()
                     .type(resName)
 
                 cy.get('tbody')
@@ -151,7 +119,6 @@ export class response_text_anlegen {
             })
                     
         // 4. Leave site via menu or breadcrump does not save value
-        cy.log('Line 756')
         cy.wait(500)
         cy.get('tbody')
             .find('tr')
@@ -159,30 +126,25 @@ export class response_text_anlegen {
             .click()
         
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        //cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Texte')
             .click()
 
         // Clicking responsetext-create
-        cy.get('[data-cy="responsetext-create"]')
-            .click()
+        cy.get('[data-cy="responsetext-create"]').click()
 
         cy.get('[data-cy="responsetext-text"]')
-            .click({force:true})
             .type('leaveWithBreadCrumb')
-        
+
         // Leave Site via Bread Crumb
-        cy.get('[class="v-breadcrumbs theme--light"]')
-            .contains(' Response Text ')
+        cy.get('[role="tab"]')
+            .contains('Texte')
             .click()
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
-        
-        cy.log('Line 792')
+        cy.selectEntireTbl()
+                
         cy.get('tbody')
             .find('tr')
             .first()

@@ -6,28 +6,11 @@ export class response_text_bearbeiten {
 
     responseTexteBearbeiten() {
 
-        /* Response Texte Bearbeiten Testing */
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        /* Response Anlegen Testing */
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-            })
+        // Assert URL after clicking Rules
+        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
 
         // 1. Edit Name should not be empty, error message should contain "Text"
         // 1.1 Response Texte Name
@@ -35,14 +18,10 @@ export class response_text_bearbeiten {
         //     1.1.2 Error message after unsuccessful saving
         
         // Entering to first of
-        cy.log('Line 849')
         cy.wait(500)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
         
         var max_val2 = 0
         // Enter to Response table Row
@@ -80,19 +59,16 @@ export class response_text_bearbeiten {
         })    
 
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        //cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Texte')
             .click()
             .wait(500)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
-
+        cy.selectEntireTbl()
+        
         // Entering to a Texte Table Row
-        cy.log('Line 910')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(2)')
@@ -100,45 +76,36 @@ export class response_text_bearbeiten {
             .click()
 
         cy.get('[data-cy="responsetext-text"]')
-            .click({force:true})
             .clear()
         
         //Assert warning notification
-        cy.get('[class="v-messages__wrapper"]')
+        cy.get('[role="alert"]')
             .should('have.text','Der Text muss gesetzt sein')
 
         // Clicking Anlegen Button while Text field is empty
-        // Click speichen
-        cy.get('[data-cy="save-button"]')
-            .click()
+        cy.get('[data-cy="save-button"]').click()
         
         // Assert Nicht Möglich,
-        cy.get('[data-cy="errorMessageTitle"]')
-            .should('have.text',' Die Response konnte nicht gespeichert werden. ')
-
+        cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Die', 'Response')
+        
         //Close Error Notification
-        cy.get('[data-cy="error-remove"]')
-            .click()
+        cy.get('[data-cy="error-remove"]').click()
 
         // add a valid text name and assert
         //  1. notification
         //  2. in the table
         cy.get('[data-cy="responsetext-text"]')
-            .click({force:true})
             .type(addValue+String(xTx))
 
         // click save-button
         cy.get('[data-cy="save-button"]')
             .click()
+            .wait(300)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
 
         // Assert Successfully Saved Notification
-        cy.log('Line 961')
         var idNr2
         cy.get('tbody')
             .find('tr')
@@ -155,34 +122,28 @@ export class response_text_bearbeiten {
             })
 
         // Remove success notification
-        cy.get('[data-cy="success-remove"]')
-            .click()
+        cy.get('[data-cy="success-remove"]').click()
         
         // 2. Check for successfully saved values
         // 2.2 Assert in the Texte table
         // Assert in Response Texte Table
-        cy.log('Line 981')
         cy.get('tbody')
             .find('tr')
                 .last()
             .find('td:nth-child(2)').then(function($text) {
-
                 const text = $text.text()
                 cy.wrap($text).should('have.text', addValue+String(xTx))
             })
 
         // 3. Saving saves given data correctly
-        cy.log('Line 992')
         cy.get('tbody')
             .find('tr')
             .then((tbLength) => {
                 const countRow = tbLength.length
                 
-                cy.get('[data-cy="navDrawerResponses"]')
-                    .click()
+                cy.get('[data-cy="navDrawerResponses"]').click()
                 
                 cy.get('[data-cy="response-table-search"]')
-                    .click()
                     .type(resName1)
 
                 cy.get('tbody')
@@ -192,17 +153,14 @@ export class response_text_bearbeiten {
             })
         
         // clear resonse-table-search
-        cy.get('[data-cy="response-table-search"]')
-            .clear()
+        cy.get('[data-cy="response-table-search"]').clear()
 
         // 4. Leave site via menu or breadcrump, data must be saved
-        cy.log('Line 1016')
-        cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+        cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)').then((responName) => {
 
                 cy.get('[data-cy="response-table-search"]')
-                    .click()
                     .type(resName1)
                     .get('tbody')
                     .find('tr')
@@ -211,18 +169,14 @@ export class response_text_bearbeiten {
             })
 
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Texte')
             .click()
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
 
         // enter to a Texte Row
-        cy.log('Line 1042')
         cy.get('tbody')
             .find('tr')
             .last()
@@ -230,19 +184,17 @@ export class response_text_bearbeiten {
 
         // responsetext-text
         cy.get('[data-cy="responsetext-text"]')
-            .click()
             .clear()
             .type(addValue+String(xTxLe))
 
         // leave site by clicken bread crumb
         // Entering to Texte Tab
-        cy.get('[class="v-breadcrumbs__item"]')
-            .contains('Response Text')
+        cy.get('[role="tab"]')
+            .contains('Texte')
             .click()
 
         // Assert value in Texte table
         cy.get('[data-cy="responsetext-table-search"]')
-            .click()
             .type(addValue+String(xTxLe))
         
         cy.get('tbody')
@@ -257,12 +209,8 @@ export class response_text_bearbeiten {
 
         // 5. leave site via button "Abbrechen" navigates to table of synonyms and 
         //    does not save edited data
-        cy.log('Line 1078')
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
 
         // enter to a Texte Row
         cy.get('tbody')
@@ -272,7 +220,6 @@ export class response_text_bearbeiten {
 
         // responsetext-text
         cy.get('[data-cy="responsetext-text"]')
-            .click()
             .clear()
             .type('responseTextName')
 
@@ -282,10 +229,9 @@ export class response_text_bearbeiten {
 
         // Assert value in Texte table
         cy.get('[data-cy="responsetext-table-search"]')
-            .click()
             .type('responseTextName')
         
-        cy.log('Line 1107')
+        cy.log('Line 233')
         cy.get('tbody')
             .find('tr')
             .should('not.have.text', 'responseTextName')

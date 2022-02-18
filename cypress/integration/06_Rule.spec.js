@@ -1,4 +1,4 @@
-import { onRules } from "../support/page_objects/Rule/Rules"
+import { onRules } from "../support/page_objects/01_Trainingsdaten/10_Rules/Rules"
 
 describe ('Test Case 8: Rules', () => {
 
@@ -7,11 +7,11 @@ describe ('Test Case 8: Rules', () => {
         //cy.login('admin', 'cciAdmin#2022+')
         
         cy.visit('/')
-        loginiFunction('admin', 'cciAdmin#2022+')
+        cy.loginiFunction('admin', 'cciAdmin#2022+')
         
     })
 
-    it('Test Case: Rules Anlegen', () => {
+    it.only('Test Case: Rules Anlegen', () => {
         onRules.rulesAnlegen()
     })
 

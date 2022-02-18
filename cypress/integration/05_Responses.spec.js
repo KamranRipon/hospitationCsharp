@@ -1,17 +1,17 @@
-import { onIntent } from "../support/page_objects/Intent/Intents"
-import { onResponses } from "../support/page_objects/Responses/Responses"
-import { onResponseAnlegen } from "../support/page_objects/Responses/01_responseAnlegen"
-import { onResponseBearbeiten } from "../support/page_objects/Responses/02_responseBearbeiten"
-import { onResponseSuchen } from "../support/page_objects/Responses/03_responseSuchen"
-import { onResponsesTextAnlegen } from "../support/page_objects/Responses/04_responseTextAnlegen"
-import { onResponsesTextBearbeiten } from "../support/page_objects/Responses/05_responseTextBearbeiten"
-import { onResponsesTextSuchen } from "../support/page_objects/Responses/06_responseTextSuchen"
-import { onResponsesTextLoeschen } from "../support/page_objects/Responses/07_responseTextLoeschen"
-import { onResponsesButtonAnlegen } from "../support/page_objects/Responses/08_responseButtonAnlegen"
-import { onResponsesButtonBearbeiten } from "../support/page_objects/Responses/09_responseButtonBearbeiten"
-import { onResponsesButtonSuchen } from "../support/page_objects/Responses/10_responseButtonSuchen"
-import { onResponsesButtonLoeschen } from "../support/page_objects/Responses/11_responseButtonLoeschen"
-import { onResponsesMetaDaten } from "../support/page_objects/Responses/12_responseMetaDaten"
+import { onIntentHinzufuegen } from "../support/page_objects/01_Trainingsdaten/01_Intents/01_Intents_Hinzufuegen"
+//import { onResponses } from "../support/page_objects/Responses/Responses"
+import { onResponseAnlegen } from "../support/page_objects/01_Trainingsdaten/05_Responses/01_responseAnlegen"
+import { onResponseBearbeiten } from "../support/page_objects/01_Trainingsdaten/05_Responses/02_responseBearbeiten"
+import { onResponseSuchen } from "../support/page_objects/01_Trainingsdaten/05_Responses/03_responseSuchen"
+import { onResponsesTextAnlegen } from "../support/page_objects/01_Trainingsdaten/05_Responses/04_responseTextAnlegen"
+import { onResponsesTextBearbeiten } from "../support/page_objects/01_Trainingsdaten/05_Responses/05_responseTextBearbeiten"
+import { onResponsesTextSuchen } from "../support/page_objects/01_Trainingsdaten/05_Responses/06_responseTextSuchen"
+import { onResponsesTextLoeschen } from "../support/page_objects/01_Trainingsdaten/05_Responses/07_responseTextLoeschen"
+import { onResponsesButtonAnlegen } from "../support/page_objects/01_Trainingsdaten/05_Responses/08_responseButtonAnlegen"
+import { onResponsesButtonBearbeiten } from "../support/page_objects/01_Trainingsdaten/05_Responses/09_responseButtonBearbeiten"
+import { onResponsesButtonSuchen } from "../support/page_objects/01_Trainingsdaten/05_Responses/10_responseButtonSuchen"
+import { onResponsesButtonLoeschen } from "../support/page_objects/01_Trainingsdaten/05_Responses/11_responseButtonLoeschen"
+import { onResponsesMetaDaten } from "../support/page_objects/01_Trainingsdaten/05_Responses/12_responseMetaDaten"
 
 describe ('Test Case 9: Responses', () => {
 
@@ -21,8 +21,8 @@ describe ('Test Case 9: Responses', () => {
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it('Test Case: Response Anlegen', () => {
-        onResponseAnlegen.responseAnlegen() 
+    it('Test Case CCI-T53: Response Anlegen', () => {
+        onResponseAnlegen.responseAnlegen()
         /*
         A. Response Anlegen 
         1. Name should not be empty, error message should contain "Name"
@@ -40,7 +40,7 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it('Test Case: Response Bearbeiten', () => {
+    it('Test Case CCI-T54: Response Bearbeiten', () => {
         onResponseBearbeiten.responseBearbeiten()
         /* 
         B. Response Bearbeiten
@@ -62,15 +62,22 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it('Test Case: Response Suchen', () => {
+    it('Test Case CCI-T63: Response Suchen', () => {
         onResponseSuchen.responseSuchen()
+        /*
+        C. Response Suchen
+        1. Searching for single specific action works
+        2. Searching for some chars multiple actions has in common 
+           filters correctly
+        3. Searching for some chars no actions has shows empty table
+        */
         
     })
 
-    it('Test Case: Response Texte Anlegen', () => {
+    it('Test Case CCI-T55: Response Texte Anlegen', () => {
         onResponsesTextAnlegen.responseTexteAnlegen()
         /* 
-        C. Response Text Anlegen
+        D. Response Text Anlegen
 
         1. Text Name should not be empty, error message should contain "Name"; /Currently Bug/
             1.1 Response Teste Name
@@ -84,10 +91,10 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it('Test Case: Response Texte Bearbeiten', () => {
+    it('Test Case CCI-T56: Response Texte Bearbeiten', () => {
         onResponsesTextBearbeiten.responseTexteBearbeiten()
         /* 
-        D. Response Text Bearbeiten
+        E. Response Text Bearbeiten
 
         1. Edit Name should not be empty, error message should contain "Text"
             1.1 Response Name
@@ -102,19 +109,30 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it('Test Case: Response Texte Suchen', () => {
+    it('Test Case CCI-T57: Response Texte Suchen', () => {
         onResponsesTextSuchen.responseTexteSuchen()
+        /*
+        F. Response Texte Suchen
+        1. Searching for single specific action works
+        2. Searching for some chars multiple actions has in common 
+           filters correctly
+        3. Searching for some chars no actions has shows empty table
+        */
     })
 
-    it('Test Case: Response Texte Loeschen', () => {
+    it('Test Case CCI-T58: Response Texte Loeschen', () => {
         onResponsesTextLoeschen.responseTexteLoeschen()
+
+        /*
+        G.
+        */
     })
 
-    it('Test Case: Response Button Anlegen', () => {
-        onIntent.intents()
+    it('Test Case CCI-T60: Response Button Anlegen', () => {
+        //onIntentHinzufuegen.intentsHinzufuegen()
         onResponsesButtonAnlegen.buttonAnlegen()
         /* 
-        F. Response Button Anlegen
+        H. Response Button Anlegen
         1. Button Name should not be empty, error message should contain "Name"; /Currently Bug/
             1.1 Test Button Name
                 1.1.1 Warning message below input field
@@ -126,7 +144,7 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it('Test Case: Response Button Bearbeiten', () => {
+    it.only('Test CaseCCI-T59: Response Button Bearbeiten', () => {
         onResponsesButtonBearbeiten.buttonBearbeiten()
         /* G. Response Button Bearbeiten
         1. Edit Name should not be empty, error message should contain "Name"
@@ -146,7 +164,7 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it('Test Case: Response Button Suchen', () => {
+    it('Test Case CCI-T61: Response Button Suchen', () => {
         onResponsesButtonSuchen.buttonSuchen()
     })
 
@@ -154,7 +172,7 @@ describe ('Test Case 9: Responses', () => {
         onResponsesButtonLoeschen.buttonLoeschen()
     })
 
-    it('Test Case: Response Button Loeschen', () => {
+    it('Test Case CCI-T62: Response Button Loeschen', () => {
         onResponsesMetaDaten.metaDaten()
         /* 
         F. Response Meta Daten

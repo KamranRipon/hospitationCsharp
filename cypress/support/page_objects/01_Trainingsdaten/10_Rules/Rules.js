@@ -1,4 +1,4 @@
-import { capitalize, find, first, values } from "lodash"
+//import { capitalize, find, first, values } from "lodash"
 
 const i = Math.floor(Math.random() * 5000);
 const b = Math.floor(Math.random() * 1000);
@@ -19,41 +19,22 @@ export class rules {
     rulesAnlegen() {
 
         /* Rules Anlegen Testing */
+        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
-
-                    cy.get('[data-cy="navDrawerIntents"]')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerIntents"]')
-                        .click()
-                }
-            })
+        
 
         // Assert URL after clicking Rules
         cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
         
         // Clicking Rules Hinzufuegen
-        cy.get('[data-cy="intent-create"]')
-            .should('have.attr', 'href')
-            .then(($href) => {
-                cy.visit($href)
-                        })
+        // cy.get('[data-cy="intent-create"]')
+        //     .should('have.attr', 'href')
+        //     .then(($href) => {
+        //         cy.visit($href)
+        //                 })
 
         // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", "http://localhost/trainingsdaten/intent/neu/");
+        //cy.url().should("eq", "http://localhost/trainingsdaten/intent/neu/");
 
         // A. Synonym Anlegen
         /* 

@@ -2,38 +2,15 @@ export class response_text_loeschen {
 
     responseTexteLoeschen() {
 
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        /* Enter to Trainingsdaten */
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                        .wait(500)
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                        .wait(500)
-                }
-        })
-
-        // Entering to first of
-        cy.log('Line 1270')
+        // Assert URL after clicking Rules
+        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
         cy.wait(500)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
         
         var max_val2 = 0
         // Enter to Response table Row
@@ -41,9 +18,7 @@ export class response_text_loeschen {
             .find('td:nth-child(2)')
             .then(($testFunc2) => {
                 const vall2 = $testFunc2.text()
-
                 var sp_vall2 = vall2.split(" ")
-                //var max_val2 = 0
                 var num2
                 for (num2=0; num2 < sp_vall2.length; num2++){
                     
@@ -53,7 +28,7 @@ export class response_text_loeschen {
                     }
                 }
 
-                cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+                cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(2)')
                     .contains(max_val2)
@@ -74,21 +49,17 @@ export class response_text_loeschen {
         })
 
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Texte')
             .click()
-            //.wait(500)
+            .wait(300)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
 
         // Get the size of Texte Table ( Nr. of Row)
         // Save Intent Name for letar Assertion
         var nrRow, newNrRow                
-        cy.log('Line 1317')
         cy.get('tbody')
             .find('tr')
             .then(function($tRowLength) {
@@ -103,27 +74,23 @@ export class response_text_loeschen {
             .click({force:true})
         
         // Confirm delete
-        cy.get('[class="v-btn__content"]')
+        cy.get('[type="button"]')
             .contains('Löschen')
             .click()
         
         // Assert Table length
-        cy.log('Line 1332')
         cy.get('tbody')
             .find('tr')
             .then(function($NewtRowLength) {
-                //const NewnrRow = $NewtRowLength.length - 1
                 cy.log(nrRow)
                 newNrRow = nrRow -1 
                 cy.wrap($NewtRowLength).should('have.length', newNrRow)
             })
 
         // back to Response 
-        cy.get('[data-cy="navDrawerResponses"]')
-            .click()
+        cy.get('[data-cy="navDrawerResponses"]').click()
 
         //select row from response table with content max text number
-        cy.log('Line 1371')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(2)')
@@ -134,7 +101,6 @@ export class response_text_loeschen {
 
                 const newMaxValue = max_val2 - 1
 
-                //cy.wrap($texteNumber).should('have.text', newNrRow)
                 cy.wrap($texteNumber).should('contain', newMaxValue)
             })
     }

@@ -5,27 +5,12 @@ export class button_anlegen {
 
     buttonAnlegen() {
 
-        /* Response Button Anlegen Testing */
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        /* Enter to Trainingsdaten */
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-            })
+        // Assert URL after clicking Rules
+        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
+        cy.wait(500)      
 
         // 1. Text Name should not be empty, error message should contain "Texte"; /Currently Bug/
         // 1.1 Response Teste Name
@@ -33,16 +18,12 @@ export class button_anlegen {
         //     1.1.2 Error message after unsuccessful saving  /Currently Bug/
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
 
         //Enter to a row of Response Table which contain height text
         var max_val2 = 0
         // Enter to Response table Row
-        cy.log('Line 57')
-        cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+        cy.get('tbody')
             .find('td:nth-child(2)')
             .then(($testFunc2) => {
                 const vall2 = $testFunc2.text()
@@ -55,7 +36,8 @@ export class button_anlegen {
                         cy.log(max_val2)
                     }
                 }
-                cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+
+                cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(2)')
                     .contains(max_val2)
@@ -63,10 +45,9 @@ export class button_anlegen {
             })
         var resbutName
         // Save Response Name for letar Assertion
-        cy.get('[class="v-text-field__slot"]')
-            .find('[data-cy="response-name"]')
-                .invoke('val')
-                    .as('name')
+        cy.get('[data-cy="response-name"]')
+            .invoke('val')
+            .as('name')
                     
         cy.get('@name').then((name) => {
             cy.log(name) //prints name
@@ -75,54 +56,40 @@ export class button_anlegen {
         })
 
         // Locate Button Tab and enter to it
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Buttons')
             .click()     
 
         // Clicking responsebutton-create
-        cy.get('[data-cy="responsebutton-create"]')
-            .click()
-
-        cy.get('[data-cy="responsebutton-title"]')
-            .click({force:true})
+        cy.get('[data-cy="responsebutton-create"]').click()
         
-        //1. Assert warning notification Title
-        cy.get('[class="v-messages__wrapper"]').eq(0)
+        //1. Assert warning notification Title        
+        cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Titel muss gesetzt sein')
 
         //2. Assert warning notification Intent
-        cy.get('[class="v-messages__wrapper"]').eq(1)
+        cy.get('[role="alert"]').eq(1)
             .should('have.text','Ein Intent muss ausgewählt sein')
 
         // Clicking Anlegen Button while Text field is empty
-        // Click speichen
         cy.get('[data-cy="create-button"]').eq(0)
             .click()
-
-        // // success-remove
-        // cy.get('[data-cy="success-remove"]')
-        //     .click()
         
         // Assert Nicht Möglich, /Currently Known as But/
-        cy.get('[data-cy="errorMessageTitle"]')
-            .should('have.text',' Der Response Button konnte nicht gespeichert werden. ')
-
+        cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Der', 'Response Button')
+        
         // Close Error Notification
-        cy.get('[data-cy="error-remove"]')
-            .click()
+        cy.get('[data-cy="error-remove"]').click()
         
         // Add a valid Button Title
         cy.get('[data-cy="responsebutton-title"]')
-            .click()
             .type(addValue+String(txa))
             
         // Add an Intent 
-        cy.log('Line 133')
-        cy.get('[class="v-select__slot"]')
+        cy.get('[role="combobox"]')
             .contains('Intent')
             .click({force:true})
-            .get('[class="v-list v-select-list v-sheet theme--light theme--light"]')
-            .find('[role="option"]')
+            .get('[role="option"]')
             .last()
             .click()
 
@@ -147,13 +114,11 @@ export class button_anlegen {
 
         cy.get('[data-cy="success-remove"]')
             .click()
+            .wait(500)
         
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
-
+        cy.selectEntireTbl()
+        
         // 2. Check for successfully saved values
         // 2.2 Assert in the Texte table
 
@@ -162,10 +127,9 @@ export class button_anlegen {
             .type(addValue+String(txa))
      
         // Assert in Response Texte Table
-        cy.log('Line 177')
         cy.get('tbody')
             .find('tr')
-                .last()
+            .last()
             .find('td:nth-child(2)').then(function($text) {
                 const text = $text.text()
                 cy.wrap($text).should('have.text', addValue+String(txa))
@@ -176,36 +140,31 @@ export class button_anlegen {
             .clear()
                     
         // 3. Leave site via menu or breadcrump does not save value
-        cy.log('Line 192')
         cy.get('tbody')
             .find('tr')
             .first()
             .click()
         
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Button')
             .click()
 
         // Clicking responsebutton-create
-        cy.get('[data-cy="responsebutton-create"]')
-            .click()
+        cy.get('[data-cy="responsebutton-create"]').click()
 
         cy.get('[data-cy="responsebutton-title"]')
-            .click({force:true})
             .type('leaveWithBreadCrumb')
             
         
         // Leave Site via Bread Crumb
-        cy.get('[class="v-breadcrumbs theme--light"]')
-            .contains(' Response Buttons ')
+        cy.get('[role="tab"]')
+            .contains('Buttons')
             .click()
+            .wait(200)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
         
         cy.log('Line 225')
         cy.get('tbody')

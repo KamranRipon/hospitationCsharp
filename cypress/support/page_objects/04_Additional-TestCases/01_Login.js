@@ -1,7 +1,9 @@
-export class login {
+export class einfacher_login {
 
-    Test_LogIn() {   
+    testLogin() {   
         cy.log('Loged in Successful')
+        cy.visit('/')
+        cy.wait(500)
         cy.visit('http://localhost/trainingsdaten/intent/')
 
         cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
@@ -9,5 +11,5 @@ export class login {
         cy.url().should('eq', 'http://localhost/')
     }
 }
-// Exportint class frontEnd to End2End to test
-export const onLogin = new login()
+// Export class einfacher_login
+export const onEinfacherLogin = new einfacher_login()

@@ -1,30 +1,13 @@
 export class response_suchen {
 
     responseSuchen() {
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
 
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        /* Response Anlegen Testing */
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                        .wait(500)
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                        .wait(500)
-                }
-        }) 
-
+        // Assert URL after clicking Rules
+        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
+        
         // Anlegen Some Random Value to Response
         const randonVal = ['response1', 'response2', 'weather']
         cy.wrap(randonVal).each((index) => {
@@ -46,18 +29,13 @@ export class response_suchen {
         })
         
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
                            
         // Single Response
         cy.get('[data-cy="response-table-search"]')
-            .click({force:true})
-                .type('weather')
+            .type('weather')
 
         // Assert Return Result
-        cy.log('Line 1172')
         cy.get('tbody')
             .find('tr')
             .should('have.length', 1)
@@ -83,8 +61,7 @@ export class response_suchen {
             .find('tr')
             .should('contain',"")
 
-        cy.get('[data-cy="response-table-search"]')
-            .clear() 
+        cy.get('[data-cy="response-table-search"]').clear() 
     }
 }
 // 

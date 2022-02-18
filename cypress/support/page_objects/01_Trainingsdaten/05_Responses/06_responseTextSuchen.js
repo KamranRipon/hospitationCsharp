@@ -1,44 +1,21 @@
 const t     = Math.floor(Math.random() * 5000);
 const b     = Math.floor(Math.random() * 1000);
-const addValue = 'resTxSuchDmy'
+//const addValue = 'resTxSuchDmy'
 
 export class responses_text_suchen {
 
     responseTexteSuchen() {
 
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        /* Response Anlegen Testing */
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                        .wait(500)
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                        .wait(500)
-                }
-        })
-        
-        // Entering to first of
-        cy.log('Line 1143')
+        // Assert URL after clicking Rules
+        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
         cy.wait(500)
 
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
-        
+        cy.selectEntireTbl()
+                
         var max_val2 = 0
         // Enter to Response table Row
         cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
@@ -54,8 +31,7 @@ export class responses_text_suchen {
                         cy.log(max_val2)
                     }
                 }
-
-                cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+                cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(2)')
                     .contains(max_val2)
@@ -63,41 +39,34 @@ export class responses_text_suchen {
             })
 
         // Entering to Texte Tab
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Texte')
             .click()
             .wait(500)
                 
         // Anlegen Some Random Value to Response
-        cy.log('Line 1185')
         const randonValue = [t, t, b]
         cy.wrap(randonValue).each((index) => {
 
             // Clicking Response Hinzufuegen
-            cy.get('[data-cy="responsetext-create"]')
-                .click()
+            cy.get('[data-cy="responsetext-create"]').click()
 
             cy.get('[data-cy="responsetext-text"]')
-                .click({force:true})
                 .type(index)
 
             cy.get('[data-cy="create-button"]')
                 .click()
+                .wait(500)
         })
         
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
                         
         // Single Response
         cy.get('[data-cy="responsetext-table-search"]')
-            .click({force:true})
-                .type(b)
+            .type(b)
 
         // Assert Return Result
-        cy.log('Line 1212')
         cy.get('tbody')
             .find('tr')
             .should('have.length', 1)
