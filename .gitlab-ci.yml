@@ -40,7 +40,8 @@ testJob1:
       - ./public
 
 testJob2:
-  image: akash062/cci:$TAGNAME
+  #image: akash062/cci:$TAGNAME
+  image: akash062/cci:latest
   stage: test
   script:
     - npm install xvfb
