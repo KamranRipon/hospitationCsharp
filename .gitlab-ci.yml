@@ -44,7 +44,7 @@ testJob2:
   image: akash062/testcci:cypress
   stage: test
   script:
-    - curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docker-compose-`uname -s`-`uname -m` -o ./docker-compose
+    - curl -L --fail https://github.com/docker/compose/releases/download/1.24.0/run.sh -o /usr/local/bin/docker-compose
     - npm install xvfb
     - npm install cypress
     - npm install
