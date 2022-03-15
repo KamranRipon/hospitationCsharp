@@ -47,4 +47,5 @@ testJob2:
     - npm install xvfb
     - npm install cypress
     - npm install
+    - npm start
     - npm run cypress:run
