@@ -34,8 +34,6 @@ testJob1:
     - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
     - docker-compose up -d --build
     - sleep 10
-  only:
-    - merge_requests
   artifacts:
     paths:
       - ./public
@@ -44,14 +42,12 @@ testJob2:
   image: akash062/testccie2e:cypress
   stage: test
   script:
-    #- npm install curl
     - curl -L --fail https://github.com/docker/compose/releases/download/1.24.0/run.sh -o /usr/local/bin/docker-compose
 
     - chmod +x /usr/local/bin/docker-compose
     - npm install xvfb
     - npm install cypress
     - npm install
-    #- npm run start
     - docker-compose up -d
     - sleep 10
     - npm run cypress:run
