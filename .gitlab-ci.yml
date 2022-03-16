@@ -39,7 +39,7 @@ testJob1:
       - ./public
 
 testJob2:
-  image: akash062/testccie2e:cypress
+  image: akash062/testccie2e:cypressup
   stage: test
   script:
     - curl -L --fail https://github.com/docker/compose/releases/download/1.24.0/run.sh -o /usr/local/bin/docker-compose

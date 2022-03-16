@@ -12,6 +12,7 @@ COPY . /app
 RUN apt-get update -y \
     && apt-get upgrade -y \
     && apt-get install curl -y \
+    && apt-get install docker-compose -y \
     && apt-get install -y \
     libgtk2.0-0 \
     libgtk-3-0 \
@@ -24,7 +25,7 @@ RUN apt-get update -y \
     libxtst6 \
     xauth \
     xvfb
-
+RUN apt-get install -y docker
 
 RUN curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docker-compose-`uname -s`-`uname -m` -o ./docker-compose
 
