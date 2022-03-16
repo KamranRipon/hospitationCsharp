@@ -13,7 +13,7 @@ import { onResponsesButtonSuchen } from "../support/page_objects/01_Trainingsdat
 import { onResponsesButtonLoeschen } from "../support/page_objects/01_Trainingsdaten/05_Responses/11_responseButtonLoeschen"
 import { onResponsesMetaDaten } from "../support/page_objects/01_Trainingsdaten/05_Responses/12_responseMetaDaten"
 
-describe ('Test Case 9: Responses', () => {
+describe ('Test Case : Responses', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')
@@ -144,7 +144,7 @@ describe ('Test Case 9: Responses', () => {
         */
     })
 
-    it.only('Test CaseCCI-T59: Response Button Bearbeiten', () => {
+    it('Test CaseCCI-T59: Response Button Bearbeiten', () => {
         onResponsesButtonBearbeiten.buttonBearbeiten()
         /* G. Response Button Bearbeiten
         1. Edit Name should not be empty, error message should contain "Name"

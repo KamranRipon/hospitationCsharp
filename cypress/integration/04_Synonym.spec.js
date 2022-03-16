@@ -1,4 +1,4 @@
-import { onSynonym } from "../support/page_objects/Synonym/Synonyms"
+import { onSynonym } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/Synonyms"
 
 describe ('Test Case 7: Synonyms', () => {
 
@@ -7,7 +7,7 @@ describe ('Test Case 7: Synonyms', () => {
         //cy.login('admin', 'cciAdmin#2022+')
         
         cy.visit('/')
-        loginiFunction('admin', 'cciAdmin#2022+')
+        cy.loginiFunction('admin', 'cciAdmin#2022+')
         
     })
 

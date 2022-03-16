@@ -54,7 +54,7 @@ describe ('Test Case : Actions', () => {
         */
     })
 
-    it.only('Test Case CCI-T71: Action Suchen', () => {
+    it('Test Case CCI-T71: Action Suchen', () => {
         onActionSuchen.actionSuchen()
         /*
         C. Action Suchen

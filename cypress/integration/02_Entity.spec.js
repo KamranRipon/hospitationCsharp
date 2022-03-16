@@ -28,7 +28,7 @@ describe("Test Case 5: Entity", () => {
         */
     })
 
-    it.only("Test Case CCI-T13: Entity Suchen", () => {
+    it("Test Case CCI-T13: Entity Suchen", () => {
         onEntitySuchen.entitySuchen()
         /* 
         C. Entity Suchen

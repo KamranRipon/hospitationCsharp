@@ -1,4 +1,4 @@
-import { onSlot } from "../support/page_objects/Slot/Slot"
+import { onSlot } from "../support/page_objects/01_Trainingsdaten/03_Slots/Slot"
 
 describe("Test Case 6: Slot", () => {
    

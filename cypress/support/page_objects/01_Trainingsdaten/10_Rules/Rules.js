@@ -20,9 +20,7 @@ export class rules {
 
         /* Rules Anlegen Testing */
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
-
-        
-
+     
         // Assert URL after clicking Rules
         cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
         
@@ -90,7 +88,7 @@ export class rules {
         cy.get('[class="v-list-item__content"]')
             .contains('Alle')
             .click({force:true})
-
+        
         // Assert Data in Action Table
         cy.log('Line 110')
         cy.get('tbody')
@@ -98,7 +96,7 @@ export class rules {
             .last()
             .find('td:nth-child(1)')
             .should('have.text', 'Action'+String(a))
-
+        
         cy.wait(500)
         // Closing success message
         cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
@@ -115,7 +113,7 @@ export class rules {
         // Clicking intent Hinzufuegen
         cy.get('[data-cy="intent-create"]')
             .click({force:true})
-
+        
         // Add Intent Name
         cy.get('[data-cy="intent-name"]')
             .clear()
@@ -137,7 +135,7 @@ export class rules {
         cy.get('[data-cy="create-button"]')
             .click()
             .wait(500)
-
+        
         cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
             .click()
 
@@ -157,18 +155,18 @@ export class rules {
             .clear()
             .click({force:true})
             .type(' ')
-
+        
         // Assert warning message after add space to input field
         cy.get('[class="v-messages__wrapper"]')
             .should('have.text','Der Name enthält ungültige Zeichen!')
 
         // Try to save with empty name
         // Click Anlegen
-        cy.log('Line 184')
+        cy.log('Line 165')
         cy.get('[data-cy="create-button"]')
             .click()
             .wait(500)
-
+        
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
 
@@ -179,36 +177,45 @@ export class rules {
         cy.get('[data-cy="rule-name"]')
             .clear()
             .type(addValue+String(r))
+
         // Select step
         cy.get('[class="v-select__slot"]')
             .contains('Step Typ auswählen')
             .click({force:true})
+        
+        cy.log('Line 186')
 
-        cy.get('[class="v-list-item__title"]').eq(2)
-            .click()
+        // cy.get('[class="v-list-item__title"]').eq(2)
+        //     .click()
+
+        //cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
+
+        
+        
+        //cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
+        cy.get('[role="listbox"]')
+            .contains('Action')
+            .click({force:true})
 
         cy.get('[data-cy="rule-new-step-item-autocomplete"]')
             .click()
 
-        cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
-            .find('[role="listbox"]')
-            .contains('Action')
-            .click({force:true})
-
+        cy.get('[role="option"]').last().click()
+        
         // Add a step by clicking "+"
         cy.get('[data-cy="rule-add-step"]')
             .click()
 
         cy.get('[data-cy="create-button"]')
             .click()
-
+        
         cy.wait(500)
         // Assert Success Message
         cy.get('[data-cy="successMessageTitle"]')
             .should('have.text', ' Die Rule'+' "'+addValue+String(r)+'" '+ 'wurde erfolgreich gespeichert ')
 
         // Assert Data in Rules TAble
-        cy.log('Line 229')
+        cy.log('Line 218')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')
@@ -230,22 +237,26 @@ export class rules {
         cy.get('[class="v-select__slot"]')
             .contains('Step Typ auswählen')
             .click({force:true})
+        cy.log('line 240')
+        // cy.get('[class="v-list-item__title"]').eq(2)
+        //     .click()
 
-        cy.get('[class="v-list-item__title"]').eq(2)
-            .click()
+        //cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
+        cy.get('[role="listbox"]')
+            .contains('Action')
+            .click({force:true})
 
         cy.get('[data-cy="rule-new-step-item-autocomplete"]')
             .click()
 
-        cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
-            .find('[role="listbox"]')
-            .contains('Action')
-            .click({force:true})
-
+        cy.get('[role="option"]').last()
+            .click()
+        
         // Add a step by clicking "+"
         cy.get('[data-cy="rule-add-step"]')
             .click()
-
+        
+        
         cy.get('[data-cy="create-button"]')
             .click()
 
@@ -275,7 +286,8 @@ export class rules {
         
         cy.get('[data-cy="create-button"]')
             .click()
-        
+
+                
         // Assert Error Message
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
@@ -284,7 +296,7 @@ export class rules {
             .click()
 
         //5. Saving works if Data is Correct
-        cy.log('Line 307')
+        cy.log('Line 299')
         cy.log('5. Saving works if Data is Correct')
 
         // Select step
@@ -292,16 +304,19 @@ export class rules {
             .contains('Step Typ auswählen')
             .click({force:true})
 
-        cy.get('[class="v-list-item__title"]').eq(2)
-            .click()
+        // cy.get('[class="v-list-item__title"]').eq(2)
+        //     .click()
+        
+        
+        //cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
+        cy.get('[role="listbox"]')
+            .contains('Action')
+            .click({force:true})
 
         cy.get('[data-cy="rule-new-step-item-autocomplete"]')
             .click()
 
-        cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
-            .find('[role="listbox"]')
-            .contains('Action')
-            .click({force:true})
+        cy.get('[role="option"]').last().click()
 
         // Add a step by clicking "+"
         cy.get('[data-cy="rule-add-step"]')
@@ -314,9 +329,9 @@ export class rules {
         // Assert Success Message
         cy.get('[data-cy="successMessageTitle"]')
                 .should('have.text', ' Die Rule'+' "'+addValue+String(r*a)+'" '+ 'wurde erfolgreich gespeichert ')
-
+        
         // Assert Data in Rules TAble
-        cy.log('Line 337')
+        cy.log('Line 334')
         cy.get('tbody')
             .find('tr')
             .last()
@@ -348,7 +363,7 @@ export class rules {
             .clear()
 
         // 7. Leave Site with Breadcrump does not save data
-
+        cy.log('Line 366')
         cy.get('tbody')
             .find('tr')
             .last()
@@ -372,16 +387,18 @@ export class rules {
             .contains('Step Typ auswählen')
             .click({force:true})
 
-        cy.get('[class="v-list-item__title"]').eq(2)
-        .click()
+        // cy.get('[class="v-list-item__title"]').eq(2)
+        // .click()
 
-        cy.get('[data-cy="rule-new-step-item-autocomplete"]')
-            .click()
-
-        cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
-            .find('[role="listbox"]')
+        //cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
+        cy.get('[role="listbox"]')
             .contains('Action')
             .click({force:true})
+        cy.log('Line 397')
+        cy.get('[data-cy="rule-new-step-item-autocomplete"]')
+            .click()
+        
+        cy.get('[role="option"]').last().click()
             
         cy.get('[class="v-breadcrumbs__item"]')
             .contains('Rules')
@@ -393,7 +410,7 @@ export class rules {
             .click()
             .type(addValue+String(r*i))
         
-        cy.log('Line 416')
+        cy.log('Line 411')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')

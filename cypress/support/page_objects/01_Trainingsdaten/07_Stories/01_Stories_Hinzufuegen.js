@@ -8,7 +8,6 @@ export class sotries_hinzufuegen {
         
         // Open Trainingsdate Tab and enter to Story
         cy.Trainingsdaten('[data-cy="navDrawerStories"]')
-        
         // Assert URL after clicking Story
         cy.url().should("eq", "http://localhost/trainingsdaten/story/");
 
@@ -25,7 +24,7 @@ export class sotries_hinzufuegen {
         //Assert warning notification
         cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Name muss gesetzt sein')
-
+        
         /* Currently Bug*/
 
         // // add a space or '/' to input field 
@@ -57,7 +56,7 @@ export class sotries_hinzufuegen {
         
         //Assert Error message, indication didn't able to save data
         cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Die','Story')
-
+        
         // Close Error Notification
         cy.get('[data-cy="error-remove"]').click()
                 
@@ -65,8 +64,8 @@ export class sotries_hinzufuegen {
         // 4.1 Assert Notification
         // Add a story name and assert notification & Assert in story table
         cy.storiesAnlegen(addValue+String(ac))
-        cy.wait(500)
-
+        // cy.wait(500)
+        // cy.pause()
         //6. Click on "Anlegen" navigates to table of strories
         cy.url().should("eq", "http://localhost/trainingsdaten/story/")
         
@@ -146,7 +145,7 @@ export class sotries_hinzufuegen {
         
         cy.get('[data-cy="story-step-element-autocomplete"]').eq(0)
             .click()
-            .get('[role="listbox"]')
+            .get('[role="option"]').last()
             .click({force:true})
 
         cy.get('[data-cy="story-step-type-select"]').eq(1)
@@ -165,7 +164,7 @@ export class sotries_hinzufuegen {
             .contains('Intent').click()
 
         cy.get('[data-cy="story-step-element-autocomplete"]').eq(2).click()
-            .get('[role="listbox"]').eq(2).click()
+            .get('[role="option"]').last().click()
 
         cy.get('[data-cy="story-step-add"]').click()
 

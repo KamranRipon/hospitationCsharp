@@ -69,7 +69,7 @@ describe ('Test Case : Stories', () => {
         */
     })
 
-    it.only('Test Case CCI-T75: Story Löschen', () => {
+    it('Test Case CCI-T75: Story Löschen', () => {
         onStoriesLoeschen.storiesLoeschen()
         /*
         D. Story Loeschen

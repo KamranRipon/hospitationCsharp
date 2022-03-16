@@ -173,7 +173,7 @@ Cypress.Commands.add('storiesAnlegen', (addval) => {
 
         cy.get('[data-cy="story-step-element-autocomplete"]').eq(0)
             .click()
-        cy.get('[role="listbox"]')
+        cy.get('[role="option"]').last()
             .click()
 
         cy.get('[data-cy="story-step-type-select"]').eq(1)
