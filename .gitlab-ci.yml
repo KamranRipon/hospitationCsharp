@@ -40,14 +40,14 @@ testJob1:
       - ./public
 
 testJob2:
-  #image: akash062/cci:$TAGNAME
   image: akash062/testcci:cypress
   stage: test
   script:
-    - npm install curl
+    #- npm install curl
     - curl -L --fail https://github.com/docker/compose/releases/download/1.24.0/run.sh -o /usr/local/bin/docker-compose
     - npm install xvfb
     - npm install cypress
     - npm install
-    - npm start
+    - npm run start
+    - sleep 10
     - npm run cypress:run
