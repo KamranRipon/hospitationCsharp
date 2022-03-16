@@ -39,7 +39,7 @@ testJob1:
       - ./public
 
 testJob2:
-  image: akash062/testcci:cypress
+  image: akash062/testccie2e:cypress
   stage: test
   script:
     #- npm install curl
