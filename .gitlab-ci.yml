@@ -47,12 +47,11 @@ testJob2:
     #- npm install curl
     - curl -L --fail https://github.com/docker/compose/releases/download/1.24.0/run.sh -o /usr/local/bin/docker-compose
 
-    #- chmod +x /usr/local/bin/docker-compose
-    - chmod +x ./docker-compose.yml
+    - chmod +x /usr/local/bin/docker-compose
     - npm install xvfb
     - npm install cypress
     - npm install
     #- npm run start
-    - docker-compose up -d --build
+    - docker-compose up -d
     - sleep 10
     - npm run cypress:run
