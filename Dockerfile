@@ -17,7 +17,6 @@ WORKDIR /app
 
 COPY . /app
 
-
 RUN npm install
 
 RUN npx browserslist@latest --update-db
@@ -25,5 +24,5 @@ RUN npx browserslist@latest --update-db
 RUN sleep 20
 
 #Führe tests aus
-ENTRYPOINT sleep 20; npm run cy:run_spec
-#RUN npm run CyTest
+#ENTRYPOINT sleep 20; npm run cy:run_spec
+RUN npm run cy:run_spec

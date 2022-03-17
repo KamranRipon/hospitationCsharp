@@ -53,3 +53,5 @@ testJob2:
     - docker-compose up -d
     - sleep 10
     - npm run cypress:run
+  only:
+    - merge_requests
