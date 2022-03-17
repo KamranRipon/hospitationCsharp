@@ -25,3 +25,5 @@ RUN npx browserslist@latest --update-db
 
 #Führe tests aus
 ENTRYPOINT RUN sleep 20; npm run cySpec
+
+RUN npm run cySpec

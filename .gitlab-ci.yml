@@ -36,7 +36,6 @@ testJob1:
     #- docker-compose up -d --build
     - docker-compose up -d
     - sleep 10
-    - npm run cySpec
   artifacts:
     paths:
       - ./public
