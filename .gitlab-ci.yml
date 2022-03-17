@@ -33,7 +33,8 @@ testJob1:
   script:
     - ifconfig lo:0 172.14.1.1 up
     - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
-    - docker-compose up -d --build
+    #- docker-compose up -d --build
+    - docker-compose up -d
     - sleep 10
   artifacts:
     paths:
