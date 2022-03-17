@@ -1,14 +1,14 @@
 version: "3"
 services:
   backend:
-    network_mode: host
     image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/backend
+    # ports:
+    #   - "8080:8080"
     environment:
       - spring.profiles.active=test
     # extra_hosts:
     #   - 'local.machine:172.14.1.1'
   frontend:
-    network_mode: host
     image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/frontend
     # extra_hosts:
     #   - 'local.machine:172.14.1.1'
