@@ -10,11 +10,12 @@
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\", > mochawesome.json && npx marge mochawesome.json",
     "merge": "mochawesome-merge cypress/results/mochawesome/*.json > cypress/results/mochawesome/output.json",
     "generateMocha_Report": "marge cypress/results/mochawesome/output.json --reportDir ./results --inline",
-    "cy:run_spec": "npx cypress run --spec 'cypress/integration/00_Login.spec.js'",
+    "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js'",
     "cypress:run": "npm run cy:run_spec -- --browser electron",
     "CyTest-1": "npm run prereport && npm run cypress:run && npm run merge && npm run generateMocha_Report",
     "CyTest": "npm run prereport && npm run cypress:run && npm run generateMocha_Report",
-    "start": "docker-compose up -d"
+    "start": "docker-compose up -d",
+    "cySpec": "npx cypress run --spec 'cypress/integration/05_Responses.spec.js'"
   },
   "author": "Abdullah",
   "license": "ISC",
