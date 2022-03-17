@@ -41,8 +41,6 @@ testJob1:
   artifacts:
     paths:
       - ./public
-  only:
-    - merge_requests
 
 testJob2:
   image: akash062/testccie2e:cypressup
@@ -57,4 +55,5 @@ testJob2:
     - docker-compose up -d
     - sleep 10
     - npm run cypress:run
-  
+  only:
+    - merge_requests
