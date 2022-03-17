@@ -17,32 +17,13 @@ WORKDIR /app
 
 COPY . /app
 
-# RUN apt-get update -y \
-#     && apt-get upgrade -y \
-#     && apt-get install curl -y \
-#     && apt-get install docker-compose -y \
-#     && apt-get install -y \
-#     libgtk2.0-0 \
-#     libgtk-3-0 \
-#     libgbm-dev \
-#     libnotify-dev \
-#     libgconf-2-4 \
-#     libnss3 \
-#     libxss1 \
-#     libasound2 \
-#     libxtst6 \
-#     xauth \
-#     xvfb
-# RUN apt-get install -y docker
-
-# RUN curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docker-compose-`uname -s`-`uname -m` -o ./docker-compose
-
-#RUN npm start
 
 RUN npm install
 
 RUN npx browserslist@latest --update-db
 
+RUN sleep 20
+
 #Führe tests aus
-RUN sleep 30; 
+#ENTRYPOINT sleep 20; npm run CyTest
 RUN npm run CyTest
