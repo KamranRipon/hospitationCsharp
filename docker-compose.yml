@@ -12,3 +12,5 @@ services:
     image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/frontend
     # extra_hosts:
     #   - 'local.machine:172.14.1.1'
+  e2etest:
+    build: .

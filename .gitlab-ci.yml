@@ -1,3 +1,4 @@
+image: docker.artifactory-extern.dataport.de/docker/compose:debian-1.29.2
 stages:
   - build
   - test

@@ -1,4 +1,4 @@
-FROM cypress/base:10.18.0
+FROM docker.artifactory-extern.dataport.de/cypress/base:10.18.0
 
 ENV HTTP_PROXY="http://wall.lit.hamburg.de:80/"
 ENV HTTPS_PROXY="http://wall.lit.hamburg.de:80/"
@@ -32,3 +32,8 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.20.0-rc2/docke
 #RUN npm start
 
 RUN npm install
+
+RUN npx browserslist@latest --update-db
+
+#Führe tests aus
+RUN npm run CyTest
