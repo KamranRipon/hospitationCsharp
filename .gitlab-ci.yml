@@ -1,6 +1,5 @@
 image: docker.artifactory-extern.dataport.de/docker/compose:debian-1.29.2
 stages:
-  - build
   - restart_test_environment
   - test
 
@@ -18,16 +17,6 @@ variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
   DOCKER_URL: "docker.artifactory-extern.dataport.de"
-
-buildJob:
-  image: tmaier/docker-compose:latest
-  stage: build
-  script:
-    - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
-    - docker push $ARTIFACT_ROOT$IMAGE_PATH 
-  only:
-    - merge_requests
-  
 
 restart test environment:
   image: debian:11-slim
@@ -76,4 +65,4 @@ testJob2:
     - sleep 10
     - npm run cypress:run
   only:
-    - merge_requests
+    - main
