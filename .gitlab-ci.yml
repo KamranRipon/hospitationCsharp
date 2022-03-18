@@ -1,6 +1,7 @@
 image: docker.artifactory-extern.dataport.de/docker/compose:debian-1.29.2
 stages:
   - build
+  - restart_test_environment
   - test
 
 variables:
@@ -27,6 +28,31 @@ buildJob:
   only:
     - merge_requests
   
+
+restart test environment:
+  image: debian:11-slim
+  stage: restart_test_environment
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEV_VM_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh
+      -o UserKnownHostsFile=/dev/null
+      -o StrictHostKeyChecking=no
+      $DEV_VM_SSH_USER@$DEV_VM_IP
+      "
+      cd /home/redakt/deployment_e2e ;
+      docker-compose down ;
+      docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT ;
+      docker-compose pull ;
+      docker-compose up -d ;
+      exit
+      "
+    - exit
+
 testJob1:
   image: tmaier/docker-compose:latest
   stage: test
