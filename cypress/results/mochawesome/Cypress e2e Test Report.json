@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2022-03-15T10:25:57.396Z",
-    "end": "2022-03-15T10:26:02.956Z",
-    "duration": 5560,
+    "start": "2022-03-17T13:10:56.008Z",
+    "end": "2022-03-17T13:11:03.873Z",
+    "duration": 7865,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "c253d57e-52b5-48bf-9712-bb94e08684fd",
+      "uuid": "e9fe8437-0782-4404-80ec-79c98395b8c6",
       "title": "",
       "fullFile": "cypress/integration/00_Login.spec.js",
       "file": "cypress/integration/00_Login.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "8f99ff1a-f6b7-477c-b3dc-e89d9819e583",
+          "uuid": "adbc26e3-627c-41d0-8a20-23e7a508cd94",
           "title": "Test Case: Einfacher Login",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "CCI-T11: Einfacher Login",
               "fullTitle": "Test Case: Einfacher Login CCI-T11: Einfacher Login",
               "timedOut": null,
-              "duration": 5479,
+              "duration": 7777,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "_Login.onEinfacherLogin.testLogin();\n/* \n1. Log in to the app\n2. go to trainingsdaten/intent\n3. assert the link\n*/",
               "err": {},
-              "uuid": "869df553-2c87-4818-b3cc-e93f370e9797",
-              "parentUUID": "8f99ff1a-f6b7-477c-b3dc-e89d9819e583",
+              "uuid": "66f02345-0c22-4d32-9677-9f443dde030d",
+              "parentUUID": "adbc26e3-627c-41d0-8a20-23e7a508cd94",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "869df553-2c87-4818-b3cc-e93f370e9797"
+            "66f02345-0c22-4d32-9677-9f443dde030d"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 5479,
+          "duration": 7777,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
