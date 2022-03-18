@@ -1,12 +1,12 @@
 image: docker.artifactory-extern.dataport.de/docker/compose:debian-1.29.2
 stages:
-  - build
+  - restart_test_environment
   - test
 
 variables:
-  HTTP_PROXY: "http://10.61.16.6:3128"
-  HTTPS_PROXY: "http://10.61.16.6:3128"
-  NO_PROXY: "git.dataport.de,10.61.135.11,sonarqube.dataport.de,127.0.0.1,minio.gitlab-runner-minio.svc.cluster.local,al.s3.dataport.de,docker:2375,docker:2376,artifactory-extern.dataport.de,localhost:80"
+  http_proxy: "http://10.61.16.6:3128"
+  https_proxy: "http://10.61.16.6:3128"
+  no_proxy: "git.dataport.de,10.61.135.11,sonarqube.dataport.de,127.0.0.1,minio.gitlab-runner-minio.svc.cluster.local,al.s3.dataport.de,docker:2375,docker:2376,artifactory-extern.dataport.de,localhost:80"
   ARTIFACT_ROOT: "dchatbot-docker-development.artifactory-extern.dataport.de"
   IMAGE_PATH: "/conplat/cci/endtoendtests"
   CONTAINER_NAME: "cci-frontend"
@@ -18,15 +18,30 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   DOCKER_URL: "docker.artifactory-extern.dataport.de"
 
-buildJob:
-  image: tmaier/docker-compose:latest
-  stage: build
+restart test environment:
+  image: debian:11-slim
+  stage: restart_test_environment
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEV_VM_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
   script:
-    - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
-    - docker push $ARTIFACT_ROOT$IMAGE_PATH 
-  only:
-    - merge_requests
-  
+    - ssh
+      -o UserKnownHostsFile=/dev/null
+      -o StrictHostKeyChecking=no
+      $DEV_VM_SSH_USER@$DEV_VM_IP
+      "
+      cd /home/redakt/deployment_e2e ;
+      docker-compose down ;
+      docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT ;
+      docker-compose pull ;
+      docker-compose up -d ;
+      exit
+      "
+    - exit
+
 testJob1:
   image: tmaier/docker-compose:latest
   stage: test
@@ -50,4 +65,4 @@ testJob2:
     - sleep 10
     - npm run cypress:run
   only:
-    - merge_requests
+    - main
