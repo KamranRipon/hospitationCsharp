@@ -35,11 +35,8 @@ testJob1:
     - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
     - docker-compose up -d --build
     - sleep 10
-    - docker-compose down
-  artifacts:
-    paths:
-      - ./public
-
+    - docker run cci_e2etest:latest
+  
 testJob2:
   stage: test
   script:
