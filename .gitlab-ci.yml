@@ -35,7 +35,7 @@ testJob1:
     - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
     - docker-compose up -d --build
     - sleep 10
-    - docker run cci_e2etest:latest
+    - docker run e2e-tests_e2etest:latest
   
 testJob2:
   stage: test
