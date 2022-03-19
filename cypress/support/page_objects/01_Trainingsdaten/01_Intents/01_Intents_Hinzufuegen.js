@@ -9,7 +9,7 @@ export class intent_hinzufuegen {
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
                 
         // checking url after clicking Inten Button
-        cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
 
         // Select Entire Table
         cy.selectEntireTbl()
@@ -34,7 +34,7 @@ export class intent_hinzufuegen {
             .click()
         
         // assert landing site
-        cy.url().should("eq", "http://localhost/trainingsdaten/intent/neu/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/neu/");
 
         // add an intent-name and intent-description
         cy.get('[data-cy="intent-name"]')
@@ -58,7 +58,7 @@ export class intent_hinzufuegen {
 
         // 5. Click on "Anlegen" remains on details page
         cy.url().then((URL) => {
-            cy.wrap(URL).should("eq", "http://localhost/trainingsdaten/intent/"+String(nrOfRow)+"/");
+            cy.wrap(URL).should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/"+String(nrOfRow)+"/");
         })
         // Back to intent
         cy.get('[data-cy="navDrawerIntents"]')
@@ -71,7 +71,7 @@ export class intent_hinzufuegen {
 
         // Selecting Entire Table
         cy.selectEntireTbl()
-            
+        
         // Assert Value in intent-table
         cy.get('tbody').find('tr')
             .find('td:nth-child(1)')
@@ -79,18 +79,17 @@ export class intent_hinzufuegen {
                 cy.wrap($synName1).should('have.text', addValue)
             })
 
-        // clear search field
         cy.get('[data-cy="intent-table-search"]').clear()
 
         // 1. Name should not be empty, error message should contain "Name"
                 
         // Enter to Intent Hinzufuegen
         cy.get('[data-cy="intent-create"]').click()
-
+        cy.log('Line 74')
         // Check for require name waring message 
-        cy.get('[role="alert"]')
-            .should('be.visible')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Name muss gesetzt sein')
+            
 
         // 2. Name should not contain "spaces" or "/", saving impossible, 
         // Checking warning message for "space" or "/" 
@@ -100,7 +99,7 @@ export class intent_hinzufuegen {
             .type(index)
 
             //Assert warning notification
-            cy.get('[role="alert"]')
+            cy.get('[role="alert"]').eq(0)
                 .should('be.visible')
                 .should('have.text','Der Name enthält ungültige Zeichen!')
 

@@ -108,7 +108,7 @@ Cypress.Commands.add('createButton', (create) => {
 
 Cypress.Commands.add('warningNotification', (alert) => {
     //Assert warning notification
-    cy.get(alert)
+    cy.get(alert).eq(0)
     .should('have.text','Der Name muss gesetzt sein')
 })
 

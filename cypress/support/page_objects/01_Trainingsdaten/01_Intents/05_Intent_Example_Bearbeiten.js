@@ -2,7 +2,6 @@ const iEdit    = Math.floor(Math.random()  * 7000);
 const newVal   = Math.floor(Math.random() * 13500);
 const valErr   = Math.floor(Math.random() * 10500);
 const addValue = 'DummyValue'
-
 export class intent_example_bearbeiten {
 
     intentExampleBearbeiten() {
@@ -13,20 +12,20 @@ export class intent_example_bearbeiten {
         // calculate maxi examples or rules on an intent
         var max_val=0
         cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
-        .find('td:nth-child(3)')
-        .then(($testFunc2) => {
-            const vall2 = $testFunc2.text()
-            const sp_vall2 = vall2.split(' ')                                            
-            var num2
-            for (num2=0; num2 < sp_vall2.length; num2++){                                                                           
-                if(Number(sp_vall2[num2]) > max_val) {
-                    max_val = sp_vall2[num2]
+            .find('td:nth-child(3)')
+            .then(($testFunc2) => {
+                const vall2 = $testFunc2.text()
+                const sp_vall2 = vall2.split(' ')                                            
+                var num2
+                for (num2=0; num2 < sp_vall2.length; num2++){                                                                           
+                    if(Number(sp_vall2[num2]) > max_val) {
+                        max_val = sp_vall2[num2]
+                    }
                 }
-            }
-        })
+            })
           
         // Enter to first row to intent table
-        cy.wait(500)
+        cy.wait(300)
         cy.get('tbody')
             .then((maxVal) => {
                 cy.get('tbody')
@@ -69,7 +68,7 @@ export class intent_example_bearbeiten {
         // Enter to row which contain max example of the Intent table
                 
         // Checking for a valid Name
-        cy.get('[role="alert"]')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text', 'Der Text muss gesetzt sein')
 
         // 2. Name should not contain "spaces" or "/", saving impossible, 
@@ -116,7 +115,7 @@ export class intent_example_bearbeiten {
         cy.successRemove()
 
         // 3. Check for successfully saved values
-        cy.log('Line 119')        
+        cy.log('Line 119')
         
         // 3. Check for successfully saved values
         // 3.2 Assert in table

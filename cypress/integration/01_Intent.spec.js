@@ -10,10 +10,7 @@ describe ('Test Case: Intents', () => {
 
     beforeEach('visit url', () => {
 
-        //cy.login('admin', 'cciAdmin#2022+')
-        
         cy.visit('/')
-        // Cypress.Cookies.preserveOnce('session_id', 'remember_token')
         cy.loginiFunction('admin', 'cciAdmin#2022+')
         cy.wait(500)
     })

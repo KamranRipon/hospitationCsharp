@@ -1,6 +1,5 @@
 const m = Math.floor(Math.random() * 1000);
 const addValue = 'DummyValue'+String(m)
-
 export class entity_bearbeiten {
 
     entityBearbeiten() {
@@ -9,11 +8,11 @@ export class entity_bearbeiten {
         cy.Trainingsdaten('[data-cy="navDrawerEntities"]')        
                 
         // checking url after clicking Entity Button
-        cy.url().should("eq", "http://localhost/trainingsdaten/entity/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/");
         
-        // Testing Intents Bearbeitung
+        // Testing Entity Bearbeitung
        
-        // Select first row of the Intent table
+        // Select first row of the Entity table
         cy.wait(500)
         cy.get('tbody')
             .find('tr')
@@ -34,7 +33,7 @@ export class entity_bearbeiten {
                 .type(index)
 
             //Assert warning notification
-            cy.get('[role="alert"]')
+            cy.get('[role="alert"]').eq(0)
                 .should('be.visible')
                 .should('have.text','Der Name enthält ungültige Zeichen!')
 
@@ -60,10 +59,10 @@ export class entity_bearbeiten {
 
         /* Check for successfully saved notification */
 
-        // Select first row of the Intent table 
+        // Select first row of the Entity table 
         cy.get('tbody')
             .find('tr')
-            .first()
+            .last()
             .click({force:true})
 
         cy.get('[data-cy="entity-name"]').clear()
@@ -85,7 +84,7 @@ export class entity_bearbeiten {
         
         cy.get('[data-cy="entity-name"]').clear()
 
-        cy.addName('[data-cy="entity-name"]', 'test1', '[data-cy="entity-description"]')
+        cy.addName('[data-cy="entity-name"]', addValue+String(m), '[data-cy="entity-description"]')
 
         cy.get('[data-cy="navDrawerEntities"]').click()
 
@@ -98,7 +97,14 @@ export class entity_bearbeiten {
         cy.get('[data-cy="entity-name"]').clear()
         
         cy.get('[data-cy="entity-name"]')
-            .type('test-infi')
+            .type('weather')
+        cy.get('[data-cy="save-button"]').click()
+
+        cy.get('[data-cy="entity-create"]').click()
+
+        cy.addName('[data-cy="entity-name"]', 'test', '[data-cy="entity-description"]')
+        cy.get('[data-cy="create-button"]').click()
+
     }
 }
 // Exportint class frontEnd to End2End to test
