@@ -1,0 +1,17 @@
+version: "3"
+services:
+  frontend:
+    #network_mode: host
+    image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/frontend
+  backend:
+    image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/backend
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.profiles.active=test
+  e2etest:
+    #network_mode: host
+    depends_on:
+      - frontend
+      - backend
+    build: .

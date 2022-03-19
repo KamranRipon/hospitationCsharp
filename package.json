@@ -1,0 +1,44 @@
+{
+  "name": "cci",
+  "version": "1.0.0",
+  "description": "CCI - Chatbot Control Interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "delete:reports": "rm -r cypress/results/* && rm -r ./output.html || true",
+    "prereport": "npm run delete:reports",
+    "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\", > mochawesome.json && npx marge mochawesome.json",
+    "merge": "mochawesome-merge cypress/results/mochawesome/*.json > cypress/results/mochawesome/output.json",
+    "generateMocha_Report": "marge cypress/results/mochawesome/output.json --reportDir ./results --inline",
+    "cy:run_spec": "npx cypress run --spec 'cypress/integration/00_Login.spec.js'",
+    "cypress:run": "npm run cy:run_spec -- --browser electron",
+    "CyTest-1": "npm run prereport && npm run cypress:run && npm run merge && npm run generateMocha_Report",
+    "CyTest": "npm run prereport && npm run cypress:run && npm run generateMocha_Report",
+    "start": "docker-compose up -d",
+    "cySpec": "npx cypress run --spec 'cypress/integration/05_Responses.spec.js'"
+  },
+  "author": "Abdullah",
+  "license": "ISC",
+  "dependencies": {
+    "curl": "^0.1.4",
+    "jasmine-core": "^3.10.1",
+    "jasmine-spec-reporter": "^7.0.0",
+    "junit": "^1.4.9",
+    "junit-merge": "^2.0.0",
+    "mocha": "^9.1.3",
+    "mochawesome": "^7.0.1",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.0.1",
+    "npm-run-all": "^4.1.5",
+    "websocket": "^1.0.34",
+    "xvfb": "^0.4.0"
+  },
+  "devDependencies": {
+    "@bahmutov/cy-api": "^1.6.2",
+    "cypress": "^9.5.2",
+    "cypress-multi-reporters": "^1.5.0",
+    "mocha-junit-reporter": "^2.0.2",
+    "prettier": "2.6.0",
+    "start-server-and-test": "^1.14.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "baseUrl": "http://10.61.135.11:8081/",
+    "viewportHeight": 1080,
+    "viewportWidth":1920,
+    "watchForFileChanges":true,
+    "chromeWebSecurity": false,
+    "screenshots":false,
+    "video": false,
+    "reporter": "cypress-multi-reporters",
+        "reporterOptions": {
+        "configFile": "reporter-config.json"
+    },
+    "experimentalSessionSupport":true
+
+}
