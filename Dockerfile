@@ -1,7 +1,7 @@
 FROM docker.artifactory-extern.dataport.de/cypress/base:10.18.0
 
-# ENV http_proxy="http://wall.lit.hamburg.de:80/"
-# ENV https_proxy="http://wall.lit.hamburg.de:80/"
+#  ENV http_proxy="http://wall.lit.hamburg.de:80/"
+#  ENV https_proxy="http://wall.lit.hamburg.de:80/"
 
 
 ENV HTTP_PROXY="http://10.61.16.6:3128"
@@ -16,7 +16,7 @@ COPY . /app
 
 RUN npm install
 
-RUN npx browserslist@latest --update-db
+#RUN npx browserslist@latest --update-db
 
 #Führe tests aus
-ENTRYPOINT sleep 20; npm run cy:run_spec
+RUN npm run cy:run_spec

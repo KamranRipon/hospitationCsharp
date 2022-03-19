@@ -48,9 +48,9 @@ testJob1:
   script:
     #- ifconfig lo:0 172.14.1.1 up
     - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
-    - docker-compose up -d --build
+    - docker build .
     - sleep 10
-    - docker run e2e-tests_e2etest:latest
+    #- docker run e2e-tests_e2etest:latest
   
 testJob2:
   stage: test

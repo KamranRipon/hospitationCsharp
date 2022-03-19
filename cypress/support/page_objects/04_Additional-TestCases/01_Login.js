@@ -4,11 +4,11 @@ export class einfacher_login {
         cy.log('Loged in Successful')
         cy.visit('/')
         cy.wait(500)
-        cy.visit('http://localhost/trainingsdaten/intent/')
+        cy.visit('http://10.61.135.11:8081/trainingsdaten/intent/')
 
-        cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
         cy.visit('/')
-        cy.url().should('eq', 'http://localhost/')
+        cy.url().should('eq', 'http://10.61.135.11:8081/')
     }
 }
 // Export class einfacher_login
