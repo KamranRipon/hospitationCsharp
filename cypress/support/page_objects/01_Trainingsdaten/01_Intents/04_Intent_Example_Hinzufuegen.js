@@ -9,7 +9,7 @@ export class intent_example_hinzufuegen {
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
 
         // 1.1 Example must not be empty -- // Currently Bug //
         // Entering Intent Tab
@@ -18,6 +18,7 @@ export class intent_example_hinzufuegen {
             
         // Entering to first row of the Intent Table
         cy.log('Line 20')
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -42,9 +43,10 @@ export class intent_example_hinzufuegen {
         // Clicking Example Hizufuegen Button
         cy.get('[data-cy="create-intent-example"]')
             .click()
+            .wait(200)
 
         // Assert initial warning Message 
-        cy.get('[role="alert"]')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Text muss gesetzt sein')
 
         // Anlegen  & weiteres Example 
@@ -72,6 +74,7 @@ export class intent_example_hinzufuegen {
 
         // Assert Successfully Saved Notification
         var idNr
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .last()
@@ -86,11 +89,11 @@ export class intent_example_hinzufuegen {
 
         // Assert in Intent-Example Table
         cy.log('Line 88')
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .last()
             .find('td:nth-child(2)').then(function($text) {
-
                 //const text = $text.text()
                 cy.wrap($text).should('have.text', addExample+String(exm))
             }) 

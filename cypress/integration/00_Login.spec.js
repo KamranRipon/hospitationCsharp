@@ -3,10 +3,7 @@ import { onEinfacherLogin } from "../support/page_objects/04_Additional-TestCase
 describe("Test Case: Einfacher Login", () => {
    
     beforeEach('visit url', () => {
-        // cy.visit('/')
-        // cy.url().should("eq", "http://localhost/login");
         
-        //cy.login('admin', 'cciAdmin#2022+')
         cy.visit('/')
         
         cy.loginiFunction('admin', 'cciAdmin#2022+')

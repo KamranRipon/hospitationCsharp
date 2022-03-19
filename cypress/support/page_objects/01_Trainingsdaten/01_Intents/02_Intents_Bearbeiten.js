@@ -64,7 +64,7 @@ export class intent_bearbeiten {
             .click()
         
         // Checking for a valid Name
-        cy.get('[role="alert"]')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text', 'Der Name muss gesetzt sein')
 
         // 2. Name should not contain "spaces" or "/", saving impossible, 
@@ -75,7 +75,7 @@ export class intent_bearbeiten {
             .type(index)
 
         //Assert warning notification
-        cy.get('[role="alert"]')
+        cy.get('[role="alert"]').eq(0)
             .should('be.visible')
             .should('have.text','Der Name enthält ungültige Zeichen!')
 
