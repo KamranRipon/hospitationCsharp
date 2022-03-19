@@ -5,7 +5,6 @@ import { onEntitySuchen } from "../support/page_objects/01_Trainingsdaten/02_Ent
 describe("Test Case 5: Entity", () => {
 
     beforeEach('visit url', () => {
-        //cy.login('admin', 'cciAdmin#2022+')
         cy.visit('/', {force:true})
         Cypress.Cookies.preserveOnce('session_id', 'remember_token')
         cy.loginiFunction('admin', 'cciAdmin#2022+')
@@ -28,18 +27,6 @@ describe("Test Case 5: Entity", () => {
         */
     })
 
-    it("Test Case CCI-T13: Entity Suchen", () => {
-        onEntitySuchen.entitySuchen()
-        /* 
-        C. Entity Suchen
-        1. Searching for single specific intent works
-        2. Searching for some chars multiple intents has in common filters correctly
-        3. Searching for some chars no intent has shows empty table
-        ** Assert All in Intent TAble **
-        */
-
-    })
-
     it("Test Case CCI-T12: Entity Bearbeiten", () => {
         onEntityBearbeiten.entityBearbeiten()
         /* 
@@ -57,5 +44,17 @@ describe("Test Case 5: Entity", () => {
         5. leave site via button "Abbrechen" navigates to table of synonyms and 
            does not save edited data
         */
+    })
+
+    it("Test Case CCI-T13: Entity Suchen", () => {
+        onEntitySuchen.entitySuchen()
+        /* 
+        C. Entity Suchen
+        1. Searching for single specific intent works
+        2. Searching for some chars multiple intents has in common filters correctly
+        3. Searching for some chars no intent has shows empty table
+        ** Assert All in Intent TAble **
+        */
+
     })
 })

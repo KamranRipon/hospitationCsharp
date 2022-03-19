@@ -1,6 +1,5 @@
 const m = Math.floor(Math.random() * 55000);
 const addValue = 'DummyValue'+String(m)
-
 export class entity_hinzufuegen {
 
     entityHinzufuegen() {
@@ -9,13 +8,13 @@ export class entity_hinzufuegen {
         cy.Trainingsdaten('[data-cy="navDrawerEntities"]')        
                 
         // checking url after clicking Entity Button
-        cy.url().should("eq", "http://localhost/trainingsdaten/entity/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/");
 
         // Entity Hinzufuegen testing 
         cy.createButton('[data-cy="entity-create"]')
         
         // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", "http://localhost/trainingsdaten/entity/neu/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/neu/");
 
         // add and Entity
         cy.addName('[data-cy="entity-name"]', addValue, '[data-cy="entity-description"]')
@@ -81,14 +80,13 @@ export class entity_hinzufuegen {
             .type(index)
 
             //Assert warning notification
-            cy.get('[role="alert"]')
+            cy.get('[role="alert"]').eq(0)
                 .should('be.visible')
                 .should('have.text','Der Name enthält ungültige Zeichen!')
 
             // Remove space or '/'
             cy.get('[data-cy="entity-name"]').clear()
         })
-                
         // Checking for Duplicate Name: Name cannot be known in Intent
         cy.get('[data-cy="entity-name"]')
             .clear()

@@ -1,15 +1,14 @@
 const m = Math.floor(Math.random() * 1000);
-
 export class entity_suchen {
 
     entitySuchen() {
         ///* Search Option testing *///
 
         // Open Trainingsdate Tab and enter to Story
-        cy.Trainingsdaten('[data-cy="navDrawerEntities"]')        
+        cy.Trainingsdaten('[data-cy="navDrawerEntities"]')
                 
         // checking url after clicking Entity Button
-        cy.url().should("eq", "http://localhost/trainingsdaten/entity/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/");
 
         // Single Intent
         cy.get('[data-cy="entity-table-search"]')
