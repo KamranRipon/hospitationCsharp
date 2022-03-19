@@ -42,7 +42,7 @@ restart test environment:
       "
     - exit
 
-testJob1:
+testJob:
   image: tmaier/docker-compose:latest
   stage: test
   script:
@@ -51,18 +51,3 @@ testJob1:
     - docker build .
     - sleep 10
     #- docker run e2e-tests_e2etest:latest
-  
-testJob2:
-  stage: test
-  script:
-    - curl -L --fail https://github.com/docker/compose/releases/download/1.24.0/run.sh -o /usr/local/bin/docker-compose
-
-    - chmod +x /usr/local/bin/docker-compose
-    - npm install xvfb
-    - npm install cypress
-    - npm install
-    - docker-compose up -d
-    - sleep 10
-    - npm run cypress:run
-  only:
-    - main
