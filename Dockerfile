@@ -19,4 +19,4 @@ RUN npm install
 #RUN npx browserslist@latest --update-db
 
 #Führe tests aus
-RUN npm run cy:run_spec
+RUN npm run CyTest
