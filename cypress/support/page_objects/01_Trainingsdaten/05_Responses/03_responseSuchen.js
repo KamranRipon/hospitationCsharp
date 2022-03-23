@@ -6,7 +6,7 @@ export class response_suchen {
         cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
         
         // Anlegen Some Random Value to Response
         const randonVal = ['response1', 'response2', 'weather']
