@@ -41,8 +41,11 @@ restart test environment:
       exit
       "
     - exit
+  only:
+    - main
 
 testJob:
+  #image: tmaier/docker-compose:latest
   image: docker.artifactory-extern.dataport.de/node:16
   stage: test
   script:
@@ -50,11 +53,9 @@ testJob:
     # - docker build .
     # - sleep 10
     #- docker run e2e-tests_e2etest:latest
-
     - apt-get update -y && apt-get upgrade -y
     - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
     - npm install xvfb
     - npm install cypress
     - npm install 
     - npm run CyTest
-

@@ -1,6 +1,6 @@
 import { onSlot } from "../support/page_objects/01_Trainingsdaten/03_Slots/Slot"
 
-describe("Test Case 6: Slot", () => {
+describe.skip("Test Case 6: Slot", () => {
    
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')

@@ -39,7 +39,7 @@ import { beforeEach, it } from "mocha"
 //     })
 // })
 
-describe ('Test Case - 2: Menu Elements', () => {
+describe.skip('Test Case - 2: Menu Elements', () => {
 
     beforeEach('visit url', () => {
         
@@ -66,7 +66,7 @@ describe ('Test Case - 2: Menu Elements', () => {
     })
 })
 
-describe('Test Case - 3: Mocking Network Response ', () => {
+describe.skip('Test Case - 3: Mocking Network Response ', () => {
 
     beforeEach('visit url', () => {
 
@@ -105,7 +105,7 @@ describe('Test Case - 3: Mocking Network Response ', () => {
     })
 })
 
-describe("Test Case - 4, Testing API Endpoints", () => {
+describe.skip("Test Case - 4, Testing API Endpoints", () => {
 
     beforeEach('visit url', () => {
         
@@ -124,7 +124,7 @@ describe("Test Case - 4, Testing API Endpoints", () => {
     })
 })
 
-describe("Test Case - 5, Backend Testing", () => {
+describe.skip("Test Case - 5, Backend Testing", () => {
 
     // before(() => {
     //     cy.login('admin', 'cciAdmin#2022+')

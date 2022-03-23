@@ -132,6 +132,7 @@ export class intent_example_hinzufuegen {
 
                 cy.get('[data-cy="intent-table-search"]')
                     .type(inExName)
+                    .wait(500)
 
                 cy.get('tbody')
                     .find('tr')

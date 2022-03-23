@@ -2,7 +2,7 @@ import { onActionAnlegen } from "../support/page_objects/01_Trainingsdaten/06_Ac
 import { onActionBearbeiten } from "../support/page_objects/01_Trainingsdaten/06_Actions/02_Action_Bearbeiten"
 import { onActionSuchen } from "../support/page_objects/01_Trainingsdaten/06_Actions/03_Action_Suchen"
 
-describe ('Test Case : Actions', () => {
+describe.skip('Test Case : Actions', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')

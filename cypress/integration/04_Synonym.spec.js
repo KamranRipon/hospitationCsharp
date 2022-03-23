@@ -1,6 +1,6 @@
 import { onSynonym } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/Synonyms"
 
-describe ('Test Case 7: Synonyms', () => {
+describe.skip('Test Case 7: Synonyms', () => {
 
     beforeEach('visit url', () => {
 

@@ -1,7 +1,7 @@
 //import { onRules } from "../support/page_objects/01_Trainingsdaten/10_Rules/Rules"
 
 import { onRulesAnlegen } from "../support/page_objects/01_Trainingsdaten/10_Rules/01_Rules_Anlegen"
-// import { onIntentBearbeiten } from "../support/page_objects/01_Trainingsdaten/10_Rules/01_Rules_Anlegen"
+import { onRulesBearbeiten } from "../support/page_objects/01_Trainingsdaten/10_Rules/02_Rules_Bearbeiten"
 // import { onIntentSuchen } from "../support/page_objects/01_Trainingsdaten/01_Intents/03_Intent_Suchen"
 // import { onIntentExampleHinzufuegen } from "../support/page_objects/01_Trainingsdaten/01_Intents/04_Intent_Example_Hinzufuegen"
 // import { onIntentExampleBearbeiten } from "../support/page_objects/01_Trainingsdaten/01_Intents/05_Intent_Example_Bearbeiten"
@@ -9,25 +9,23 @@ import { onRulesAnlegen } from "../support/page_objects/01_Trainingsdaten/10_Rul
 // import { onIntentExampleLoeschen } from "../support/page_objects/01_Trainingsdaten/01_Intents/07_Intent_Example_Loeschen"
 
 
-describe ('Test Case 8: Rules', () => {
+describe.skip('Test Case 8: Rules', () => {
 
     beforeEach('visit url', () => {
-
-        //cy.login('admin', 'cciAdmin#2022+')
         
         cy.visit('/')
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it.only('Test Case: Rules Anlegen', () => {
+    it('Test Case: Rules Anlegen', () => {
         onRulesAnlegen.rulesAnlegen()
     })
 
-    it.skip('Test Case: Rules Bearbeiten', () => {
-        onRules.rulesBearbeiten()
+    it.only('Test Case: Rules Bearbeiten', () => {
+        onRulesBearbeiten.rulesBearbeiten()
     })
 
-    it.skip('Test Case: Rules Suchen', () => {
+    it('Test Case: Rules Suchen', () => {
         onRules.rulesSuchen()
     })
 

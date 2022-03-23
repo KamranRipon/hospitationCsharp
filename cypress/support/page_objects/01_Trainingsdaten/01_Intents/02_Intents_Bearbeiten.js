@@ -1,4 +1,4 @@
-const iEdit = Math.floor(Math.random() * 7000);
+const iEdit = Math.floor(Math.random() * 70000);
 const newVal = Math.floor(Math.random() * 13500);
 const valErr = Math.floor(Math.random() * 10500);
 const addValue = 'DummyValue'
@@ -8,8 +8,7 @@ export class intent_bearbeiten {
     intentBearbeiten() {
 
         // Open Trainingsdate Tab and enter to Intents
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')       
-          //.wait(100)        
+        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
         // Enter to Intent Hinzufuegen
         cy.get('[data-cy="intent-create"]')
@@ -76,7 +75,6 @@ export class intent_bearbeiten {
 
         //Assert warning notification
         cy.get('[role="alert"]').eq(0)
-            .should('be.visible')
             .should('have.text','Der Name enthält ungültige Zeichen!')
 
         // Remove space or '/'

@@ -52,6 +52,5 @@ export class metadaten {
             .wait(300)  
     }
 }
-
 // Exportint class frontEnd to End2End to test
 export const onResponsesMetaDaten = new metadaten()

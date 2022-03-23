@@ -9,7 +9,7 @@ export class button_anlegen {
         cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://localhost/trainingsdaten/response/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
         cy.wait(500)      
 
         // 1. Text Name should not be empty, error message should contain "Texte"; /Currently Bug/

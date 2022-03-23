@@ -3,7 +3,7 @@ import { onStoryBearbeiten } from "../support/page_objects/01_Trainingsdaten/07_
 import { onStoriesSuchen } from "../support/page_objects/01_Trainingsdaten/07_Stories/03_Stories_Suchen"
 import { onStoriesLoeschen } from "../support/page_objects/01_Trainingsdaten/07_Stories/04_Stories_Loeschen"
 
-describe ('Test Case : Stories', () => {
+describe.skip('Test Case : Stories', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')
