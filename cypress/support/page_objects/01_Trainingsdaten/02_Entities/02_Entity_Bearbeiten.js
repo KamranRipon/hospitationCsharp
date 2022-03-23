@@ -92,7 +92,7 @@ export class entity_bearbeiten {
         cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Das', 'Entity')
 
         cy.get('[data-cy="errorMessageBody"]')
-            .should('have.text', ' Es exisitiert bereits ein Entity mit diesem Namen ')
+            .should('have.text', ' Es existiert bereits ein Entity mit diesem Namen ')
                 
         cy.get('[data-cy="entity-name"]').clear()
         
