@@ -10,7 +10,7 @@ export class intent_suchen {
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
         
         const randonVal = [addValue+String(singleEle), addValue+String(multiEle1)]
         cy.wrap(randonVal).each((index) => {
@@ -24,10 +24,7 @@ export class intent_suchen {
             cy.get('[data-cy="create-button"]').click()
             cy.get('[data-cy="navDrawerIntents"]').click()
         })
-
-        // Selecting Entire Table
         cy.wait(500)
-        //cy.selectEntireTbl()
 
         // 1. Searching for single specific story 
         cy.get('[data-cy="intent-table-search"]')
@@ -35,20 +32,19 @@ export class intent_suchen {
             .wait(500)
 
         // Assert Return Result
-        cy.log('Line 34')
         cy.get('tbody')
             .find('tr')
             .should('have.length', 1)
             .find('td:nth-child(1)')
-            .should('have.text', addValue+String(singleEle))
+            .should('contain', addValue+String(singleEle))
 
         // 2. Searching for some chars multiple stories has in common
         cy.get('[data-cy="intent-table-search"]')
             .clear()
             .type(addValue)
+            .wait(300)
 
         // Assert Return Result
-        cy.log('Line 46')
         cy.get('tbody')
             .find('tr')
             .then((trLength) => {
@@ -63,15 +59,14 @@ export class intent_suchen {
         cy.get('[data-cy="intent-table-search"]')
             .clear()
             .type('sky')
+            .wait(300)
 
         // Assert Return Result
-        cy.log('Line 65')
         cy.get('tbody')
             .find('tr')
-            .should('have.length', 1)
             .find('td:nth-child(1)')
             .should('not.have.text', 'sky')
     }
 }
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onIntentSuchen = new intent_suchen()
