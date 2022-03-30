@@ -6,10 +6,10 @@ export class intent_bearbeiten {
 
     intentBearbeiten() {
 
-        // Open Trainingsdate Tab and enter to Intents
+        // Open Trainingsdate tab and enter to Intents
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
-        // Enter to Intent Hinzufuegen
+        // Create an intent
         cy.get('[data-cy="intent-create"]')
             .should('be.visible')
             .click()
@@ -22,50 +22,26 @@ export class intent_bearbeiten {
             .should('be.visible')
             .click()
             .wait(400)
+
         //success-remove
         cy.successRemove()
 
         // return to Intent
         cy.get('[data-cy="navDrawerIntents"]').click()
 
+        // Arrange intent-table assending order
+        cy.get('thead').find('tr').find('th:nth-child(1)').click()
+
         // Selecting Entire Table
         cy.selectEntireTbl()
-
-        // // calculate maxi examples or rules on an intent
-        // var max_val=0
-        // //cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
-        // cy.get('tbody tr')
-        // .find('td:nth-child(3)')
-        // .then(($testFunc2) => {
-        //     const vall2 = $testFunc2.text()
-        //     const sp_vall2 = vall2.split(' ')
-        //     var num2
-        //     for (num2=0; num2 < sp_vall2.length; num2++){
-        //         if(Number(sp_vall2[num2]) > max_val) {
-        //             max_val = sp_vall2[num2]
-        //         }
-        //     }
-        // })
         
         // 1. Name should not be empty, error message should contain "Name"
-        // Enter to row which contain max example of the Intent table
-        cy.log('Line 55')
-        // cy.get('tbody')
-        //     .then((maxVal) => {
-        //         cy.get('tbody')
-        //             .find('td:nth-child(3)')
-        //             .contains(max_val)
-        //             .click()
-        //     })
+
         cy.wait(300)
         cy.get('tbody')
             .find('tr').eq(-2)
-            //.first()
             .click()
         
-        // Remove Name by clicking "X"
-        //cy.get('[title="Name löschen"]').click()
-        // clear intent-name
         cy.get('[data-cy="intent-name"]').clear()
         
         // 1.1 Warning message below input field
@@ -86,7 +62,7 @@ export class intent_bearbeiten {
             cy.get('[data-cy="intent-name"]')
                 .clear()
         })
-        // 1.3 Error message after unsuccessful saving 
+        // 1.3 Error message after unsuccessful saving
         
         cy.get('[data-cy="save-button"]').click()
         //Assert Error message, indication didn't able to save data
@@ -95,12 +71,11 @@ export class intent_bearbeiten {
         cy.get('[data-cy="error-remove"]').click()
 
         // 2. Check for successfully saved values
-        cy.log('Line 91')
         cy.addIntent(addValue+String(newVal))
         // save-button
         cy.get('[data-cy="save-button"]').click()
-        cy.wait(600)
-        cy.log('newVal: ', newVal)
+        cy.wait(400)
+
         // 2.1 Assert success Message
         cy.get('[data-cy="successMessageTitle"]')
             .then((successMsg) => {
@@ -120,47 +95,45 @@ export class intent_bearbeiten {
         cy.get('tbody').find('tr')
             .find('td:nth-child(1)')
             .then(function($synName1) {
-                cy.wrap($synName1).should('have.text', addValue+String(newVal))
+                cy.wrap($synName1).should('contain', addValue+String(newVal))
             })
 
         // clear search field
         cy.get('[data-cy="intent-table-search"]').clear()
 
-        /* 3.Checking for Duplicate Name: Name cannot be known in Intent
+        // Arrange intent-table assending order
+        cy.get('thead').find('tr').find('th:nth-child(1)').click()
+
+        /* 3. Checking for Duplicate Name: Name cannot be known already
            3.1 Error message after unsuccessful saving */
-                
-        cy.log('Line 124')
-        // Enter to Intent Hinzufuegen
-        cy.get('[data-cy="intent-create"]').click()
-        cy.wait(500)
-        // add intent
+
+        cy.wait(300)
+        cy.get('tbody')
+            .find('tr').eq(-2)
+            .click()
+        
+        cy.get('[data-cy="intent-name"]').clear()
+
+        // edit intent
         cy.addIntent(addValue+String(iEdit))
         // create-button
-        cy.log('Line 136')
-        cy.get('[data-cy="create-button"]').click()
-        cy.wait(500)
+        cy.get('[data-cy="save-button"]').click()
+        cy.wait(400)
         // Assert Error message after unsuccessful saving
         cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Das', 'Intent')
         cy.wait(1000)
         // Close Error Notification
-        //cy.get('[data-cy="error-remove"]').click()
+        cy.get('[data-cy="error-remove"]').click()
         
-        // Leave site by clicking Intests
-        cy.get('[data-cy="navDrawerIntents"]')
+        // Leave site by clicking abort-button
+        cy.get('[data-cy="abort-button"]')
             .click()
-            .wait(200)
+            .wait(300)
         
         // Select Entire Synonym Table
         cy.selectEntireTbl()
 
         // 5. Leave site via menu or breadcrump, data must be saved
-        // cy.get('tbody')
-        //     .then((maxVal) => {
-        //         cy.get('tbody')
-        //             .find('td:nth-child(3)')
-        //             .contains(max_val)
-        //             .click()
-        //     })
         cy.wait(300)
         cy.get('tbody')
             .find('tr').eq(-2)
@@ -172,8 +145,7 @@ export class intent_bearbeiten {
             .type(addValue+String(valErr))
 
         cy.get('[data-cy="navDrawerIntents"]').click()
-        cy.log('Line 158')
-        cy.wait(1000)
+        cy.wait(500)
         // Assert success Message
         cy.get('[data-cy="successMessageTitle"]')
             .then((successMsg) => {
@@ -193,24 +165,17 @@ export class intent_bearbeiten {
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')
-            .should('have.text', addValue+String(valErr))
+            .should('contain', addValue+String(valErr))
 
         // clear search field
         cy.get('[data-cy="intent-table-search"]')
             .clear()
-        
+
         // 6. Leave site via Abbrechen button, data must not be saved
-        // cy.get('tbody')
-        //     .then((maxVal) => {
-        //         cy.get('tbody')
-        //             .find('td:nth-child(3)')
-        //             .contains(max_val)
-        //             .click()
-        //     })
+
         cy.get('tbody')
             .find('tr').eq(-2)
             .click()
-
 
         // clear intent name
         cy.get('[data-cy="intent-name"]')
@@ -231,8 +196,8 @@ export class intent_bearbeiten {
             .find('td:nth-child(1)')
             .should('not.have.text', 'someName')
 
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
     }
 }
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onIntentBearbeiten = new intent_bearbeiten()

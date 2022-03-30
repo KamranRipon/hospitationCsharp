@@ -41,8 +41,6 @@ restart test environment:
       exit
       "
     - exit
-  only:
-    - main
 
 testJob:
   #image: tmaier/docker-compose:latest
