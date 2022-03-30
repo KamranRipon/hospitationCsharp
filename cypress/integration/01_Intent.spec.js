@@ -36,7 +36,7 @@ describe ('Test Case: Intents', () => {
         */
     })
 
-    it.only('Test Case: Intent bearbeiten', () => {
+    it('Test Case: Intent bearbeiten', () => {
         onIntentBearbeiten.intentBearbeiten()
         /* 
         B. Intent Bearbeiten
