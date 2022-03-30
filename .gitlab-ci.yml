@@ -59,3 +59,10 @@ testJob:
     - npm install cypress
     - npm install 
     - npm run CyTest
+  artifacts:
+    paths:
+      - cypress/results/mochawesome/output.json
+      - ./output.html
+    reports:
+      junit: output.html
+    expire_in: 1 week

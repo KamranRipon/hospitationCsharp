@@ -2,19 +2,19 @@
     "reporterEnabled": "mocha-junit-reporter, mochawesome",
     "mochaJunitReporterReporterOptions": {
         "mochaFile": "cypress/results/junit/result-[hash].xml"
-
     },
 
     "reporterOptions": {
         "reportDir": "cypress/results/mochawesome",
-        "charts":true,
-        "reportPageTitle":"e2e Test Report",
-        "reportFilename":"Cypress e2e Test Report",
+        "reportPageTitle":"End to End Test Report",
+        "reportFilename":"E2E-Test-Report",
         "embeddedScreenshots":true,
         "quiet":true,
         "overwrite":false,
         "html": true,
-        "json": true
+        "json": true,
+        "charts": true,
+        "timestamp": "mmddyyyy_HHMMss"
     },
     "video":false
 }

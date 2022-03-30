@@ -3,7 +3,7 @@ import { onStoryBearbeiten } from "../support/page_objects/01_Trainingsdaten/07_
 import { onStoriesSuchen } from "../support/page_objects/01_Trainingsdaten/07_Stories/03_Stories_Suchen"
 import { onStoriesLoeschen } from "../support/page_objects/01_Trainingsdaten/07_Stories/04_Stories_Loeschen"
 
-describe.skip('Test Case : Stories', () => {
+describe('Test Case : Stories', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')
@@ -24,7 +24,7 @@ describe.skip('Test Case : Stories', () => {
             2.1 Error message after unsuccessful saving 
             2.2 Valaue should be in the Story table, assert action Table
         3. Saving on validation error not possible
-            3.1 Case 1: "no intent is chossen"    --> Assert error message
+            3.1 Case 1: "no intent was chossen"    --> Assert error message
             3.2 Case 2: multiple intents in a row --> Assert error message
             3.3 Case 3: intents is last step      --> Assert error message
         4. Check for successfully saved values

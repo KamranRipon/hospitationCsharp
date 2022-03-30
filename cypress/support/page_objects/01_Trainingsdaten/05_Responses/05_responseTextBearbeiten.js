@@ -77,10 +77,10 @@ export class response_text_bearbeiten {
 
         cy.get('[data-cy="responsetext-text"]')
             .clear()
-        
+        cy.log('Line 80')
         //Assert warning notification
         cy.get('[role="alert"]')
-            .should('have.text','Der Text muss gesetzt sein')
+            .should('have.text','Der Text muss gesetzt sein      ')
 
         // Clicking Anlegen Button while Text field is empty
         cy.get('[data-cy="save-button"]').click()

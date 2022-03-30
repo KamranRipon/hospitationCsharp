@@ -11,13 +11,13 @@ export class sotries_bearbeiten {
         cy.Trainingsdaten('[data-cy="navDrawerStories"]')
         
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/");
 
         // Clicking Story Hinzufuegen
         cy.createButton('[data-cy="story-create"]')
 
         // checking url after clicking Story Hinzufuegen
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/neu/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/neu/");
 
         // At first Add a Story-name
         cy.storiesAnlegen(addValue+String(ac))
@@ -26,7 +26,7 @@ export class sotries_bearbeiten {
         cy.successRemove()
 
         //6. Click on "Anlegen" navigates to table of strories
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/")
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/")
         
         // 1. Name should not be empty, error message should contain "Name"
         //    1.1 Story 

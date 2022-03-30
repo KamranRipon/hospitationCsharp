@@ -5,26 +5,8 @@ export class button_suchen {
 
     buttonSuchen() {
         /* H. Response Button Suchen Testing */
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-            })        
         //Enter to a row of Response Table which contain highest no. of text
         var max_val2 = 0
         // Enter to Response table Row
@@ -42,7 +24,9 @@ export class button_suchen {
                         cy.log(max_val2)
                     }
                 }
-                cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+                //cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+                cy.wait(200)
+                cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(2)')
                     .contains(max_val2)
@@ -53,37 +37,37 @@ export class button_suchen {
             .contains('Buttons')
             .click()
             .wait(300)  
-
+        cy.log('Line 40')
         // Anlegen Some Random response-button-title
         const randonVal = ['test'+String(test1), 'test'+String(test2), 'weather']
         cy.wrap(randonVal).each((index) => {
 
             // Clicking Response Hinzufuegen
-            cy.get('[data-cy="responsebutton-create"]')
-                .click()
+            cy.get('[data-cy="responsebutton-create"]').click()
 
             cy.get('[data-cy="responsebutton-title"]')
                 .click({force:true})
                 .type(index)
 
             // Add an Intent 
-            cy.get('[class="v-select__slot"]')
+            cy.get('[role="combobox"]').eq(0).clear()
                 .contains('Intent')
                 .click({force:true})
-                .get('[class="v-list v-select-list v-sheet theme--light theme--light"]')
-                .find('[role="option"]')
+                .get('[role="option"]')
                 .last()
                 .click()
 
             cy.get('[data-cy="create-button"]').eq(0)
                 .click()
+            
+            cy.get('[role="tab"]')
+                .contains('Buttons')
+                .click()
+            
         })
-        cy.wait(500)
+        //cy.wait(500)
         // Selecting Entire Table
-        cy.get('[class="v-select__slot"]').click()
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-            .click({force:true})
+        cy.selectEntireTbl()
                            
         // Single Response
         cy.get('[data-cy="responsebutton-table-search"]')
@@ -91,7 +75,8 @@ export class button_suchen {
                 .type('weather')
 
         // Assert Return Result
-        cy.log('Line 98')
+        cy.log('Line 78')
+        cy.wait(200)
         cy.get('tbody')
             .find('tr')
             .should('have.length', 1)
@@ -105,7 +90,7 @@ export class button_suchen {
 
         cy.get('tbody')
             .find('tr')
-            .should('have.length', 2)
+            //.should('have.length', >1)
             .find('td:nth-child(2)')
             .should('contain','test')
 
@@ -127,14 +112,14 @@ export class button_suchen {
 
             cy.get('tbody')
                 .find('tr')
-                .find('td:nth-child(6)')
+                .find('td:nth-child(5)')
                 .first()
                 .click()
 
             // Confirm delete
-            cy.get('[class="v-btn__content"]')
-            .contains('Löschen')
-            .click()
+            cy.get('[type="button"]')
+                .contains('Löschen')
+                .click()
 
             // clear response-table-search
             cy.get('[data-cy="responsebutton-table-search"]')
@@ -147,12 +132,12 @@ export class button_suchen {
 
         cy.get('tbody')
             .find('tr')
-            .find('td:nth-child(6)')
+            .find('td:nth-child(5)')
             .first()
             .click()
 
         // Confirm delete
-        cy.get('[class="v-btn__content"]')
+        cy.get('[type="button"]')
         .contains('Löschen')
         .click()
         

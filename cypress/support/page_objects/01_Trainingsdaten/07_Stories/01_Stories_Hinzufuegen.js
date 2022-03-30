@@ -1,21 +1,26 @@
+import { onActionAnlegen } from "../06_Actions/01_Action_Hinzufuegen"
+
 const ac     = Math.floor(Math.random() * 5000);
 const valErr     = Math.floor(Math.random() * 6500);
 const addValue = 'StoryAnDummy'
-
 export class sotries_hinzufuegen {
 
     storyHinzufuegen() {
-        
+
+        // Add an Action for Steps
+        onActionAnlegen.actionAnlegen()
+        cy.reload()
+
         // Open Trainingsdate Tab and enter to Story
         cy.Trainingsdaten('[data-cy="navDrawerStories"]')
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/");
 
         // Clicking Story Hinzufuegen
         cy.createButton('[data-cy="story-create"]')
 
         // checking url after clicking Story Hinzufuegen
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/neu/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/neu/");
         
         // 1. Name should not be empty, error message should contain "Name"
         //    1.1 Story 
@@ -24,6 +29,7 @@ export class sotries_hinzufuegen {
         //Assert warning notification
         cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Name muss gesetzt sein')
+
         
         /* Currently Bug*/
 
@@ -46,10 +52,10 @@ export class sotries_hinzufuegen {
 
         // Assert further alert messages
         cy.get('[role="alert"]').eq(1)
-            .should('have.text', 'Auf ein Intent muss immer eine Action oder Response folgen.')
+            .should('have.text', 'Auf ein Intent muss immer eine Action oder Response folgen')
         
         cy.get('[role="alert"]').eq(2)
-            .should('have.text', 'Das Feld Intent darf nicht leer sein.')
+            .should('have.text', 'Das Feld Intent darf nicht leer sein')
     
         // Click Anlegen
         cy.get('[data-cy="create-button"]').click()
@@ -64,10 +70,38 @@ export class sotries_hinzufuegen {
         // 4.1 Assert Notification
         // Add a story name and assert notification & Assert in story table
         cy.storiesAnlegen(addValue+String(ac))
+        ///////////////////////////////
+        // cy.get('[data-cy="story-name"]')
+        //     .type(addValue+String(ac))
+
+        // cy.get('[data-cy="story-step-element-autocomplete"]').eq(0)
+        //     .click()
+        // cy.get('[role="option"]').last()
+        //     .click()
+
+        // cy.get('[data-cy="story-step-type-select"]').eq(1)
+        //     .click({force:true})
+
+        // cy.get('[role="option"]')
+        //     .contains('Action')
+        //     .click()
+        
+        // cy.get('[data-cy="story-step-element-autocomplete"]').eq(1)
+        //     .click()
+        //     .get('[role="option"]').last()
+        //     .click({force:true})
+
+        // cy.get('[data-cy="story-step-add"]')
+        //     .click()
+
+        // // Click Anlegen
+        // cy.get('[data-cy="create-button"]')
+        //     .click()
+        ///////////////////////////////
         // cy.wait(500)
-        // cy.pause()
+
         //6. Click on "Anlegen" navigates to table of strories
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/")
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/")
         
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')
@@ -136,7 +170,7 @@ export class sotries_hinzufuegen {
 
         // Assert Error Message body
         cy.get('[data-cy="errorMessageBody"]')
-            .should('have.text', ' Die Regeln für die Anordnung der Elemente wurden nicht beachtet. ')
+            .should('have.text', ' Die Regeln für die Anordnung der Elemente wurden nicht beachtet ')
 
         cy.get('[data-cy="error-remove"]').click()
         
@@ -173,7 +207,7 @@ export class sotries_hinzufuegen {
 
         // Assert Error Message body
         cy.get('[data-cy="errorMessageBody"]')
-            .should('have.text', ' Die Regeln für die Anordnung der Elemente wurden nicht beachtet. ')
+            .should('have.text', ' Die Regeln für die Anordnung der Elemente wurden nicht beachtet ')
 
         cy.get('[data-cy="error-remove"]').click()
         

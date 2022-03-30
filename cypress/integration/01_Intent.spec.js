@@ -22,19 +22,18 @@ describe ('Test Case: Intents', () => {
         A. Intent Hinzufügen
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
+            1.2 Warning message for space and Slace
             1.2 Error message after unsuccessful saving 
-        2. Name should not contain spaces or "/", saving impossible, 
-           Error message should contain "Name"
-           2.1 Warning message below input field
-           2.2 Error message after unsuccessful saving 
+        2. Check for successfully saved values
+            2.1 Assert Notification
+            2.2 Assert in table
         3. Check for duplicate name
             3.1 Error message after unsuccessful saving 
-            3.2 Valaue should be in the Response table, assert response Table
-        4. Check for successfully saved values
-            4.1 Assert Notification
-            4.2 Assert in table
-        5. Leave site via menu or breadcrump, data must not be saved
-        6. Click on "Anlegen" remains on details page
+            3.2 Table should not contain double value
+        4. Leave site via menu or breadcrump, data must not be saved
+            4.1 Assert in Table
+        5. Click on "Anlegen" remains on details page
+            5.1 Assert url
         */
     })
 
@@ -44,16 +43,19 @@ describe ('Test Case: Intents', () => {
         B. Intent Bearbeiten
         1. Edit Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
-            1.2 Error message after unsuccessful saving
-        2. Check for duplicate name
-            2.1 Error message after unsuccessful saving
-            2.2 Valaue should be double in the Response table, assert response Table
-        3. Check for successfully saved values
-            3.1 Assert Notification
-            3.2 Assert in response table
+            1.2 Warning message for space and Slace
+            1.3 Error message after unsuccessful saving
+        2. Check for successfully saved values
+            2.1 Assert Notification
+            2.2 Assert in response table
+        3. Check for duplicate name
+            3.1 Error message after unsuccessful saving
+            3.2 Table should not contain double value
         4. Leave site via menu or breadcrump, edited data must be saved
         5. leave site via button "Abbrechen" navigates to table of synonyms and 
            does not save edited data
+            5.1 Assert landing page
+            5.2 Assert data on table
         */
     })
 

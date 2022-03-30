@@ -12,7 +12,7 @@ export class stories_suchen {
         cy.Trainingsdaten('[data-cy="navDrawerStories"]')
 
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://localhost/trainingsdaten/story/");
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/");
         
         const randonVal = [addValue+String(singleEle), addValue+String(multiEle1)]
         cy.wrap(randonVal).each((index) => {

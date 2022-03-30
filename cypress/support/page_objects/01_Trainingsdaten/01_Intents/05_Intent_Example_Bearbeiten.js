@@ -211,9 +211,10 @@ export class intent_example_bearbeiten {
 
                 cy.get('[data-cy="intent-table-search"]')
                     .type(inExName)
-                cy.wait(500)
+                cy.wait(300)
                 cy.get('tbody')
                     .find('tr')
+                    .first()
                     .find('td:nth-child(3)')
                     .should('have.text', ' '+String(tbSize)+' ')
             })

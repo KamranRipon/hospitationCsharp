@@ -64,8 +64,6 @@ export class rules_anlegen {
             .find('td:nth-child(1)')
             .should('have.text', 'Action'+String(a))
         
-        // cy.wait(500)
-        
         // Closing success message
         cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
             .click()
@@ -118,7 +116,7 @@ export class rules_anlegen {
         // Add space to rules name input field
         cy.get('[data-cy="rule-name"]')
             .clear()
-            .type(' ')
+            .type('/')
         
         // Assert warning message after add space to input field
         /* Currently Bug*/

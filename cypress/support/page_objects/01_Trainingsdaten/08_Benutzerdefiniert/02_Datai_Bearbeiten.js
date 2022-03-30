@@ -11,7 +11,7 @@ export class datei_bearbeiten {
         cy.Trainingsdaten('[data-cy="navDrawerBenutzerdefiniert"]')
 
         // 1. Edit Name should not be empty, error message should contain "Name"
-        // 1.1 Action Name
+        // 1.1 Datei Name
         //     1.1.1 Warning message below input field
         //     1.1.2 Error message after unsuccessful saving
         

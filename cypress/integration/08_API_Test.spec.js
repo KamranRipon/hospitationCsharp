@@ -55,7 +55,7 @@ describe.skip('Test Case - 2: Menu Elements', () => {
         cy.get('[tabindex="0"]').contains('Trainingsdaten').click()
         cy.wait(500)
         cy.get("[data-cy=navDrawerIntents]").click()
-        cy.url().should("eq", "http://localhost/trainingsdaten/intent/");
+        cy.url().should("eq", "10.61.135.11:8081/trainingsdaten/intent/");
     })
 
     it('Testing Menu', () => {
@@ -78,14 +78,14 @@ describe.skip('Test Case - 3: Mocking Network Response ', () => {
             body: 
             [
                 {
-                "id":6,
+                "id":37,
                 "name":"Ripon",
                 "description":"",
-                "createDate":"2021-11-17T09:06:28.807+00:00",
+                //"createDate":"2021-11-17T09:06:28.807+00:00",
                 "useEntities":true,
                 "version":2,
-                "changeDate":"2021-11-17T09:07:04.112+00:00",
-                "exampleCount":2   
+                //"changeDate":"2021-11-17T09:07:04.112+00:00",
+                //"exampleCount":2
                 }      
             ]
         })
@@ -119,7 +119,7 @@ describe.skip("Test Case - 4, Testing API Endpoints", () => {
             .click()
     })
 
-    it.skip("Test Get Request", () => {
+    it("Test Get Request", () => {
         onIntent.restApiTesting()
     })
 })
