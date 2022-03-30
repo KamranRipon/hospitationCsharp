@@ -1,4 +1,5 @@
-const exm = Math.floor(Math.random() * 2500)
+const exm = Math.floor(Math.random() * 25000)
+const annot = Math.floor(Math.random() * 35000)
 const addExample = 'testExample'
 
 export class intent_example_hinzufuegen {
@@ -9,15 +10,11 @@ export class intent_example_hinzufuegen {
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
 
-        // 1.1 Example must not be empty
-        // Entering Intent Tab
-        //cy.get('[data-cy=navDrawerIntents]')
-        //    .click()
-            
+        // 1.1 Example Name must not be empty
+        
         // Entering to first row of the Intent Table
-        cy.log('Line 20')
         cy.wait(300)
         cy.get('tbody')
             .find('tr')
@@ -33,12 +30,10 @@ export class intent_example_hinzufuegen {
             inExName = name
         })
 
-        cy.log('Line 35')
         // Entering to Example Tab
         cy.get('[role="tab"]')
             .contains('Examples')
             .click()
-            //.wait(500)
         
         // Clicking Example Hizufuegen Button
         cy.get('[data-cy="create-intent-example"]')
@@ -55,19 +50,17 @@ export class intent_example_hinzufuegen {
         
         cy.get('[data-cy="create-button"]').eq(1)
             .click()
-            //.wait(500)
 
         // success remove
         cy.successRemove()
         
         // Add an example 
         cy.get('[data-cy="example-text"]')
-            //.click({force:true})
             .type(addExample+String(exm))
         
         cy.get('[data-cy="create-button"]').eq(0)
             .click()
-            .wait(500)
+            .wait(400)
 
         // select entire table
         cy.selectEntireTbl()
@@ -88,14 +81,13 @@ export class intent_example_hinzufuegen {
             })
 
         // Assert in Intent-Example Table
-        cy.log('Line 88')
         cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .last()
             .find('td:nth-child(2)').then(function($text) {
                 //const text = $text.text()
-                cy.wrap($text).should('have.text', addExample+String(exm))
+                cy.wrap($text).should('contain', addExample+String(exm))
             }) 
 
         // 1.2 Leave site via menu or breadcrump is possible
@@ -119,8 +111,36 @@ export class intent_example_hinzufuegen {
             .find('td:nth-child(2)')
             .should('not.have.text', 'breadcrump')
 
+        // 2. Annotate text in editor works
+
+        // 2.1 single annotation
+
+        //Arrange
+        cy.get('[data-cy="create-intent-example"]').click()
+        cy.get('[data-cy="example-text"]').type('singleAnnot'+String(annot))
+        cy.get('[data-cy="example-text"]').type('{selectall}')
+        cy.get('[role="combobox"]').click()
+        cy.get('[role="option"]').last().click()
+        cy.get('[data-cy="example-add-entity"]').click()
+        cy.get('[data-cy="create-button"]').eq(0).click()
+
+        //Act
+        cy.get('[data-cy=example-table-search]').type('singleAnnot'+String(annot))
+
+        //Assert
+        cy.wait(300)
+        cy.get('tbody')
+            .find('tr').last()
+            .find('td:nth-child(3)')
+            .should('not.be.empty')
+        
+        cy.get('[data-cy=example-table-search]').clear()
+
+        // Select entire table
+        cy.selectEntireTbl()
+
         // 1.3 Saving saves given data correctly
-        cy.log('Line 120')
+        cy.wait(200)
         cy.get('tbody')
             .find('tr')
             .then((exTbSize) => {
