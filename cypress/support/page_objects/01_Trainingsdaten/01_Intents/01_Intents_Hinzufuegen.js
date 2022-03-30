@@ -1,15 +1,15 @@
-const m = Math.floor(Math.random() * 65000);
-const addValue = 'DummyValue'+ String(m)
+const randNumber = Math.floor(Math.random() * 65000);
+const addValue = 'DummyValue'+ String(randNumber)
 
 export class intent_hinzufuegen {
         
     intentsHinzufuegen() {
 
-        // Open Trainingsdate Tab and enter to Intents
+        // Open Trainingsdate and enter to Intents
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
                 
         // checking url after clicking Inten Button
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
 
         // Select Entire Table
         cy.selectEntireTbl()
@@ -28,20 +28,20 @@ export class intent_hinzufuegen {
                 }
             })
 
-        // Enter to Intent Hinzufuegen
+        // Create an Intent
         cy.get('[data-cy="intent-create"]')
             .should('be.visible')
             .click()
         
         // assert landing site
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/neu/`);
 
-        // 1. Name should not be empty, error message should contain "Name" 
+        // 1. Name should not be empty, error message should contain "Name"
 
-        //1.1 Warning message below input field
+        // 1.1 Warning message below input field
         cy.warningNotification('[role="alert"]')
 
-        //1.2 Warning message for space and Slace
+        // 1.2 Warning message for space and Slace
         const space   = [' ', '/']
         cy.wrap(space).each((index) => {
             cy.get('[data-cy="intent-name"]')
@@ -52,12 +52,10 @@ export class intent_hinzufuegen {
                 .should('be.visible')
                 .should('have.text','Der Name enthält ungültige Zeichen!')
 
-            // Remove space or '/'
-            cy.get('[data-cy="intent-name"]')
-                .clear()
+            cy.get('[data-cy="intent-name"]').clear()
         })
 
-        // 1.2 Error message after unsuccessful saving 
+        // 1.2 Error message after unsuccessful saving
 
         cy.get('[data-cy="create-button"]').click()
         //Assert Error message, indication didn't able to save data
@@ -87,7 +85,7 @@ export class intent_hinzufuegen {
 
         // 5. Click on "Anlegen" remains on details page
         cy.url().then((URL) => {
-            cy.wrap(URL).should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/"+String(nrOfRow)+"/");
+            cy.wrap(URL).should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/${String(nrOfRow)}/`);
         })
         // Back to intent
         cy.get('[data-cy="navDrawerIntents"]').click()
@@ -114,7 +112,7 @@ export class intent_hinzufuegen {
         cy.get('[data-cy="intent-name"]')
             .type(addValue)
             .get('[data-cy="intent-description"]')
-            .type(addValue)            
+            .type(addValue)
     
         // create button
         cy.get('[data-cy="create-button"]').click()
@@ -129,9 +127,9 @@ export class intent_hinzufuegen {
         // Leave site by clicking Intests
         cy.get('[data-cy="navDrawerIntents"]')
             .click()
-            .wait(150)
+            .wait(200)
         
-        // Add some addition name to Intests
+        // Add some addition name to Intests for test intent-search
         var textList = ["test15","test1", "weather"]
 
         cy.wrap(textList).each((index) => {
@@ -187,5 +185,5 @@ export class intent_hinzufuegen {
             .click()
     }
 }
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onIntentHinzufuegen = new intent_hinzufuegen()

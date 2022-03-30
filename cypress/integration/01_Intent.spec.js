@@ -17,13 +17,12 @@ describe ('Test Case: Intents', () => {
 
     it('CCI-T4: Intents Hinzufuegen', () => {
         onIntentHinzufuegen.intentsHinzufuegen()
-        //onFrontend.Entities()
         /*
         A. Intent Hinzufügen
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Warning message for space and Slace
-            1.2 Error message after unsuccessful saving 
+            1.2 Error message after unsuccessful saving
         2. Check for successfully saved values
             2.1 Assert Notification
             2.2 Assert in table
@@ -37,7 +36,7 @@ describe ('Test Case: Intents', () => {
         */
     })
 
-    it('Test Case: Intent bearbeiten', () => {
+    it.only('Test Case: Intent bearbeiten', () => {
         onIntentBearbeiten.intentBearbeiten()
         /* 
         B. Intent Bearbeiten

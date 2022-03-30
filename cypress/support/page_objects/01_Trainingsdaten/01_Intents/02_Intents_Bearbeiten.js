@@ -6,7 +6,7 @@ export class intent_bearbeiten {
 
     intentBearbeiten() {
 
-        // Open Trainingsdate Tab and enter to Intents
+        // Open Trainingsdate and enter to Intents
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
 
         // Enter to Intent Hinzufuegen
