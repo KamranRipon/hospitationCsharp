@@ -15,6 +15,7 @@ export class action_bearbeiten {
         //     1.1.2 Error message after unsuccessful saving
         
         // Entering to first of
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -35,7 +36,7 @@ export class action_bearbeiten {
 
             //Assert warning notification
             cy.get('[role="alert"]')
-                .should('have.text','Der Name enthält ungültige Zeichen!')
+                .should('have.text','Der Name enthält ungültige Zeichen!      ')
 
             // Remove space or '/'
             cy.get('[data-cy="action-name"]')
@@ -82,6 +83,7 @@ export class action_bearbeiten {
         cy.selectEntireTbl()
             
         // Assert Value in Response Table
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')
@@ -121,6 +123,7 @@ export class action_bearbeiten {
         cy.get('[data-cy="action-table-search"]')
             .type(addValue+String(b))
         
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .contains(addValue+String(b))
@@ -153,6 +156,7 @@ export class action_bearbeiten {
         cy.selectEntireTbl()
 
         // Assert table length in Action Table
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .contains(addValue+String(x))
@@ -166,6 +170,7 @@ export class action_bearbeiten {
         cy.get('[data-cy="action-table-search"]').clear()
 
         // 4. Leave site via menu or breadcrump, data must be saved
+        cy.wait(200)
         cy.get('tbody')
             .find('tr')
             .first()

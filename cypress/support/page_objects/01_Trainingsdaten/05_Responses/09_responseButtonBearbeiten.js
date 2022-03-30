@@ -41,10 +41,11 @@ export class button_bearbeiten {
                     .contains(max_val2)
                     .click({force:true})
             })
+        
         var resbutName
         // Save Response Name to a variable for letar Assertion
-        cy.get('[class="v-text-field__slot"]')
-            .find('[data-cy="response-name"]')
+        cy.get('[data-cy="response-name"]')
+            //.find('[data-cy="response-name"]')
                 .invoke('val')
                     .as('name')
       
@@ -57,7 +58,7 @@ export class button_bearbeiten {
         cy.get('[role="tab"]')
             .contains('Buttons')
             .click()
-            .wait(400)  
+            .wait(300)  
 
         // Entering to last row of Button table
         cy.get('tbody')
@@ -70,7 +71,7 @@ export class button_bearbeiten {
 
         //Assert warning notification
         cy.get('[role="alert"]')
-            .should('have.text','Der Titel muss gesetzt sein')
+            .should('have.text','Der Titel muss gesetzt sein      ')
 
         // add a space or '/' to input field /* Currently Bug, cannot be tested */
 
@@ -98,7 +99,7 @@ export class button_bearbeiten {
         // Assert Error Message
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Der Response Button konnte nicht gespeichert werden. ')
-
+        
         // Close Error Notification
         cy.get('[data-cy="error-remove"]').click()
         
@@ -106,12 +107,16 @@ export class button_bearbeiten {
         cy.get('[data-cy="responsebutton-title"]')
             .type(addValue+String(Resb))
         
-        cy.get('[class="v-input__icon v-input__icon--clear"]').eq(1)
-            .click()
+        // cy.get('[class="v-input__icon v-input__icon--clear"]').eq(1)
+        //     .click()
+        cy.get('[role="combobox"]').eq(0).clear()
+        cy.get('[data-cy="responsebutton-title"]').click()
 
         //2.1 Assert warning notification Intent
-        cy.get('[role="alert"]')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text','Ein Intent muss ausgewählt sein')
+
+        //cy.wait(500)
 
         cy.get('[data-cy="save-button"]').click()
 
@@ -120,7 +125,7 @@ export class button_bearbeiten {
 
         // Close Error Notification
         cy.get('[data-cy="error-remove"]').click()
-
+        
         // 3. Check for successfully saved values
         // 3.1 Assert Notification
         cy.get('[data-cy="responsebutton-title"]')
@@ -134,14 +139,14 @@ export class button_bearbeiten {
             .get('[role="option"]')
             .last()
             .click()
-
+        
         // Click Speichern
         cy.get('[data-cy="save-button"]').click()
         
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')
             .should('have.text', ' Der Response Button "'+addValue+String(Resb)+'"  wurde erfolgreich gespeichert ')
-        
+        cy.wait(300)
         // Closing Successfully Saved Notification
         cy.get('[data-cy="success-remove"]').click()
 
@@ -153,9 +158,10 @@ export class button_bearbeiten {
             .type(addValue+String(Resb))
         
         // Selecting Entire Table
-        cy.selectEntireTbl()
+        //cy.selectEntireTbl()
             
         // Assert Value in Response Table
+        cy.wait(200)
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(2)')
@@ -191,11 +197,13 @@ export class button_bearbeiten {
         // Click Anlegen
         cy.get('[data-cy="create-button"]').eq(0)
             .click()
+        cy.successRemove()
 
         // 2. Check for duplicate name
         // 2.1 Response Name
         // 2.1.1 Error message after unsuccessful saving
         // edit a button-title and try to save with an existing title
+        cy.wait(200)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -271,6 +279,7 @@ export class button_bearbeiten {
         // Assert Value in Response Table
         cy.get('tbody')
             .find('tr')
+            .first()
             .find('td:nth-child(2)')
             .then(function($synName1) {
                 cy.wrap($synName1).should('have.text', addValue+String(Resble))

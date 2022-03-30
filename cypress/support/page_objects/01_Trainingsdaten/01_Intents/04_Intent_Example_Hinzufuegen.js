@@ -11,7 +11,7 @@ export class intent_example_hinzufuegen {
         // Assert URL after clicking Story
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
 
-        // 1.1 Example must not be empty -- // Currently Bug //
+        // 1.1 Example must not be empty
         // Entering Intent Tab
         //cy.get('[data-cy=navDrawerIntents]')
         //    .click()
@@ -24,10 +24,10 @@ export class intent_example_hinzufuegen {
             .first()
             .click({force:true})
 
-        // Save Response Name for letar Assertion
+        // Save Intent Name for letar assertion
         var inExName
         cy.get('[data-cy="intent-name"]')
-                .invoke('val').as('name')
+            .invoke('val').as('name')
                     
         cy.get('@name').then((name) => {
             inExName = name
@@ -62,7 +62,7 @@ export class intent_example_hinzufuegen {
         
         // Add an example 
         cy.get('[data-cy="example-text"]')
-            .click({force:true})
+            //.click({force:true})
             .type(addExample+String(exm))
         
         cy.get('[data-cy="create-button"]').eq(0)
@@ -136,6 +136,7 @@ export class intent_example_hinzufuegen {
 
                 cy.get('tbody')
                     .find('tr')
+                    .first()
                     .find('td:nth-child(3)')
                     .should('have.text', ' '+String(tbSize)+' ')
             })

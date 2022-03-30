@@ -115,7 +115,7 @@ Cypress.Commands.add('warningNotification', (alert) => {
 Cypress.Commands.add('spaceWarningNotification', (alert) => {
     //Assert warning notification
     cy.get(alert)
-        .should('have.text','Der Name enthält ungültige Zeichen!')
+        .should('have.text','Der Name enthält ungültige Zeichen!      ')
 })
 
 Cypress.Commands.add('successMessageTitle', (succesTitle, artikel, itemName, value) => {
@@ -133,7 +133,7 @@ Cypress.Commands.add('errorMessageTitle', (errorMessage, artikel, itemName) => {
 
 Cypress.Commands.add('errorMessageBody',(errorMessage) => {
     cy.get(errorMessage)
-        .should('have.text', ' Die Regeln für die Anordnung der Elemente wurden nicht beachtet. ')
+        .should('have.text', ' Die Regeln für die Anordnung der Elemente wurden nicht beachtet ')
 })
 
 Cypress.Commands.add('successRemove', () => {
@@ -160,10 +160,12 @@ Cypress.Commands.add('addRandValue', (randVAl, create, name, button, backNav) =>
 
         cy.get(button)
             .click()
+            .wait(300)
         
         // Back to action Tab
         cy.get(backNav)
             .click()
+            .wait(300)
     })
 })
 
@@ -171,29 +173,29 @@ Cypress.Commands.add('storiesAnlegen', (addval) => {
     cy.get('[data-cy="story-name"]')
             .type(addval)
 
-        cy.get('[data-cy="story-step-element-autocomplete"]').eq(0)
-            .click()
-        cy.get('[role="option"]').last()
-            .click()
+    cy.get('[data-cy="story-step-element-autocomplete"]').eq(0)
+        .click()
+    cy.get('[role="option"]').last()
+        .click()
 
-        cy.get('[data-cy="story-step-type-select"]').eq(1)
-            .click({force:true})
+    cy.get('[data-cy="story-step-type-select"]').eq(1)
+        .click({force:true})
 
-        cy.get('[role="option"]')
-            .contains('Action')
-            .click()
-        
-        cy.get('[data-cy="story-step-element-autocomplete"]').eq(1)
-            .click()
-            .get('[role="option"]').last()
-            .click({force:true})
+    cy.get('[role="option"]')
+        .contains('Action')
+        .click()
+    
+    cy.get('[data-cy="story-step-element-autocomplete"]').eq(1)
+        .click()
+        .get('[role="option"]').last()
+        .click({force:true})
 
-        cy.get('[data-cy="story-step-add"]')
-            .click()
+    cy.get('[data-cy="story-step-add"]')
+        .click()
 
-        // Click Anlegen
-        cy.get('[data-cy="create-button"]')
-            .click()
+    // Click Anlegen
+    cy.get('[data-cy="create-button"]')
+        .click()
 })
 
 Cypress.Commands.add('confirmDelete', () => {
@@ -209,7 +211,9 @@ Cypress.Commands.add('addName', (name, val, description) => {
     //cy.get('[data-cy="intent-name"]')
     cy.get(name)
         .clear()
+        .wait(300)
         .type(val)
+        .wait(300)
         //.get('[data-cy="intent-description"]')
         .get(description)
         .clear()
@@ -221,8 +225,11 @@ Cypress.Commands.add('addIntent', (val) => {
     // add an intent-name and intent-description
     cy.get('[data-cy="intent-name"]')
         .clear()
+        .wait(500)
         .type(val)
-        .get('[data-cy="intent-description"]')
+        .wait(200)
+    cy.get('[data-cy="intent-description"]')
         .clear()
         .type(val)
+        .wait(200)
 })

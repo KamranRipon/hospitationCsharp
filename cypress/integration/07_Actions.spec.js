@@ -2,12 +2,12 @@ import { onActionAnlegen } from "../support/page_objects/01_Trainingsdaten/06_Ac
 import { onActionBearbeiten } from "../support/page_objects/01_Trainingsdaten/06_Actions/02_Action_Bearbeiten"
 import { onActionSuchen } from "../support/page_objects/01_Trainingsdaten/06_Actions/03_Action_Suchen"
 
-describe.skip('Test Case : Actions', () => {
+describe('Test Case : Actions', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')
         cy.visit('/')
-        Cypress.Cookies.preserveOnce('session_id', 'remember_token')
+        //Cypress.Cookies.preserveOnce('session_id', 'remember_token')
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 

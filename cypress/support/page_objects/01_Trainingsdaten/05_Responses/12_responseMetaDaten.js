@@ -2,26 +2,7 @@ export class metadaten {
 
     metaDaten() {
         /* H. Response Button Suchen Testing */
-        cy.get('[class="v-list-group"]')
-            .contains('Trainingsdaten')
-            .then((Tdaten) => {
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerResponses"]')
-                        .click()
-                }
-            })
+        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
 
         //Enter to a row of Response Table which contain highest no. of text
         var max_val2 = 0
@@ -46,7 +27,7 @@ export class metadaten {
                     .click({force:true})
             })
         // Locate Button Tab and enter to it
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Meta-Daten')
             .click()
             .wait(300)  

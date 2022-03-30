@@ -11,7 +11,7 @@ export class responses_text_suchen {
 
         // Assert URL after clicking Rules
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
-        cy.wait(500)
+        cy.wait(300)
 
         // Selecting Entire Table
         cy.selectEntireTbl()
@@ -56,7 +56,7 @@ export class responses_text_suchen {
 
             cy.get('[data-cy="create-button"]')
                 .click()
-                .wait(500)
+                .wait(300)
         })
         
         // Selecting Entire Table
@@ -65,11 +65,13 @@ export class responses_text_suchen {
         // Single Response
         cy.get('[data-cy="responsetext-table-search"]')
             .type(b)
-
+        cy.log('Line 68')
         // Assert Return Result
+        cy.wait(200)
         cy.get('tbody')
             .find('tr')
-            .should('have.length', 1)
+            .first()
+            //.should('have.length', 1)
             .find('td:nth-child(2)')
             .should('have.text', b)
         
@@ -77,9 +79,11 @@ export class responses_text_suchen {
         cy.get('[data-cy="responsetext-table-search"]')
             .clear()
             .type(t)
+            .wait(300)
         cy.get('tbody')
             .find('tr')
-            .should('have.length', 2)  // hard coding is not good idea
+            .first()
+            //.should('have.length', 2)  // hard coding is not good idea
             .find('td:nth-child(2)')
             .should('contain', t)
 

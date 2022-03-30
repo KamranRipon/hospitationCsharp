@@ -36,63 +36,12 @@ export class intent_hinzufuegen {
         // assert landing site
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/neu/");
 
-        // add an intent-name and intent-description
-        cy.get('[data-cy="intent-name"]')
-            .type(addValue)
-            .get('[data-cy="intent-description"]')
-            .type(addValue)
+        // 1. Name should not be empty, error message should contain "Name" 
 
-        // create-button
-        cy.get('[data-cy="create-button"]')
-            .should('be.visible')
-            .click()
-            .wait(400)
+        //1.1 Warning message below input field
+        cy.warningNotification('[role="alert"]')
 
-        // 3. Check for successfully saved values
-
-        // 3.1 Assert success Message
-        cy.get('[data-cy="successMessageTitle"]')
-            .then((successMsg) => {
-                expect(successMsg).to.have.text(' Das Intent "'+ addValue +'" wurde erfolgreich gespeichert ')
-        })
-
-        // 5. Click on "Anlegen" remains on details page
-        cy.url().then((URL) => {
-            cy.wrap(URL).should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/"+String(nrOfRow)+"/");
-        })
-        // Back to intent
-        cy.get('[data-cy="navDrawerIntents"]')
-            .click()
-            .wait(300)
-
-        // 3. Check for successfully saved values
-        // 3.2 Assert in table
-        cy.get('[data-cy="intent-table-search"]').type(addValue)
-
-        // Selecting Entire Table
-        cy.selectEntireTbl()
-        
-        // Assert Value in intent-table
-        cy.get('tbody').find('tr')
-            .find('td:nth-child(1)')
-            .then(function($synName1) {
-                cy.wrap($synName1).should('have.text', addValue)
-            })
-
-        cy.get('[data-cy="intent-table-search"]').clear()
-
-        // 1. Name should not be empty, error message should contain "Name"
-                
-        // Enter to Intent Hinzufuegen
-        cy.get('[data-cy="intent-create"]').click()
-        cy.log('Line 74')
-        // Check for require name waring message 
-        cy.get('[role="alert"]').eq(0)
-            .should('have.text','Der Name muss gesetzt sein')
-            
-
-        // 2. Name should not contain "spaces" or "/", saving impossible, 
-        // Checking warning message for "space" or "/" 
+        //1.2 Warning message for space and Slace
         const space   = [' ', '/']
         cy.wrap(space).each((index) => {
             cy.get('[data-cy="intent-name"]')
@@ -107,10 +56,60 @@ export class intent_hinzufuegen {
             cy.get('[data-cy="intent-name"]')
                 .clear()
         })
-                
-        /* 3.Checking for Duplicate Name: Name cannot be known in Intent
-           3.1 Error message after unsuccessful saving */
 
+        // 1.2 Error message after unsuccessful saving 
+
+        cy.get('[data-cy="create-button"]').click()
+        //Assert Error message, indication didn't able to save data
+        cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Das','Intent')
+        // Close Error Notification
+        cy.get('[data-cy="error-remove"]').click()
+
+        // 2. Check for successfully saved values
+
+        // add an intent-name and intent-description
+        cy.get('[data-cy="intent-name"]')
+            .type(addValue)
+            .get('[data-cy="intent-description"]')
+            .type(addValue)
+
+        // create-button
+        cy.get('[data-cy="create-button"]')
+            .should('be.visible')
+            .click()
+            .wait(400)
+
+        // 2.1 Assert success Message
+        cy.get('[data-cy="successMessageTitle"]')
+            .then((successMsg) => {
+                expect(successMsg).to.have.text(' Das Intent "'+ addValue +'" wurde erfolgreich gespeichert ')
+        })
+
+        // 5. Click on "Anlegen" remains on details page
+        cy.url().then((URL) => {
+            cy.wrap(URL).should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/"+String(nrOfRow)+"/");
+        })
+        // Back to intent
+        cy.get('[data-cy="navDrawerIntents"]').click()
+            //.wait(300)
+
+        // 2.2 Assert in table
+        cy.get('[data-cy="intent-table-search"]').type(addValue)
+        // Selecting Entire Table
+        cy.selectEntireTbl()
+        // Assert Value in intent-table
+        cy.get('tbody').find('tr')
+            .find('td:nth-child(1)')
+            .then(function($synName1) {
+                cy.wrap($synName1).should('have.text', addValue)
+            })
+
+        cy.get('[data-cy="intent-table-search"]').clear()
+                
+        // 3.Checking for Duplicate Name
+
+        // Enter to Intent Hinzufuegen
+        cy.get('[data-cy="intent-create"]').click()
         // add an intent-name and an intent-description
         cy.get('[data-cy="intent-name"]')
             .type(addValue)
@@ -118,9 +117,9 @@ export class intent_hinzufuegen {
             .type(addValue)            
     
         // create button
-        cy.get('[data-cy="create-button"]')
-                .click()
-        // Assert Error Message
+        cy.get('[data-cy="create-button"]').click()
+
+        // 3.1 Assert Error Message
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Das Intent konnte nicht gespeichert werden. ')
         cy.wait(300)
@@ -158,12 +157,10 @@ export class intent_hinzufuegen {
                     
             cy.get('[data-cy="create-button"]').click()
 
-            cy.get('[data-cy="navDrawerIntents"]')
-                .click()
+            cy.get('[data-cy="navDrawerIntents"]').click()
         })
 
         // 4. Leave site via menu or breadcrump, data must not be saved
-        cy.log('Line 167')
         cy.get('[data-cy="navDrawerIntents"]').click()
 
         cy.get('[data-cy="intent-create"]').click()

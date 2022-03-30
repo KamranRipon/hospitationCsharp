@@ -122,7 +122,7 @@ export class responses_bearbeiten {
         // 2. Check for duplicate name
         // 2.1 Response Name
         // 2.1.1 Error message after unsuccessful saving
-        
+        cy.wait(200)
         cy.get('[data-cy="response-table-search"]')
             .type(addValue+String(b))
         

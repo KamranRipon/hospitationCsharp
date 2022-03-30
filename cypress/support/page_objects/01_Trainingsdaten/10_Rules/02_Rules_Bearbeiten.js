@@ -153,8 +153,7 @@ export class rules {
         // cy.get('[class="v-messages__wrapper"]')
         //     .should('have.text','Der Name enthält ungültige Zeichen!')
 
-        cy.get('[data-cy="rule-name"]')
-            .clear()
+        cy.get('[data-cy="rule-name"]').clear()
 
         // 1.2 Leave site with breadcrump 
         //Case 1: Rules name Empty
@@ -180,7 +179,7 @@ export class rules {
             .type(addValue+String(er))
 
         // Remove steps
-        cy.get('[data-cy="rule-remove-step"]')
+        cy.get('[data-cy="rule-remove-step"]').eq(0)
             .click()
 
         cy.get('[class="v-breadcrumbs__item"]')
@@ -190,6 +189,7 @@ export class rules {
 
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
+        cy.pause()
 
         cy.get('[data-cy="errorMessageBody"]')
             .should('have.text', ' Die Schritte der Rule sind ungültig ')

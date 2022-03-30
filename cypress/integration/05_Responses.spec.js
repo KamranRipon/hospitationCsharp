@@ -13,7 +13,7 @@ import { onResponsesButtonSuchen } from "../support/page_objects/01_Trainingsdat
 import { onResponsesButtonLoeschen } from "../support/page_objects/01_Trainingsdaten/05_Responses/11_responseButtonLoeschen"
 import { onResponsesMetaDaten } from "../support/page_objects/01_Trainingsdaten/05_Responses/12_responseMetaDaten"
 
-describe.skip('Test Case : Responses', () => {
+describe('Test Case : Responses', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')
@@ -172,7 +172,7 @@ describe.skip('Test Case : Responses', () => {
         onResponsesButtonLoeschen.buttonLoeschen()
     })
 
-    it('Test Case CCI-T62: Response Button Loeschen', () => {
+    it('Test Case CCI-T62: Response Meta Daten', () => {
         onResponsesMetaDaten.metaDaten()
         /* 
         F. Response Meta Daten

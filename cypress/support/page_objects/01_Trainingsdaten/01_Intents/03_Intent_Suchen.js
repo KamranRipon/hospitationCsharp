@@ -1,5 +1,5 @@
-const singleEle = Math.floor(Math.random() * 5500);
-const multiEle1  = Math.floor(Math.random() * 6500);
+const singleEle = Math.floor(Math.random() * 55000);
+const multiEle1  = Math.floor(Math.random() * 65000);
 const addValue = 'intentDummy'
 
 export class intent_suchen {
@@ -27,11 +27,12 @@ export class intent_suchen {
 
         // Selecting Entire Table
         cy.wait(500)
-        cy.selectEntireTbl()
+        //cy.selectEntireTbl()
 
         // 1. Searching for single specific story 
         cy.get('[data-cy="intent-table-search"]')
-                .type(addValue+String(singleEle))
+            .type(singleEle)
+            .wait(500)
 
         // Assert Return Result
         cy.log('Line 34')
