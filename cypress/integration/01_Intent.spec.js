@@ -72,15 +72,19 @@ describe ('Test Case: Intents', () => {
     it('Test Case: Intent Example hinzufuegen', () => {
         onIntentExampleHinzufuegen.intentExampleHinzufuegen()
         /*
-        D. Intent Example Hinzufügen 
+        D. Intent Example Hinzufügen
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Error message after unsuccessful saving 
         2. Annotate text in editor works
-        3. Text and Annotations remains stable if toggling "Visuelle Annotation" several times
+            2.1 single annotation
+            2.2 multiple annotation of same entity
+            2.3 multiple annotation of different entities
         3. Check for successfully saved values
             3.1 Assert Notification
             3.2 Assert in table
+            3.3 Unsed entitles shows correctly
+        5. Table of intents has correct count of examples
         4. Leave site via menu or breadcrump, data must not be saved
         */
     })
@@ -89,15 +93,21 @@ describe ('Test Case: Intents', () => {
         onIntentExampleBearbeiten.intentExampleBearbeiten()
         /*
         D. Intent Example Hinzufügen 
-        1. Name should not be empty, error message should contain "Name"
+        1. Edit name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Error message after unsuccessful saving 
-        2. Annotate text in editor works
-        3. Text and Annotations remains stable if toggling "Visuelle Annotation" several times
+        2. Edit annotate text in editor works
+            2.1 single annotation
+            2.2 multiple annotation of same entity
+            2.3 multiple annotation of different entities
         3. Check for successfully saved values
             3.1 Assert Notification
             3.2 Assert in table
-        4. Leave site via menu or breadcrump, data must not be saved
+            3.3 Unsed entitles shows correctly
+        4. Table of intents has correct count of examples
+        5. Leave site via menu or breadcrump, data must be saved
+        6. leave site via button "Abbrechen" navigates to table of intent examples 
+           and does not save edited data
         */
     })
 

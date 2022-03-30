@@ -16,6 +16,7 @@ export class intent_hinzufuegen {
 
         // Get the length of Intent-table for later Assertion
         var nrOfRow
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .then(function($intentTabLength) {
