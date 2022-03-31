@@ -13,8 +13,8 @@
     "generateMocha_Report": "marge cypress/results/mochawesome/output.json --reportDir ./ --inline",
     "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js'",
     "cypress:run": "npm run cy:run_spec -- --headless",
-    "CyTest": "npm run prereport && npm run cypress:run && npm run merge && npm run generateMocha_Report",
-    "CyTest-1": "npm run prereport && npm run cypress:run && npm run merge",
+    "CyTest-1": "npm run prereport && npm run cypress:run && npm run merge && npm run generateMocha_Report",
+    "CyTest": "npm run prereport && npm run cypress:run",
     "cySpec": "npx cypress run --spec 'cypress/integration/05_Responses.spec.js'"
   },
   "author": "Abdullah",
