@@ -1,3 +1,5 @@
+import { onEntityHinzufuegen } from "../02_Entities/01_Entity_Hinzufuegen"
+
 const exm = Math.floor(Math.random() * 25000)
 const annot = Math.floor(Math.random() * 35000)
 const addExample = 'testExample'
@@ -5,6 +7,10 @@ const addExample = 'testExample'
 export class intent_example_hinzufuegen {
     
     intentExampleHinzufuegen() {
+
+        // add some entity
+        onEntityHinzufuegen.entityHinzufuegen()
+        cy.reload()
 
         // Open Trainingsdate Tab and enter to Story
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
@@ -118,7 +124,7 @@ export class intent_example_hinzufuegen {
         //Arrange
         cy.get('[data-cy="create-intent-example"]').click()
         cy.get('[data-cy="example-text"]').type('singleAnnot'+String(annot))
-        cy.get('[data-cy="example-text"]').type('{selectall}')
+        cy.get('[data-cy="example-text"]').type('{selectAll}')
         cy.get('[role="combobox"]').click()
         cy.get('[role="option"]').last().click()
         cy.get('[data-cy="example-add-entity"]').click()
