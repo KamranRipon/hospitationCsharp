@@ -1,3 +1,5 @@
+import { onEntityHinzufuegen } from "../02_Entities/01_Entity_Hinzufuegen"
+
 const exm = Math.floor(Math.random() * 25000)
 const annot = Math.floor(Math.random() * 35000)
 const addExample = 'testExample'
@@ -5,6 +7,10 @@ const addExample = 'testExample'
 export class intent_example_hinzufuegen {
     
     intentExampleHinzufuegen() {
+
+        // add some entity
+        onEntityHinzufuegen.entityHinzufuegen()
+        cy.reload()
 
         // Open Trainingsdate Tab and enter to Story
         cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
