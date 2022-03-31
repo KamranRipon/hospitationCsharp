@@ -22,7 +22,7 @@ describe ('Test Case: Intents', () => {
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Warning message for space and Slace
-            1.2 Error message after unsuccessful saving
+            1.3 Error message after unsuccessful saving
         2. Check for successfully saved values
             2.1 Assert Notification
             2.2 Assert in table

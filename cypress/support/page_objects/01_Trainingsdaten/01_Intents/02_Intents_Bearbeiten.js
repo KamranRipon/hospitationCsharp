@@ -30,6 +30,7 @@ export class intent_bearbeiten {
         cy.get('[data-cy="navDrawerIntents"]').click()
 
         // Arrange intent-table assending order
+        cy.wait(500)
         cy.get('thead').find('tr').find('th:nth-child(1)').click()
 
         // Selecting Entire Table

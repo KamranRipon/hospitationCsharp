@@ -9,7 +9,7 @@ import { onRulesBearbeiten } from "../support/page_objects/01_Trainingsdaten/10_
 // import { onIntentExampleLoeschen } from "../support/page_objects/01_Trainingsdaten/01_Intents/07_Intent_Example_Loeschen"
 
 
-describe.skip('Test Case 8: Rules', () => {
+describe('Test Case 8: Rules', () => {
 
     beforeEach('visit url', () => {
         
@@ -17,8 +17,23 @@ describe.skip('Test Case 8: Rules', () => {
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it('Test Case: Rules Anlegen', () => {
+    it.only('Test Case: Rules Anlegen', () => {
         onRulesAnlegen.rulesAnlegen()
+
+        // A. Rules Anlegen
+        /* 
+        1. Name should not be empty, error message should contain "Name"
+            1.1 Warning message below input field
+            1.2 Error message after unsuccessful saving
+        2. Check for successfully saved values
+            2.1 Assert Notification
+            2.2 Assert in table
+        3. Check for duplicate name
+            3.1 Error message after unsuccessful saving 
+            3.2 Table should not contain double value
+        4. Number of Rules must show correctly in Intent Table
+        5. Leave site via menu or breadcrump, data must not be saved
+        */
     })
 
     it('Test Case: Rules Bearbeiten', () => {
