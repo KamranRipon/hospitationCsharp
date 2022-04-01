@@ -72,7 +72,7 @@ export class rules_bearbeiten {
             .then(($testFunc) => {
 
                 const vall = $testFunc.text()
-                var sp_vall = vall.split(" ")
+                var sp_vall = vall.split('')
                 var max_val = 0
                 var num
 
@@ -150,16 +150,6 @@ export class rules_bearbeiten {
         // Assert initial warning Message
         cy.get('[class="v-messages__wrapper"]')
             .should('have.text','Der Name muss gesetzt sein')
-        
-        // Add space to rules name input field
-        // cy.get('[data-cy="rule-name"]')
-        //     .click({force:true})
-        //     .type(' ')
-
-        /* At this moment Bug */
-        // Assert warning message after add space to input field
-        // cy.get('[class="v-messages__wrapper"]')
-        //     .should('have.text','Der Name enthält ungültige Zeichen!')
 
         cy.get('[data-cy="rule-name"]').clear()
 
@@ -215,14 +205,9 @@ export class rules_bearbeiten {
             .click({force:true})
 
         // Select Action or Response from list
-        cy.get('[role="option"]')
-            .contains('Action')
-            .click({force:true})
-
+        cy.get('[role="option"]').contains('Action').click({force:true})
         cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
-
         cy.get('[role="option"]').last().click()
-
         // Add a step by clicking "+"
         cy.get('[data-cy="rule-add-step"]').click()
 
@@ -275,13 +260,12 @@ export class rules_bearbeiten {
             .should('not.have.text', addExample+String(er*ei))
 
         // Clear Search Field
-        cy.get('[data-cy="rule-table-search"]')
-            .clear()
+        cy.get('[data-cy="rule-table-search"]').clear()
 
         // 3. Check for duplicate name
 
         // 3.1 Error message after unsuccessful saving
-        cy.log('Line 278')
+        cy.log('Line 268')
         cy.get('tbody')
             .find('tr')
             .last()
@@ -307,9 +291,9 @@ export class rules_bearbeiten {
                         .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
 
                 // Clicking Abbrechen Button
-                cy.get('[data-cy="abort-button"]')              .click()
+                cy.get('[data-cy="abort-button"]').click()
 
-                // 3.2 Table should not contain double value
+                // 3.2 Table should not contain same value twice
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)')
@@ -317,7 +301,7 @@ export class rules_bearbeiten {
             })
             
         // 1.5. Saving works if Data is Correct
-        cy.log('Line 685')
+        cy.log('Line 304')
         cy.log('1.5. Saving works if Data is Correct')
 
         cy.get('tbody')
@@ -337,13 +321,13 @@ export class rules_bearbeiten {
         //     .click({force:true})
 
         // Select a step
-        cy.get('[data-cy="rule-new-step-type-select"]').click({force:true})
-        cy.get('[role="option"]').contains('Action')
-            .click({force:true})
-        cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
-        cy.get('[role="option"]').last().click()
-        // Add a step by clicking "+"
-        cy.get('[data-cy="rule-add-step"]').click()
+        // cy.get('[data-cy="rule-new-step-type-select"]').click({force:true})
+        // cy.get('[role="option"]').contains('Action')
+        //     .click({force:true})
+        // cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
+        // cy.get('[role="option"]').last().click()
+        // // Add a step by clicking "+"
+        // cy.get('[data-cy="rule-add-step"]').click()
 
         // cy.get('[class="v-list-item__title"]').eq(2)
         //     .click()
@@ -372,7 +356,7 @@ export class rules_bearbeiten {
 
         cy.successRemove()
 
-        // Assert Data in Rules TAble
+        // Assert Data in Rules Table
         cy.log('Line 726')
         cy.get('tbody')
             .find('tr')
@@ -382,18 +366,18 @@ export class rules_bearbeiten {
 
         // delet one stape
         cy.log('Line 795')
-        cy.get('tbody')
-            .find('tr')
-            .first()
-            .click()
+        // cy.get('tbody')
+        //     .find('tr')
+        //     .first()
+        //     .click()
 
-        cy.get('[data-cy="rule-remove-step"]').eq(1)
-            .click()
+        // cy.get('[data-cy="rule-remove-step"]').eq(1)
+        //     .click()
 
         // Back to Rules Table
-        cy.get('[class="v-breadcrumbs__item"]')
-            .contains('Rules')
-            .click()        
+        // cy.get('[class="v-breadcrumbs__item"]')
+        //     .contains('Rules')
+        //     .click()
 
         // 6. Number of Rules must show correctly in Intent Table
         cy.log('Line 810')
