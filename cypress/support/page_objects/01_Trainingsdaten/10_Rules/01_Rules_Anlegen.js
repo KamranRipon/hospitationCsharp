@@ -10,7 +10,7 @@ export class rules_anlegen {
     rulesAnlegen() {
 
         /* Rules Anlegen Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
      
         // Assert URL after clicking Rules
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);

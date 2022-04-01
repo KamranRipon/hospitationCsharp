@@ -16,10 +16,10 @@ export class rules {
 
         /* Rules Anlegen Testing */
 
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
 
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
 
         // // Enter Intent
         // // Entering to Intents
@@ -63,10 +63,11 @@ export class rules {
         //     .click({force:true})
         cy.selectEntireTbl()
 
-        // Enter to first row of the intent Table
+        // 1. Edit name should not be empty, error message should contain "Name"
+        
+        // 1.1 Warning message below input field
         var inName
         cy.wait(500)
-        cy.log('1.1 Edit Rules Name')
         cy.log('Line 489')
         cy.get('tbody')
             .find('tr')
@@ -132,7 +133,7 @@ export class rules {
         cy.get('tbody')
             .find('tr')
             .first()
-            .find('td:nth-child(2)')
+            //.find('td:nth-child(2)')
             .click()
             .wait(500)
 
@@ -189,9 +190,8 @@ export class rules {
 
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
-        cy.pause()
 
-        cy.get('[data-cy="errorMessageBody"]')
+        cy.get('[data-cy="errorMessageBod"]')
             .should('have.text', ' Die Schritte der Rule sind ungültig ')
 
         cy.get('[class="v-icon notranslate theme--dark"]').eq(0)

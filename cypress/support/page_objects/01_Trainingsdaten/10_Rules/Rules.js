@@ -19,7 +19,7 @@ export class rules {
     rulesAnlegen() {
 
         /* Rules Anlegen Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
      
         // Assert URL after clicking Rules
         cy.url().should("eq", "http://localhost/trainingsdaten/intent/");

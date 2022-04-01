@@ -6,7 +6,7 @@ export class intent_hinzufuegen {
     intentsHinzufuegen() {
 
         // Open Trainingsdate and enter to Intents
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
                 
         // checking url after clicking Inten Button
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);

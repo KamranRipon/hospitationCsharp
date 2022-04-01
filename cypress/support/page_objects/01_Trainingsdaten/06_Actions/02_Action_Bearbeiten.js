@@ -7,7 +7,7 @@ export class action_bearbeiten {
     actionBearbeiten() {
 
         /* B. Action Bearbeiten Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerActions"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerActions"]')
 
         // 1. Edit Name should not be empty, error message should contain "Name"
         // 1.1 Action Name

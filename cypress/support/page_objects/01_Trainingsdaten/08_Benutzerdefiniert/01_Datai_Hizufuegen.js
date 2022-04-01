@@ -5,7 +5,7 @@ export class datai_anlegen {
     dataiAnlegen() {
         
         // Open Trainingsdate Tab and enter to Benutzerdefiniert
-        cy.Trainingsdaten('[data-cy="navDrawerBenutzerdefiniert"]');
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerBenutzerdefiniert"]');
         
         // Assert URL after clicking Benutzerdefiniert
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/");

@@ -3,7 +3,7 @@ export class datei_loeschen {
     dateiLoeschen() {
 
         // Open Trainingsdate Tab and enter to Story
-        cy.Trainingsdaten('[data-cy="navDrawerBenutzerdefiniert"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerBenutzerdefiniert"]')
 
         // Entering to first of
         cy.wait(300)

@@ -7,7 +7,7 @@ export class intent_bearbeiten {
     intentBearbeiten() {
 
         // Open Trainingsdate tab and enter to Intents
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
 
         // Create an intent
         cy.get('[data-cy="intent-create"]')

@@ -17,7 +17,7 @@ describe('Test Case 8: Rules', () => {
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it.only('Test Case: Rules Anlegen', () => {
+    it('Test Case: Rules Anlegen', () => {
         onRulesAnlegen.rulesAnlegen()
 
         // A. Rules Anlegen
@@ -38,6 +38,23 @@ describe('Test Case 8: Rules', () => {
 
     it('Test Case: Rules Bearbeiten', () => {
         onRulesBearbeiten.rulesBearbeiten()
+
+        // A. Rules Bearbeiten
+        /* 
+        1. Edited naame should not be empty, error message should contain "Name"
+            1.1 Warning message below input field
+            1.2 Error message after unsuccessful saving
+        2. Check for successfully saved values
+            2.1 Assert Notification
+            2.2 Assert in table
+        3. Check for duplicate name
+            3.1 Error message after unsuccessful saving 
+            3.2 Table should not contain double value
+        4. Number of Rules must show correctly in Intent Table
+        5. Leave site via menu or breadcrump, data must be saved
+        6. leave site via button "Abbrechen" navigates to table of rules 
+        and does not save edited data
+        */
     })
 
     it('Test Case: Rules Suchen', () => {
