@@ -1,16 +1,12 @@
 const i = Math.floor(Math.random() * 5000);
-const b = Math.floor(Math.random() * 1000);
-const r = Math.floor(Math.random() * 1500);
-const a = Math.floor(Math.random() * 2000);
 const ei = Math.floor(Math.random() * 3000);
-const eb = Math.floor(Math.random() * 3500);
 const er = Math.floor(Math.random() * 4000);
-const ea = Math.floor(Math.random() * 4500);
 const x = Math.floor(Math.random() * 3500);
+const duplicat = Math.floor(Math.random() * 65000);
 
 const addValue = 'DummyValue'
 const addExample = 'testExample'
-export class rules {
+export class rules_bearbeiten {
 
     rulesBearbeiten() {
 
@@ -61,27 +57,26 @@ export class rules {
         // cy.get('[class="v-list-item__content"]')
         //     .contains('Alle')
         //     .click({force:true})
+
+        // select whole table
         cy.selectEntireTbl()
 
         // 1. Edit name should not be empty, error message should contain "Name"
         
         // 1.1 Warning message below input field
         var inName
-        cy.wait(500)
-        cy.log('Line 489')
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(4)')
-
             .then(($testFunc) => {
-                const vall = $testFunc.text()
 
+                const vall = $testFunc.text()
                 var sp_vall = vall.split(" ")
-                
                 var max_val = 0
                 var num
+
                 for (num=0; num < sp_vall.length; num++){
-                    
                     if(sp_vall[num] > max_val) {
                         max_val = sp_vall[num]
                     }
@@ -94,20 +89,19 @@ export class rules {
                     .click()
 
                 // Save Intent Name for letar Assertion
-                cy.get('[class="v-text-field__slot"]').find('[data-cy="intent-name"]').invoke('val').as('name')
+                cy.get('[class="v-text-field__slot"]')
+                    .find('[data-cy="intent-name"]')
+                    .invoke('val').as('name')
                     
                     cy.get('@name').then((name1) => {
 
                       cy.log(name1) //prints name
-
                       inName = name1
-
                       cy.log(inName)
                     })
                     // .find('tr')
                     // .then(($intentName) => {
                     //     intentname = $intentName.text()
-
                     //     return intentname
                     // })
 
@@ -117,25 +111,38 @@ export class rules {
                 //     .contains(max_val)
                 //     .click({force:true})
         })
-            
+
         // Entering to rules table
-        cy.get('[class="v-slide-group__wrapper"]')
-            .find('[class="v-tab"]').eq(1)
+        // cy.get('[class="v-slide-group__wrapper"]')
+        //     .find('[class="v-tab"]').eq(1)
+        cy.get('[role="tab"]')
+            .contains('Rules')
             .click()
-            .wait(500)
-        
-        cy.log('Line 126')
-        cy.log('Intent Name')
-        cy.log(inName)
+            .wait(300)
+
+        // add a new rules
+        cy.get('[data-cy="rule-create"]').click()
+        cy.get('[data-cy="rule-name"]').clear()
+            .type(addValue+String(duplicat))
+        // Select a step
+        cy.get('[data-cy="rule-new-step-type-select"]').click({force:true})
+        cy.get('[role="option"]').contains('Action')
+            .click({force:true})
+        cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
+        cy.get('[role="option"]').last().click()
+        // Add a step by clicking "+"
+        cy.get('[data-cy="rule-add-step"]').click()
+        // create
+        cy.get('[data-cy="create-button"]').click()
+        // remove success message
+        cy.successRemove()
 
         // Entering to first row of rules table
-        cy.log('Line 131')
         cy.get('tbody')
             .find('tr')
             .first()
-            //.find('td:nth-child(2)')
             .click()
-            .wait(500)
+            .wait(300)
 
         // Clear Rules Name field
         cy.get('[data-cy="rule-name"]').clear()
@@ -145,9 +152,9 @@ export class rules {
             .should('have.text','Der Name muss gesetzt sein')
         
         // Add space to rules name input field
-        cy.get('[data-cy="rule-name"]')
-            .click({force:true})
-            .type(' ')
+        // cy.get('[data-cy="rule-name"]')
+        //     .click({force:true})
+        //     .type(' ')
 
         /* At this moment Bug */
         // Assert warning message after add space to input field
@@ -158,11 +165,14 @@ export class rules {
 
         // 1.2 Leave site with breadcrump 
         //Case 1: Rules name Empty
-        cy.log('Line 533')
-        cy.get('[class="v-breadcrumbs__item"]')
-            .contains('Rules')
-            .click()
-            .wait(500)
+        cy.log('Line 161')
+        // cy.get('[class="v-breadcrumbs__item"]')
+        //     .contains('Rules')
+        //     .click()
+        //     .wait(500)
+
+        // 1.2 Error message after unsuccessful saving
+        cy.get('[data-cy="save-button"]').click()
 
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
@@ -172,7 +182,6 @@ export class rules {
 
         // 1.2 Leave site with breadcrump 
         //Case 2: Rules name not empty Empty but remove all steps
-        cy.log('Line 547')
 
         // Clear and add a valid Rule name
         cy.get('[data-cy="rule-name"]')
@@ -191,19 +200,17 @@ export class rules {
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
 
-        cy.get('[data-cy="errorMessageBod"]')
+        cy.get('[data-cy="errorMessageBody"]')
             .should('have.text', ' Die Schritte der Rule sind ungültig ')
 
         cy.get('[class="v-icon notranslate theme--dark"]').eq(0)
             .click()
 
-        // 1.2 Leave site with breadcrump 
-        //Case 3: add a valid rules name and have at least one stape
+        // 2. Check for successfully saved values
 
-        cy.log('Line 575')
-        
+        // 2.1 Assert Notification
+        cy.log('Line 208')
         // Select steps
-        // Select step
         cy.get('[data-cy="rule-new-step-type-select"]')
             .click({force:true})
 
@@ -212,34 +219,37 @@ export class rules {
             .contains('Action')
             .click({force:true})
 
-        cy.get('[data-cy="rule-new-step-item-autocomplete"]')
-            .click()
+        cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
 
         cy.get('[role="option"]').last().click()
 
         // Add a step by clicking "+"
-        cy.get('[data-cy="rule-add-step"]')
-            .click()
+        cy.get('[data-cy="rule-add-step"]').click()
 
-        // leave site with breadcrump
+        // // leave site with breadcrump
         cy.get('[class="v-breadcrumbs__item"]')
             .contains('Rules')
             .click()
+
+        //cy.get('[data-cy="save-button"]').click()
 
         // Assert Success Message
         cy.get('[data-cy="successMessageTitle"]')
             .should('have.text', ' Die Rule'+' "'+addValue+String(er)+'" '+ 'wurde erfolgreich gespeichert ')
 
-        // Assert Data in Rules Table
-        cy.log('Line 234')
+        cy.successRemove()
+
+        // 2.2 Assert in table
+        cy.log('Line 235')
         cy.get('tbody')
             .find('tr')
             .first()
             .find('td:nth-child(1)')
             .should('have.text', addValue+String(er))
 
-        // 1.3 Leave Site by "Abbrechen" button
-        cy.log('Line 613')
+        // 6. leave site via button "Abbrechen" navigates to table of rules 
+        // and does not save edited data
+        cy.log('Line 248')
         // Entering to first Row of Rules table
         cy.get('tbody')
             .find('tr')
@@ -268,9 +278,10 @@ export class rules {
         cy.get('[data-cy="rule-table-search"]')
             .clear()
 
-        //1.4. Check for duplicate Name
-        cy.log('1.4. Check for duplicate Name')
-        cy.log('Line 647')
+        // 3. Check for duplicate name
+
+        // 3.1 Error message after unsuccessful saving
+        cy.log('Line 278')
         cy.get('tbody')
             .find('tr')
             .last()
@@ -291,15 +302,14 @@ export class rules {
                     .contains('Rules')
                     .click()
 
-                cy.log('Line 294')
+                cy.log('Line 301')
                 cy.get('[data-cy="errorMessageTitle"]')
                         .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
 
                 // Clicking Abbrechen Button
-                cy.get('[data-cy="abort-button"]')
-                    .click()
+                cy.get('[data-cy="abort-button"]')              .click()
 
-                // Assert data in the Rules Table
+                // 3.2 Table should not contain double value
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)')
@@ -322,24 +332,33 @@ export class rules {
         // Select step
         // cy.get('[class="v-select__slot"]')
         cy.log('Line 699')
-        cy.get('[class="col col-4"]').eq(1)
-            .contains('Step Typ auswählen')
+        // cy.get('[class="col col-4"]').eq(1)
+        //     .contains('Step Typ auswählen')
+        //     .click({force:true})
+
+        // Select a step
+        cy.get('[data-cy="rule-new-step-type-select"]').click({force:true})
+        cy.get('[role="option"]').contains('Action')
             .click({force:true})
-
-        cy.get('[class="v-list-item__title"]').eq(2)
-            .click()
-
-        cy.get('[data-cy="rule-new-step-item-autocomplete"]')
-            .click()
-
-        cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
-            .find('[role="listbox"]')
-            .contains('Action')
-            .click({force:true})
-
+        cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
+        cy.get('[role="option"]').last().click()
         // Add a step by clicking "+"
-        cy.get('[data-cy="rule-add-step"]')
-            .click()
+        cy.get('[data-cy="rule-add-step"]').click()
+
+        // cy.get('[class="v-list-item__title"]').eq(2)
+        //     .click()
+
+        // cy.get('[data-cy="rule-new-step-item-autocomplete"]')
+        //     .click()
+
+        // cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
+        //     .find('[role="listbox"]')
+        //     .contains('Action')
+        //     .click({force:true})
+
+        // // Add a step by clicking "+"
+        // cy.get('[data-cy="rule-add-step"]')
+        //     .click()
 
         cy.get('[class="v-breadcrumbs__item"]')
             .contains('Rules')
@@ -350,6 +369,8 @@ export class rules {
 
         cy.get('[data-cy="successMessageTitle"]')
                 .should('have.text', ' Die Rule'+' "'+addValue+String(x)+'" '+ 'wurde erfolgreich gespeichert ')
+
+        cy.successRemove()
 
         // Assert Data in Rules TAble
         cy.log('Line 726')
@@ -376,6 +397,8 @@ export class rules {
 
         // 6. Number of Rules must show correctly in Intent Table
         cy.log('Line 810')
+        // select entire rules table
+        cy.selectEntireTbl()
         cy.get('tbody')
             .find('tr')
             .then(function($countTr2) {
@@ -403,4 +426,4 @@ export class rules {
     }
 }
 // Exportint class frontEnd to End2End to test
-export const onRulesBearbeiten = new rules()
+export const onRulesBearbeiten = new rules_bearbeiten()

@@ -57,11 +57,11 @@ describe('Test Case 8: Rules', () => {
         */
     })
 
-    it('Test Case: Rules Suchen', () => {
+    it.skip('Test Case: Rules Suchen', () => {
         onRules.rulesSuchen()
     })
 
-    it('Test Case: Rules Loeschen', () => {
+    it.skip('Test Case: Rules Loeschen', () => {
         onRules.rulesLoeschen()
     })
 })
