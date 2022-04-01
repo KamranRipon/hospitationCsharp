@@ -12,7 +12,7 @@ export class sotries_hinzufuegen {
         cy.reload()
 
         // Open Trainingsdate Tab and enter to Story
-        cy.Trainingsdaten('[data-cy="navDrawerStories"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerStories"]')
         // Assert URL after clicking Story
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/");
 

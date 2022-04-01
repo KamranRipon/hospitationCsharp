@@ -5,7 +5,7 @@ export class action_anlegen {
     actionAnlegen() {
         
         // Open Trainingsdate Tab and enter to Actions
-        cy.Trainingsdaten('[data-cy="navDrawerActions"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerActions"]')
         
         // Assert URL after clicking Actions
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/action/");

@@ -66,10 +66,10 @@ Cypress.Commands.add('loginiFunction',(Username, Password) => {
         .wait(300)
 })
 
-Cypress.Commands.add('Trainingsdaten', (navDrawer) => {
+Cypress.Commands.add('Trainingsdaten', (tabName, navDrawer) => {
     // Expand Trainingsdate Tab
     cy.get('[role="button"]')
-        .contains('Trainingsdaten')
+        .contains(tabName)
         .then((Tdaten) => {         
             if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
                 cy.log('If Statement True')
@@ -79,7 +79,7 @@ Cypress.Commands.add('Trainingsdaten', (navDrawer) => {
             else {
                 cy.log('If Statement False')
                 cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                    .contains('Trainingsdaten')
+                    .contains(tabName)
                     .click()
                 cy.get(navDrawer)
                     .click()

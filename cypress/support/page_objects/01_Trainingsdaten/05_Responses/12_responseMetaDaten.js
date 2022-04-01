@@ -2,7 +2,7 @@ export class metadaten {
 
     metaDaten() {
         /* H. Response Button Suchen Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerResponses"]')
 
         //Enter to a row of Response Table which contain highest no. of text
         var max_val2 = 0

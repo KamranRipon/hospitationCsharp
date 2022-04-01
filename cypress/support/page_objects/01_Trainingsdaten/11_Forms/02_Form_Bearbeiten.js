@@ -6,7 +6,7 @@ export class form_bearbeiten {
     formBearbeiten() {
 
         /* Forms Bearbeiten Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerForms"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerForms"]')
 
         // Assert URL after clicking Form
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/form/");

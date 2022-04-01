@@ -7,7 +7,7 @@ export class form_suchen {
         /* C. Test Form Suchen*/
 
         // Expand Trainingsdaten and Enter to Actin
-        cy.Trainingsdaten('[data-cy="navDrawerForms"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerForms"]')
         
         // Ass Some Random Value to Actions
         const randonVal = ['form'+String(multiEle1), 'form'+String(multiEle2), 'weather'+String(singleEle)]
