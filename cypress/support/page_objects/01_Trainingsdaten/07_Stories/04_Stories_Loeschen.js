@@ -3,7 +3,7 @@ export class stories_loeschen {
     storiesLoeschen() {
 
         // Open Trainingsdate Tab and enter to Story
-        cy.Trainingsdaten('[data-cy="navDrawerStories"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerStories"]')
 
         // Entering to first of
         cy.wait(300)

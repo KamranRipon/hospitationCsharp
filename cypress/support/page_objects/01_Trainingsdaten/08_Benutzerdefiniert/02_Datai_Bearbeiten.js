@@ -8,7 +8,7 @@ export class datei_bearbeiten {
     dateiBearbeiten() {
 
         /* B. Action Bearbeiten Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerBenutzerdefiniert"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerBenutzerdefiniert"]')
 
         // 1. Edit Name should not be empty, error message should contain "Name"
         // 1.1 Datei Name

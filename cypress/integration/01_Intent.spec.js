@@ -22,7 +22,7 @@ describe ('Test Case: Intents', () => {
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Warning message for space and Slace
-            1.2 Error message after unsuccessful saving
+            1.3 Error message after unsuccessful saving
         2. Check for successfully saved values
             2.1 Assert Notification
             2.2 Assert in table
@@ -95,7 +95,7 @@ describe ('Test Case: Intents', () => {
         D. Intent Example Hinzufügen 
         1. Edit name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
-            1.2 Error message after unsuccessful saving 
+            1.2 Error message after unsuccessful saving
         2. Edit annotate text in editor works
             2.1 single annotation
             2.2 multiple annotation of same entity

@@ -7,7 +7,7 @@ export class responses_text_suchen {
     responseTexteSuchen() {
 
         /* Response Anlegen Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");

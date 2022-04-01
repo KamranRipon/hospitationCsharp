@@ -7,7 +7,7 @@ export class intent_example_bearbeiten {
     intentExampleBearbeiten() {
 
         // Open Trainingsdate Tab and enter to Intents
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
         
         // calculate maxi examples or rules on an intent
         var max_val=0

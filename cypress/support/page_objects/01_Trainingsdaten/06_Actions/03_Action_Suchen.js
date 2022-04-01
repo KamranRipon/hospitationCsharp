@@ -8,7 +8,7 @@ export class action_suchen {
         /* C. Test Action Suchen*/
 
         // Expand Trainingsdaten and Enter to Actin
-        cy.Trainingsdaten('[data-cy="navDrawerActions"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerActions"]')
         
         // Ass Some Random Value to Actions
         const randonVal = ['action'+String(multiEle1), 'action'+String(multiEle2), 'weather'+String(singleEle)]

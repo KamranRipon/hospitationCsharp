@@ -8,7 +8,7 @@ export class button_bearbeiten {
     buttonBearbeiten() {
 
         /* Enter to Trainingsdaten */
-        cy.Trainingsdaten('[data-cy="navDrawerResponses"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");

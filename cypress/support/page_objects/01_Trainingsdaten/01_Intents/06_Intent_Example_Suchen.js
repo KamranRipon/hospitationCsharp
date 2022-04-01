@@ -7,7 +7,7 @@ export class intent_example_suchen {
     intentExampleSuchen() {
 
         // Open Trainingsdate Tab and enter to Story
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
 
         // Assert URL after clicking Story
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");

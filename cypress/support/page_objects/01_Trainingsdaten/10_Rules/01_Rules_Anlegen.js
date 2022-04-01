@@ -1,7 +1,7 @@
-const i = Math.floor(Math.random() * 5000);
-const b = Math.floor(Math.random() * 1000);
-const r = Math.floor(Math.random() * 1500);
-const a = Math.floor(Math.random() * 2000);
+const intent = Math.floor(Math.random() * 5000);
+const besheibung = Math.floor(Math.random() * 1000);
+const rule = Math.floor(Math.random() * 1500);
+const action = Math.floor(Math.random() * 2000);
 
 const addValue = 'DummyValue'
 
@@ -10,31 +10,10 @@ export class rules_anlegen {
     rulesAnlegen() {
 
         /* Rules Anlegen Testing */
-        cy.Trainingsdaten('[data-cy="navDrawerIntents"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
      
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
-        
-        // A. Synonym Anlegen
-        /* 
-        1. Name should not be empty, error message should contain "Name"
-            1.1 Synonym
-                1.1.1 Warning message
-                1.1.2 Warning Notification
-            1.2 Synonyms Example
-                1.1.1 Warning message
-                1.1.2 Warning Notification
-        2. Check for duplicate name
-            2.1 Synonym
-            2.2 Example
-        3. Check for successfully saved values
-            3.1 Assert Notification
-            3.2 Assert in table
-                3.2.1 Assert Synonym name in Synonym talbe
-                3.2.2 Assert name in example table
-                3.2.3 Assert example number for each synonym in synonym table
-        4. Leave site via menu or breadcrump, data must not be saved
-        */
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
 
         /* Add Action Name. Require to test Rules */
         cy.get('[data-cy="navDrawerActions"]').click()
@@ -44,37 +23,40 @@ export class rules_anlegen {
         
         // add a Name to action
         cy.get('[data-cy="action-name"]')
-            .type('Action'+String(a))
+            .type('aktion'+String(action))
         
-        // add a descriptions or python code
-        cy.get('[data-mode-id="python"]')
-            .type('pring("Hello World!")')
+        // // add a descriptions or python code
+        // cy.get('[data-mode-id="python"]')
+        //     .type('Hello World')
 
         // Clicking Anlegen
         cy.get('[data-cy="create-button"]').click()
+        cy.wait(300)
 
-        // Assert Success Message
-        cy.get('[data-cy="successMessageTitle"]')
-            .should('have.text', ' Die Action'+' "Action'+String(a)+'" '+ 'wurde erfolgreich gespeichert ')
+        // // Assert Success Message
+        // cy.get('[data-cy="successMessageTitle"]')
+        //     .should('have.text', ' Die Action'+' "Action'+String(action)+'" '+ 'wurde erfolgreich gespeichert ')
 
-        // Select Entire Synonym Table
-        cy.selectEntireTbl()
-        // Assert Data in Action Table
-        cy.get('tbody tr').last()
-            .find('td:nth-child(1)')
-            .should('have.text', 'Action'+String(a))
+        // // Select Entire Synonym Table
+        // cy.selectEntireTbl()
+        // // Assert Data in Action Table
+        // cy.wait(300)
+        // cy.get('tbody tr').last()
+        //     .find('td:nth-child(1)')
+        //     .should('contain', 'Action'+String(action))
         
         // Closing success message
-        cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
+        cy.get('[data-cy="success-remove"]')
             .click()
 
-        // 1.1 Rules Name Anlegen
-        // 1.1.1 Warning message
+        // 1. Name should not be empty, error message should contain "Name"
+        
+        // 1.1 Warning message below input field
 
         // Entering to Intents
         cy.get('[data-cy="navDrawerIntents"]')
             .click({force:true})
-            .wait(500)
+            .wait(300)
 
         // Clicking intent Hinzufuegen
         cy.get('[data-cy="intent-create"]')
@@ -83,46 +65,40 @@ export class rules_anlegen {
         // Add Intent Name
         cy.get('[data-cy="intent-name"]')
             .clear()
-            .type(addValue+String(i))
+            .type(addValue+String(intent))
         
         // Assert Visibility of remove button
-        cy.get('[title="Name löschen"]')
-            //.find('button.v-icon')
-            .should('be.visible')
+        // cy.get('[title="Name löschen"]')
+        //     //.find('button.v-icon')
+        //     .should('be.visible')
         
         // Add a description
         cy.get('[data-cy="intent-description"]')
             .clear()
-            .type(addValue+String(b))
+            .type(addValue+String(besheibung))
 
         // Click Anlegen
         cy.get('[data-cy="create-button"]')
             .click()
-            .wait(500)
+            .wait(400)
         
-        cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
-            .click()
+        // cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
+        //     .click()
+        cy.get('[data-cy="success-remove"]').click()
 
-        cy.get('[class="v-slide-group__wrapper"]')
-            .find('[class="v-tab"]').eq(1)
+        // cy.get('[class="v-slide-group__wrapper"]')
+        //     .find('[class="v-tab"]').eq(1)
+        cy.get('[role="tab"]')
+            .contains('Rules')
             .click()
 
         // Entering Rules Hinzufuegen
         cy.get('[data-cy="rule-create"]').click()
         // Assert initial warning Message
-        cy.get('[class="v-messages__wrapper"]')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Name muss gesetzt sein')
         cy.log('Line 117')
-        // Add space to rules name input field
-        cy.get('[data-cy="rule-name"]')
-            .clear()
-            .type('/')
         
-        // Assert warning message after add space to input field
-        /* Currently Bug*/
-        // cy.get('[class="v-messages__wrapper"]')
-        //     .should('have.text','Der Name enthält ungültige Zeichen!')
-
         // Try to save with empty name
         // Click Anlegen
         cy.get('[data-cy="create-button"]')
@@ -132,17 +108,17 @@ export class rules_anlegen {
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
 
-        cy.get('[class="v-icon notranslate theme--dark"]').eq(0)
+        cy.get('[data-cy="error-remove"]')
             .click()
+        
+        // 2. Check for successfully saved values
 
-        // Clear and add a valid Rule name
         cy.get('[data-cy="rule-name"]')
             .clear()
-            .type(addValue+String(r))
+            .type(addValue+String(rule))
 
-        // Select step
+        // Select a step
         cy.get('[data-cy="rule-new-step-type-select"]')
-            //.contains('Step Typ auswählen')
             .click({force:true})
         
         cy.get('[role="option"]')
@@ -161,28 +137,33 @@ export class rules_anlegen {
         cy.get('[data-cy="create-button"]')
             .click()
         cy.log('Line 165')
-        cy.wait(500)
-        // Assert Success Message
-        cy.get('[data-cy="successMessageTitle"]')
-            .should('have.text', ' Die Rule'+' "'+addValue+String(r)+'" '+ 'wurde erfolgreich gespeichert ')
+        cy.wait(400)
 
-        // Assert Data in Rules TAble
+        // 2.1 Assert Notification
+        cy.get('[data-cy="successMessageTitle"]')
+            .should('have.text', ' Die Rule'+' "'+addValue+String(rule)+'" '+ 'wurde erfolgreich gespeichert ')
+        
+        //cy.get('[data-cy="success-remove"]').click()
+        
+        // 2.2 Assert in Table
+        cy.wait(300)
         cy.get('tbody tr')
             .find('td:nth-child(1)')
-            .should('have.text', addValue+String(r))
+            .should('have.text', addValue+String(rule))
         cy.log('Line 175')
-        //3. Check for duplicate Name
-        // Entering Rules Hinzufuegen
+
+        // 3. Check for duplicate name
+
+        //     3.1 Error message after unsuccessful saving 
         cy.get('[data-cy="rule-create"]')
             .click()
 
         // Clear and add a valid Rule name
         cy.get('[data-cy="rule-name"]')
-            .type(addValue+String(r))
+            .type(addValue+String(rule))
 
         // Select a step
         cy.get('[data-cy="rule-new-step-type-select"]')
-            //.contains('Step Typ auswählen')
             .click({force:true})
 
         cy.get('[role="option"]')
@@ -200,67 +181,21 @@ export class rules_anlegen {
                 
         cy.get('[data-cy="create-button"]').click()
         cy.log('Line 204')
-        cy.wait(500)
+        cy.wait(300)
 
+        // 3.1 Error message after unsuccessful saving 
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
 
-        cy.get('[class="v-icon notranslate theme--dark"]').eq(0)
+        cy.get('[data-cy="error-remove"]').eq(0)
             .click()
 
         cy.get('[class="v-breadcrumbs__item"]')
             .contains('Rules')
             .click()
 
-        // //4. Check for duplicate Name
-        // // Entering Rules Hinzufuegen
-        // cy.get('[data-cy="rule-create"]').click()
-
-        // // Clear and add a valid Rule name
-        // cy.get('[data-cy="rule-name"]')
-        //     .type(addValue+String(r*a))
-        
-        // cy.get('[data-cy="create-button"]').click()
-
-        // // Assert Error Message
-        // cy.get('[data-cy="errorMessageTitle"]')
-        //     .should('have.text',' Die Rule konnte nicht gespeichert werden. ')
-
-        // cy.get('[class="v-icon notranslate theme--dark"]').eq(0)
-        //     .click()
-
-        // //5. Saving works if Data is Correct
-        // // Select step
-        // cy.get('[class="v-select__slot"]')
-        //     .contains('Step Typ auswählen')
-        //     .click({force:true})
-
-        // cy.get('[role="listbox"]')
-        //     .contains('Action')
-        //     .click({force:true})
-
-        // cy.get('[data-cy="rule-new-step-item-autocomplete"]')
-        //     .click()
-
-        // cy.get('[role="option"]').last().click()
-
-        // // Add a step by clicking "+"
-        // cy.get('[data-cy="rule-add-step"]').click()
-
-        // cy.get('[data-cy="create-button"]').click()
-
-        // cy.wait(500)
-        // // Assert Success Message
-        // cy.get('[data-cy="successMessageTitle"]')
-        //         .should('have.text', ' Die Rule'+' "'+addValue+String(r*a)+'" '+ 'wurde erfolgreich gespeichert ')
-        
-        // // Assert Data in Rules TAble
-        // cy.get('tbody tr')
-        //     .last()
-        //     .find('td:nth-child(1)')
-        //     .should('have.text', addValue+String(r*a))
-
-        // 6. Number of Rules must show correctly in Intent Table
+        // 4. Number of Rules must show correctly in Intent Table
+        cy.wait(200)
         cy.get('tbody tr')
             .then(function($countTr) {
                 const NoOfRules =$countTr.length
@@ -270,24 +205,27 @@ export class rules_anlegen {
                     .click({force:true})
 
                 cy.get('[data-cy="intent-table-search"]')
-                    .type(addValue+String(i))
+                    .type(addValue+String(intent))
 
                 cy.get('tbody tr')
                     .find('td:nth-child(4)')
-                    .should('have.text', ' '+String(NoOfRules)+' ')
+                    .should('contain', ' '+String(NoOfRules)+' ')
             })
 
         // Clear Search Field
         cy.get('[data-cy="intent-table-search"]')
             .clear()
 
-        // 7. Leave Site with Breadcrump does not save data
+        // 5. Leave Site with Breadcrump/Menu does not save data
+        cy.wait(300)
         cy.get('tbody tr')
             .last()
             .click()
 
-        cy.get('[class="v-slide-group__wrapper"]')
-            .find('[class="v-tab"]').eq(1)
+        // cy.get('[class="v-slide-group__wrapper"]')
+        //     .find('[class="v-tab"]').eq(1)
+        cy.get('[role="tab"]')
+            .contains('Rules')
             .click()
 
         // Entering Rules Hinzufuegen
@@ -297,11 +235,10 @@ export class rules_anlegen {
         // Clear and add a valid Rule name
         cy.get('[data-cy="rule-name"]')
             .clear()
-            .type(addValue+String(r*i))  
+            .type(addValue+String(rule * intent))
 
         // Select step
         cy.get('[data-cy="rule-new-step-type-select"]')
-            //.contains('Step Typ auswählen')
             .click({force:true})
 
         cy.get('[role="option"]')
@@ -318,13 +255,14 @@ export class rules_anlegen {
 
         // Assert data in Rules table. Data must not be in the table
         cy.get('[data-cy="rule-table-search"]')
-            .type(addValue+String(r*i))
+            .type(addValue+String(rule * intent))
         
+        cy.wait(200)
         cy.get('tbody tr')
             .find('td:nth-child(1)')
-            .should('not.have.text', addValue+String(r*i))
+            .should('not.have.text', addValue+String(rule*intent))
     }
 }
 
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onRulesAnlegen = new rules_anlegen() 

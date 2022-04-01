@@ -8,7 +8,7 @@ export class datei_suchen {
         /* C. Test Action Suchen*/
 
         // Expand Trainingsdaten and Enter to Actin
-        cy.Trainingsdaten('[data-cy="navDrawerBenutzerdefiniert"]')
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerBenutzerdefiniert"]')
         
         // Ass Some Random Value to Actions
         const randonVal = ['datei'+String(multiEle1), 'datei'+String(multiEle2), 'weather'+String(singleEle)]
