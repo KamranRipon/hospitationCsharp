@@ -14,7 +14,6 @@ export class synonyms_bearbeiten {
 
     synonymBearbeiten() {
 
-        
         /* Synonyms Bearbeiten Testing */
 
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSynonyms"]')
@@ -25,26 +24,23 @@ export class synonyms_bearbeiten {
         // 1. Edit Name should not be empty, error message should contain "Name"
         // 1.1 Synonym Name
 
-        // add a value to synonym table
-
-        cy.get('[data-cy="navDrawerSynonyms"]')
-            .click()
-
-        cy.get('[data-cy="synonym-create"]')
-            .click()
-
+        // add a Name to synonym table
+        cy.get('[data-cy="navDrawerSynonyms"]').click()
+        cy.get('[data-cy="synonym-create"]').click()
         cy.get('[data-cy="synonym-name"]')
             .click()
             .type(addValue+String(x))
 
-        cy.get('[data-cy="create-button"]')
-            .click()
+        cy.get('[data-cy="create-button"]').click()
+
+        // remove success message
+        cy.successRemove()
        
         const value1   = ['', addValue+String(x)]
         
         cy.wrap(value1).each((index) => {
-            cy.log('Line '+String(585))
-            cy.wait(500)  // Mast have .wait() here
+            cy.log('Line 44')
+            cy.wait(400)  // Mast have .wait() here
             cy.get('tbody')
                 .find('tr')
                 .first()
@@ -52,7 +48,7 @@ export class synonyms_bearbeiten {
 
             // clear input field
             cy.get('[data-cy="synonym-name"]')
-                .click()
+                //.click()
                 .clear()
 
             if (index == '') {
@@ -65,9 +61,11 @@ export class synonyms_bearbeiten {
                 cy.get('[data-cy="navDrawerSynonyms"]')
                     .contains('Synonyms')
                     .click()
+
                 //1.1.2 Warning Notification
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text',' Das Synonym konnte nicht gespeichert werden. ')
+
                 // after assert close warning message
                 cy.get('[class="v-icon notranslate theme--dark"]').eq(0)
                     .click()
@@ -76,10 +74,13 @@ export class synonyms_bearbeiten {
                 cy.get('[data-cy="abort-button"]')
                     .click()
             }
+
             else {
+
                 cy.log('If Statement FAlse')
                 cy.log('Line'+String(602))
                 cy.log('index'+String(index))
+
                 cy.get('[data-cy="synonym-name"]')
                     .click()
                     .type(index)
@@ -88,35 +89,30 @@ export class synonyms_bearbeiten {
                     .contains('Synonyms')
                     .click()
                 
-                cy.log('Line 612')
+                cy.log('Line 92')
 
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text',' Das Synonym konnte nicht gespeichert werden. ')
                 
                 // clicking "Abbrechen" buttton. Slected Name should remain same.
-
                 // cy.get('[class="alert error white--text"]').then(function($errorMsg) {
-
                 //     if($errorMsg.find('[class="mx-4 mt-1 mb-3"]')) {
-
                 //         cy.log('if Statement True')
-
                 //         cy.get('[data-cy="abort-button"]')
                 //             .click({force:true})
                 //     }
-
                 //     else {
                 //         cy.log('I Statment False')
-
-                        
                 //     }
                 // })
+
                 cy.get('[data-cy="abort-button"]')
                     .click({force:true})
             }
             
             // Assert Saved value
-            cy.log('Line 640')
+            cy.log('Line 114')
+            cy.wait(400)
             cy.get('tbody')
                 .find('tr')
                 .first()
@@ -133,6 +129,8 @@ export class synonyms_bearbeiten {
 
         // Edit Synonym Name and Anlegen Valid Name
         cy.log('Edit Synonym Name and Anlegen Valid Name')
+
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -151,7 +149,6 @@ export class synonyms_bearbeiten {
         // cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
         //     .click()
 
-        cy.wait(500)
         // cy.get('[data-cy="successMessageTitle"]')
         //     .should('have.text', ' Das Synonym'+' "'+addValue+String(b)+'" '+ 'wurde erfolgreich gespeichert ')
 
@@ -162,7 +159,9 @@ export class synonyms_bearbeiten {
         //     .click()
         
         // Assert value Table
-        cy.log('Line 686')
+        cy.log('Line 162')
+
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -177,7 +176,8 @@ export class synonyms_bearbeiten {
 
         //1.1.1 Warning message
         //1.1.2 Warning Notification
-        cy.log('Line 667')
+        cy.log('Line 179')
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -185,7 +185,8 @@ export class synonyms_bearbeiten {
         
         cy.get('[href="/trainingsdaten/synonym/1/example/"]')
             .click()
-
+        
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -230,7 +231,9 @@ export class synonyms_bearbeiten {
         // cy.get('[href="/trainingsdaten/synonym/1/example/"]').eq(0)
         //     .click()
         // Assert value Table
-        cy.log('Line 720')
+        cy.log('Line 234')
+
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -244,7 +247,7 @@ export class synonyms_bearbeiten {
         // Test duplicate Name
         cy.log('// Test duplicate Name')
         // Synonym Name
-        cy.log('Line 768')
+        cy.log('Line 250')
 
         // 2. Check for duplicate name
         // 2.1 Synonym Name
@@ -252,7 +255,8 @@ export class synonyms_bearbeiten {
         cy.log('2. Check for duplicate name')
         cy.get('[data-cy="navDrawerSynonyms"]').click()
         
-        cy.log('Line 742')
+        cy.log('Line 258')
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -270,7 +274,8 @@ export class synonyms_bearbeiten {
             .should('have.text', ' Das Synonym konnte nicht gespeichert werden. ')
 
         cy.log('Line 792')
-        cy.wait(250)
+
+        cy.wait(350)
         cy.get('[data-cy="synonym-name"]')
             .clear({force:true})
             .wait(500)
@@ -279,7 +284,7 @@ export class synonyms_bearbeiten {
 
         cy.get('[data-cy="navDrawerSynonyms"]').click()
 
-        cy.wait(500)
+        cy.wait(400)
 
         // cy.get('[data-cy="successMessageTitle"]')
         //     .should('have.text', ' Das Synonym'+' "'+addValue+String(t*b)+'" '+ 'wurde erfolgreich gespeichert ')
@@ -300,6 +305,7 @@ export class synonyms_bearbeiten {
         cy.get('[data-cy="navDrawerSynonyms"]').click()
         cy.log('Log 787')
         cy.log('Unique Name for Synonym Example')
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
