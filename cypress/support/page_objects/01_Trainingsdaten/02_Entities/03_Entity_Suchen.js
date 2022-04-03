@@ -11,9 +11,9 @@ export class entity_suchen {
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/entity/`);
 
         // Add an entity
-        cy.get('[data-cy="entity-name"]')
-            .clear()
-            .type('test')
+        cy.get('[data-cy="entity-create"]').click()
+
+        cy.get('[data-cy="entity-name"]').type('test')
 
         cy.get('[data-cy="entity-description"]')
             .type('entity test')
