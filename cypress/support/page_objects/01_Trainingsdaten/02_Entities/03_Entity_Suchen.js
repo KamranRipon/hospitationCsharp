@@ -10,6 +10,20 @@ export class entity_suchen {
         // checking url after clicking Entity Button
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/entity/`);
 
+        // Add an entity
+        cy.get('[data-cy="entity-name"]')
+            .clear()
+            .type('test')
+
+        cy.get('[data-cy="entity-description"]')
+            .type('entity test')
+
+        // entity hinzufuegen
+        cy.get('[data-cy="create-button"]').click()
+
+        //return to Entity
+        cy.get('[data-cy="navDrawerEntities"]').click()
+
         // Single Intent
         cy.get('[data-cy="entity-table-search"]')
             .type('weather')
