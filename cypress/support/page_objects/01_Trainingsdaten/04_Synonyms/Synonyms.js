@@ -17,31 +17,10 @@ export class synonyms {
     synonymAnlegen() {
 
         /* Synonyms Anlegen Testing */
-
-        cy.get('[class="v-list-group"]').contains('Trainingsdaten').then((Tdaten) => {
-
-                if(Tdaten.find('[class="v-list-group__header v-list-item v-list-item--link theme--light"]').length > 0) {
-                    cy.log('If Statement True')
-
-                    cy.get('[data-cy="navDrawerSynonyms"]')
-                        .contains('Synonyms')
-                        .click()
-                }
-                else {
-                    cy.log('If Statement False')
-
-                    cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')
-                        .contains('Trainingsdaten')
-                        .click()
-
-                    cy.get('[data-cy="navDrawerSynonyms"]')
-                        .contains('Synonyms')
-                        .click()
-                }
-        })
+        cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSynonyms"]')
 
         // Assert URL after clicking Synonym
-        cy.url().should("eq", "http://localhost/trainingsdaten/synonym/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/`);
         
         // Clicking Slot Hinzufuegen
         cy.get('[data-cy="synonym-create"]')
@@ -51,7 +30,7 @@ export class synonyms {
                         })
 
         // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", "http://localhost/trainingsdaten/synonym/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/neu/`);
 
         // A. Synonym Anlegen
         /* 
@@ -559,7 +538,7 @@ export class synonyms {
         })
 
         // Assert URL after clicking Synonym
-        cy.url().should("eq", "http://localhost/trainingsdaten/synonym/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/`);
         
         // 1. Edit Name should not be empty, error message should contain "Name"
         // 1.1 Synonym Name
@@ -1149,7 +1128,7 @@ export class synonyms {
         })
 
         // Assert URL after clicking Synonym
-        cy.url().should("eq", "http://localhost/trainingsdaten/synonym/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/`);
 
         //C. Synonym Loeschen
         // 4.1. Synonym Table
