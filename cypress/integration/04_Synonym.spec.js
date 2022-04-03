@@ -15,7 +15,7 @@ describe('Test Case 7: Synonyms', () => {
         
     })
 
-    it('Test Case: Synonym Anlegen', () => {
+    it.only('CCI-T26: Synonym Anlegen', () => {
         onSynonymAnlegen.synonymAnlegen()
 
         // A. Synonym Anlegen
@@ -31,16 +31,17 @@ describe('Test Case 7: Synonyms', () => {
             2.1 Synonym
             2.2 Example
         3. Check for successfully saved values
-            3.1 Assert Notification
+            3.1 Assert Success Notification
             3.2 Assert in table
                 3.2.1 Assert Synonym name in Synonym talbe
                 3.2.2 Assert name in example table
                 3.2.3 Assert example number for each synonym in synonym table
         4. Leave site via menu or breadcrump, data must not be saved
+        5. Click on "Anlegen" remains on details page
         */
     })
 
-    it('Test Case: Synonym Bearbeiten', () => {
+    it('CCI-T27: Synonym Bearbeiten', () => {
         onSynonymBearbeiten.synonymBearbeiten()
 
         // B. Synonym Bearbeiten
@@ -67,11 +68,11 @@ describe('Test Case 7: Synonyms', () => {
         */
     })
 
-    it('Test Case: Synonym Loeschen', () => {
+    it('CCI-T28: Synonym Loeschen', () => {
         onSynonymLoeschen.synonymLoeschen()
     })
 
-    it('Test Case: Synonym Suchen', () => {
+    it('CCI-T29: Synonym Suchen', () => {
         onSynonymSuchen.synonymSuchen()
     })
 
