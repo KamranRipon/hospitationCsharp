@@ -15,6 +15,7 @@ export class entity_suchen {
             .type('weather')
 
         // Checking return Result
+        cy.wait(500)
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')
@@ -24,7 +25,7 @@ export class entity_suchen {
         cy.get('[data-cy="entity-table-search"]').clear()
             .type('test')
         
-        cy.wait(300)
+        cy.wait(500)
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')
