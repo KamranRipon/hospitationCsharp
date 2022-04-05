@@ -67,5 +67,3 @@ testJob:
     reports:
       junit: output.html
     expire_in: 1 week
-  only:
-    - main

@@ -4,11 +4,11 @@ export class einfacher_login {
         cy.log('Loged in Successful')
         cy.visit('/')
         cy.wait(500)
-        cy.visit('http://10.61.135.11:8081/trainingsdaten/intent/')
+        cy.visit(`${Cypress.config().baseUrl}/trainingsdaten/intent/`)
 
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
         cy.visit('/')
-        cy.url().should('eq', 'http://10.61.135.11:8081/')
+        cy.url().should('eq', `${Cypress.config().baseUrl}/`)
     }
 }
 // Export class einfacher_login
