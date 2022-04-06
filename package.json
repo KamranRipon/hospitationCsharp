@@ -13,6 +13,7 @@
     "generateMocha_Report": "marge cypress/results/mochawesome/output.json --reportDir ./ --inline",
     "cy:run_spec": "npx cypress run --spec 'cypress/integration/*.spec.js'",
     "cypress:run": "npm run cy:run_spec -- --headless",
+    "cy:run_browser": "npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser firefox & npm run cy:run_spec -- --browser electron",
     "CyTest-1": "npm run prereport && npm run cypress:run && npm run merge && npm run generateMocha_Report",
     "CyTest": "npm run prereport && npm run cypress:run",
     "cySpec": "npx cypress run --spec 'cypress/integration/05_Responses.spec.js'"
@@ -21,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "curl": "^0.1.4",
+    "edge": "^7.10.1",
     "jasmine-core": "^3.10.1",
     "jasmine-spec-reporter": "^7.0.0",
     "junit": "^1.4.9",

@@ -20,7 +20,7 @@ export class responses_bearbeiten {
         
         // Entering to first of
         cy.log('Line 312')
-        cy.wait(500)
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .first()
@@ -64,6 +64,7 @@ export class responses_bearbeiten {
 
         // Click Speichern
         cy.get('[data-cy="save-button"]').click()
+        cy.wait(300)
         
         // Assert Successful Notification
         cy.successMessageTitle('[data-cy="successMessageTitle"]', 'Die', 'Response', addValue+String(b))
@@ -86,13 +87,13 @@ export class responses_bearbeiten {
         cy.selectEntireTbl()
             
         // Assert Value in Response Table
-        cy.log('Line 398')
+        cy.log('Line 90')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(1)')
             .contains(addValue+String(b))
             .then(function($synName1) {
-                cy.wrap($synName1).should('have.text', addValue+String(b))
+                cy.wrap($synName1).should('contain', addValue+String(b))
             })
 
         // clear search field
@@ -171,7 +172,7 @@ export class responses_bearbeiten {
         cy.get('[data-cy="response-table-search"]').clear()
 
         // 4. Leave site via menu or breadcrump, data must be saved
-        cy.log('Line 503')
+        cy.log('Line 175')
         cy.get('tbody')
             .find('tr')
             .first()

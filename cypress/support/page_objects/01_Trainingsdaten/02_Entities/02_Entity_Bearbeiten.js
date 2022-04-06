@@ -5,32 +5,30 @@ export class entity_bearbeiten {
     entityBearbeiten() {
 
         // Open Trainingsdate Tab and enter to Story
-        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerEntities"]')        
-                
+        cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerEntities"]')
+        
         // checking url after clicking Entity Button
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/entity/`);
         
         // Testing Entity Bearbeitung
        
         // Select first row of the Entity table
-        cy.wait(500)
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .first()
             .click({force:true})
         
-        cy.get('[data-cy="entity-name"]')
-            .clear()
+        cy.get('[data-cy="entity-name"]').clear()
 
         // Checking for a valid Name
         cy.warningNotification('[role="alert"]')
         
         // 2. Name should not contain "spaces" or "/", saving impossible, 
-        // Checking warning message for "space" or "/" 
+        // Checking warning message for "space" or "/"
         const space   = [' ', '/']
         cy.wrap(space).each((index) => {
-            cy.get('[data-cy="entity-name"]')
-                .type(index)
+            cy.get('[data-cy="entity-name"]').type(index)
 
             //Assert warning notification
             cy.get('[role="alert"]').eq(0)
@@ -43,6 +41,8 @@ export class entity_bearbeiten {
 
         cy.addName('[data-cy="entity-name"]', 'test161'+String(m), '[data-cy="entity-description"]')
         cy.get('[data-cy="save-button"]').click()
+        
+        // success remove
         cy.successRemove()
         
         cy.get('[data-cy="navDrawerEntities"]')
@@ -98,14 +98,14 @@ export class entity_bearbeiten {
         
         cy.get('[data-cy="entity-name"]')
             .type('weather')
+
         cy.get('[data-cy="save-button"]').click()
 
         cy.get('[data-cy="entity-create"]').click()
 
         cy.addName('[data-cy="entity-name"]', 'test', '[data-cy="entity-description"]')
         cy.get('[data-cy="create-button"]').click()
-
     }
 }
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onEntityBearbeiten = new entity_bearbeiten()
