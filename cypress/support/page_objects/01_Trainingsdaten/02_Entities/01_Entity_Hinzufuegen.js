@@ -8,13 +8,13 @@ export class entity_hinzufuegen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerEntities"]')
                 
         // checking url after clicking Entity Button
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/entity/`);
 
         // Entity Hinzufuegen testing 
         cy.createButton('[data-cy="entity-create"]')
         
         // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/entity/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/entity/neu/`);
 
         // add and Entity
         cy.addName('[data-cy="entity-name"]', addValue, '[data-cy="entity-description"]')
@@ -23,27 +23,27 @@ export class entity_hinzufuegen {
             .should('be.visible')
                 .click()
 
-        cy.wait(500)
+        cy.wait(400)
+
         // Saved Notification Must appear after successfully saved
-    
         cy.successMessageTitle('[data-cy="successMessageTitle"]', 'Das', 'Entity', addValue)
                 
         // Select Whole Table
         cy.selectEntireTbl()
         
         // Check saved example saved or Not
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .last()
             .find('td:nth-child(1)').then(function($text) {
                 cy.log($text.text())
-                cy.wrap($text).should('have.text', addValue)
+                cy.wrap($text).should('contain', addValue)
             }) 
 
         // Leave Site with menu or Breadcrump doesn't save value
-        // Clicking Entity Hinzufuegen
+
         cy.createButton('[data-cy="entity-create"]')
-        
         // add an entity-name
         cy.addName('[data-cy="entity-name"]', addValue+String(m), '[data-cy="entity-description"]')
 
@@ -56,6 +56,7 @@ export class entity_hinzufuegen {
         cy.selectEntireTbl()
         
         // Check saved example saved or Not
+        cy.wait(300)
         cy.get('tbody')
             .find('tr')
             .last()
@@ -107,19 +108,14 @@ export class entity_hinzufuegen {
         var textList = ["test15","test1", "weather"]
         cy.wrap(textList).each((index) => {
 
-            cy.get('[data-cy="entity-create"]')
-                .click()
+            cy.get('[data-cy="entity-create"]').click()
 
             // add an entity-name
             cy.addName('[data-cy="entity-name"]', addValue+String(m), '[data-cy="entity-description"]')
-
-            cy.get('[data-cy="create-button"]')
-                .click()
-
-            cy.get('[data-cy="navDrawerEntities"]')
-                .click()
+            cy.get('[data-cy="create-button"]').click()
+            cy.get('[data-cy="navDrawerEntities"]').click()
         })
     }
 }
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onEntityHinzufuegen = new entity_hinzufuegen()

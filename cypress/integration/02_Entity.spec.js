@@ -55,6 +55,5 @@ describe("Test Case 5: Entity", () => {
         3. Searching for some chars no intent has shows empty table
         ** Assert All in Intent TAble **
         */
-
     })
 })
