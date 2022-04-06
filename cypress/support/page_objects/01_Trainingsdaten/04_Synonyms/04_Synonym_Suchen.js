@@ -1,12 +1,12 @@
 import { capitalize, find, first, values } from "lodash"
 
-const t = Math.floor(Math.random() * 500);
-const f = Math.floor(Math.random() * 1000);
-const b = Math.floor(Math.random() * 1500);
-const l = Math.floor(Math.random() * 2000);
-const c = Math.floor(Math.random() * 2500);
-const a = Math.floor(Math.random() * 3000);
-const x = Math.floor(Math.random() * 3500);
+const t = Math.floor(Math.random() * 50000);
+const f = Math.floor(Math.random() * 10000);
+const b = Math.floor(Math.random() * 15000);
+const l = Math.floor(Math.random() * 20000);
+const c = Math.floor(Math.random() * 25000);
+const a = Math.floor(Math.random() * 30000);
+const x = Math.floor(Math.random() * 35000);
 
 const addValue = 'DummyValue'
 const addValue_2 = 'DummyValue'

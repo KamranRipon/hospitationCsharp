@@ -4,6 +4,7 @@ import { onSynonymLoeschen } from "../support/page_objects/01_Trainingsdaten/04_
 import { onSynonymSuchen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/04_Synonym_Suchen"
 import { onSynonymExmAnlegen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/05_Synonyms_Example_Anlegen"
 import { onSynonymExmBearbeiten } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/06_Synonyms_Example_Bearbeiten"
+import { onSynonymExmLoeschen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/07_Synonyms_Example_Loeschen"
 
 describe('CCI-C5: Synonyms', () => {
 
@@ -99,7 +100,7 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it('CCI-T30: Synonym Example Anlegen', () => {
+    it('CCI-T31: Synonym Example Bearbeiten', () => {
         onSynonymExmBearbeiten.synonymExmBearbeiten()
 
         // E. Synonym Example Bearbeiten
@@ -121,7 +122,7 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it.only('CCI-T33: Synonym Example Loeschen', () => {
+    it('CCI-T32: Synonym Example Loeschen', () => {
         onSynonymExmLoeschen.synonymExmLoeschen()
         /*
         F. Synonym Example Loeschen
