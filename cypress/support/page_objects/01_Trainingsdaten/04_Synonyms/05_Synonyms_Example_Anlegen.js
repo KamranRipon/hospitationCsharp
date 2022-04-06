@@ -1,13 +1,13 @@
 const t = Math.floor(Math.random() * 500);
-const f = Math.floor(Math.random() * 1000);
-const b = Math.floor(Math.random() * 1500);
+//const f = Math.floor(Math.random() * 1000);
+//const b = Math.floor(Math.random() * 1500);
 const l = Math.floor(Math.random() * 2000);
-const c = Math.floor(Math.random() * 2500);
-const a = Math.floor(Math.random() * 3000);
-const x = Math.floor(Math.random() * 3500);
+//const c = Math.floor(Math.random() * 2500);
+//const a = Math.floor(Math.random() * 3000);
+//const x = Math.floor(Math.random() * 3500);
 
 const addValue = 'DummyValue'
-const addValue_2 = 'DummyValue'
+//const addValue_2 = 'DummyValue'
 const addExample = 'testExample'
 
 export class synonyms_exampleAnlegen {
@@ -19,14 +19,9 @@ export class synonyms_exampleAnlegen {
 
         // Assert URL after clicking Synonym
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/`);
-
         
-        // 1.1.1 Warning message
-        //Create Synonyms
+        // 1.1 Warning message
         cy.get('[data-cy="synonym-create"]').click()
-
-        // // checking url after clicking Intent Hinzufuegen
-        // cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/neu/`);
 
         // cy.get('[data-cy="synonym-name"]')
         //     .click({force:true})
@@ -48,7 +43,6 @@ export class synonyms_exampleAnlegen {
         // 3. Saving saves data
         // add a valid synonyms name
         cy.get('[data-cy="synonym-name"]')
-            //.click({force:true})
             .type(addValue+String(t))
         
         // create-button
@@ -136,12 +130,16 @@ export class synonyms_exampleAnlegen {
         cy.get('[data-cy="create-button"]').eq(0)
             .click()
 
-        cy.log('Line 138')
+        cy.log('Line 133')
         // 3.1 Assert Success Notification
         cy.get('[data-cy="successMessageTitle"]')
         .then(function($successMsg) {
             cy.wrap($successMsg).should('have.text', ' Das Synonym'+' "'+inExName+'" '+ 'wurde erfolgreich gespeichert ')
         })
+
+        // 4. Saving with button "Anlegen" saves example and 
+        //    navigates to table of synonym examples
+        cy.url().should('include', '/example/')
 
         cy.wait(300)
         // Close successfully saved message
@@ -155,7 +153,7 @@ export class synonyms_exampleAnlegen {
         // 3.2 Assert in table
         cy.get('[data-cy="synonym-example-table-search"]').type(addExample+String(l))
 
-        cy.log('Line 158')
+        cy.log('Line 156')
         cy.wait(300)
         cy.get('tbody')
             .find('tr')
@@ -498,5 +496,5 @@ export class synonyms_exampleAnlegen {
     }
 }
 
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onSynonymExmAnlegen = new synonyms_exampleAnlegen()
