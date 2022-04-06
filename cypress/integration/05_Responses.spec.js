@@ -13,7 +13,7 @@ import { onResponsesButtonSuchen } from "../support/page_objects/01_Trainingsdat
 import { onResponsesButtonLoeschen } from "../support/page_objects/01_Trainingsdaten/05_Responses/11_responseButtonLoeschen"
 import { onResponsesMetaDaten } from "../support/page_objects/01_Trainingsdaten/05_Responses/12_responseMetaDaten"
 
-describe('Test Case : Responses', () => {
+describe.skip('Test Case : Responses', () => {
 
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')

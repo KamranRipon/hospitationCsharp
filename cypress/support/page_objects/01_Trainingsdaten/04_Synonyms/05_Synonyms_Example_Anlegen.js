@@ -110,7 +110,8 @@ export class synonyms_exampleAnlegen {
         // 1. Name should not be empty, error message should contain "Name"
         
         // 1.1 Warning message
-        cy.get('[class="v-messages__wrapper"]')
+        //cy.get('[class="v-messages__wrapper"]')
+        cy.get('[role="alert"]').eq(0)
             .should('have.text','Der Text muss gesetzt sein')
 
         //save without name, Click Anlegen
@@ -152,9 +153,9 @@ export class synonyms_exampleAnlegen {
         cy.selectEntireTbl()
 
         // 3.2 Assert in table
-        cy.get('[data-cy="synonym-example-table-searc"]').type(addExample+String(l))
+        cy.get('[data-cy="synonym-example-table-search"]').type(addExample+String(l))
 
-        cy.log('Line 159')
+        cy.log('Line 158')
         cy.wait(300)
         cy.get('tbody')
             .find('tr')
@@ -168,7 +169,7 @@ export class synonyms_exampleAnlegen {
         cy.get('[data-cy="synonym-example-table-search"]').clear()
 
         // get the size of example talbe
-        cy.log('Line 180')
+        cy.log('Line 172')
         cy.wait(300)
         var noRow
         cy.get('tbody')
@@ -194,7 +195,7 @@ export class synonyms_exampleAnlegen {
             .then(function($rowCount) {
                 cy.wrap($rowCount).should('contain', noRow)
             })
-
+        cy.log('Line 198')
         cy.get('[data-cy="synonym-table-search"]').clear()
 
         // 3.3 Assert example number for each synonym in synonym table
