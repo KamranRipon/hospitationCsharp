@@ -1,27 +1,26 @@
 const t = Math.floor(Math.random() * 500);
-//const f = Math.floor(Math.random() * 1000);
-//const b = Math.floor(Math.random() * 1500);
+const f = Math.floor(Math.random() * 1000);
+const b = Math.floor(Math.random() * 1500);
 const l = Math.floor(Math.random() * 2000);
 const c = Math.floor(Math.random() * 2500);
 const a = Math.floor(Math.random() * 3000);
-//const x = Math.floor(Math.random() * 3500);
+const x = Math.floor(Math.random() * 3500);
 
 const addValue = 'DummyValue'
-//const addValue_2 = 'DummyValue'
+const addValue_2 = 'DummyValue'
 const addExample = 'testExample'
 
 export class synonyms_exampleAnlegen {
 
     synonymExmAnlegen() {
 
-        /* Synonyms Anlegen Testing */
+        /* E. Synonyms Anlegen Testing */
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSynonyms"]')
 
         // Assert URL after clicking Synonym
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/`);
 
-        // 1.1 Synonym Name
-
+        
         // 1.1.1 Warning message
         //Create Synonyms
         cy.get('[data-cy="synonym-create"]').click()
@@ -63,7 +62,7 @@ export class synonyms_exampleAnlegen {
         cy.successRemove()
 
         // Selecting Entire Table
-        cy.selectEntireTbl()
+        //cy.selectEntireTbl()
             
         // Assert VAlue in Synonyms TAble
         cy.get('[data-cy="navDrawerSynonyms"]').click()
@@ -83,8 +82,7 @@ export class synonyms_exampleAnlegen {
         // 1.1.2 Warning Notification
 
         // Entering first row of synonym table
-        cy.log('Test valid Name of Synonym Example')
-        cy.log('Line 87')
+        cy.log('Line 85')
         cy.wait(400)
         cy.get('tbody')
             .find('tr')
@@ -105,9 +103,6 @@ export class synonyms_exampleAnlegen {
         cy.get('[role="tab"]')
             .contains('Examples')
             .click()
-
-        // Assert URL after entering to Synonym Example
-        // cy.url().should("eq", "http://localhost/trainingsdaten/synonym/1/example/");
         
         //Click Example Hinzufuegen
         cy.get('[data-cy="synonym-example-create"]').click()
@@ -115,8 +110,6 @@ export class synonyms_exampleAnlegen {
         // 1. Name should not be empty, error message should contain "Name"
         
         // 1.1 Warning message
-
-        // checking for valid name Notification
         cy.get('[class="v-messages__wrapper"]')
             .should('have.text','Der Text muss gesetzt sein')
 
@@ -131,7 +124,7 @@ export class synonyms_exampleAnlegen {
         
         // close unsuccessful saved notification
         cy.errorRemove()
-
+        
         // 3. Check for successfully saved values
 
         // Enter a valid Name
@@ -142,7 +135,7 @@ export class synonyms_exampleAnlegen {
         cy.get('[data-cy="create-button"]').eq(0)
             .click()
 
-        cy.log('Line 143')
+        cy.log('Line 138')
         // 3.1 Assert Success Notification
         cy.get('[data-cy="successMessageTitle"]')
         .then(function($successMsg) {
@@ -151,14 +144,15 @@ export class synonyms_exampleAnlegen {
 
         cy.wait(300)
         // Close successfully saved message
-        cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
-            .click()
+        cy.successRemove()
+        // cy.get('[class="v-icon notranslate theme--dark"]').eq(1)
+        //     .click()
 
         // Select Entire table
         cy.selectEntireTbl()
 
         // 3.2 Assert in table
-        cy.get('[data-cy="synonym-example-table-search"]').type(addExample+String(l))
+        cy.get('[data-cy="synonym-example-table-searc"]').type(addExample+String(l))
 
         cy.log('Line 159')
         cy.wait(300)
