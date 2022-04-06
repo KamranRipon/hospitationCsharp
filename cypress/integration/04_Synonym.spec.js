@@ -32,7 +32,7 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it.only('CCI-T27: Synonym Bearbeiten', () => {
+    it('CCI-T27: Synonym Bearbeiten', () => {
         onSynonymBearbeiten.synonymBearbeiten()
 
         // B. Synonym Bearbeiten
@@ -76,7 +76,7 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it('CCI-T30: Synonym Example Anlegen', () => {
+    it.skip('CCI-T30: Synonym Example Anlegen', () => {
         onSynonymExmAnlegen.synonymExmAnlegen()
 
         // E. Synonym Example Anlegen
@@ -91,14 +91,17 @@ describe('CCI-C5: Synonyms', () => {
             3.1 Assert Success Notification
             3.2 Assert in table
             3.3 Assert example number for each synonym in synonym table
-        4. Leave site via menu or breadcrump, data must be saved
-        5. Click on "Anlegen" remains on details page
+        4. Saving with button "Anlegen" saves example and 
+           navigates to table of synonym examples
+        5. Saving with button "Anlegen & weiteres Example" saves example and 
+           navigates to creation mask for new example
+        6. Leave site via menu or breadcrump, data must not save
+        7. new example text is visible in table of synonyms 
         */
     })
 
-    it('CCI-T33: Synonym Example Loeschen', () => {
+    it.skip('CCI-T33: Synonym Example Loeschen', () => {
         onSynonymLoeschen.synonymLoeschen()
-
         /*
         F. Synonym Example Loeschen
         1. Synonym Example Name can be remove form Synonym Table

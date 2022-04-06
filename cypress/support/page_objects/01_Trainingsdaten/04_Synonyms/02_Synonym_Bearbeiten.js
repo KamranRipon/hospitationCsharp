@@ -446,7 +446,7 @@ export class synonyms_bearbeiten {
             .first()
             .click({force:true})
 
-        cy.get('[data-cy="synonym-name"]')
+        cy.get('[data-cy="synonym-name"]').clear()
             //.clear()
             //.click({force:true})
             .type('someName')
