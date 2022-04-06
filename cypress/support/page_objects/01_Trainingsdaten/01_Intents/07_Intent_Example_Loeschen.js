@@ -102,5 +102,5 @@ export class intent_example_loeschen {
         })
     }
 }
-// Exportint class frontEnd to End2End to test
+// Export class
 export const onIntentExampleLoeschen = new intent_example_loeschen()

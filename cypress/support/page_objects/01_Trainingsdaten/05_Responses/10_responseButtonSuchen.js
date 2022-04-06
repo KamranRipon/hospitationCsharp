@@ -10,13 +10,14 @@ export class button_suchen {
         //Enter to a row of Response Table which contain highest no. of text
         var max_val2 = 0
         // Enter to Response table Row
-        cy.log('Line 35')
-        cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+        cy.log('Line 13')
+        //cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+        cy.get('tbody')
             .find('td:nth-child(2)')
             .then(($testFunc2) => {
                 const vall2 = $testFunc2.text()
                 const sp_vall2 = vall2.split(' ')
-                                                                
+
                 var num2
                 for (num2=0; num2 < sp_vall2.length; num2++){                                                                           
                     if(Number(sp_vall2[num2]) > max_val2) {
@@ -33,7 +34,7 @@ export class button_suchen {
                     .click({force:true})
             })
         // Locate Button Tab and enter to it
-        cy.get('[class="v-slide-group__wrapper"]')
+        cy.get('[role="tab"]')
             .contains('Buttons')
             .click()
             .wait(300)  
@@ -44,9 +45,10 @@ export class button_suchen {
 
             // Clicking Response Hinzufuegen
             cy.get('[data-cy="responsebutton-create"]').click()
+            cy.wait(300)
 
             cy.get('[data-cy="responsebutton-title"]')
-                .click({force:true})
+                //.click({force:true})
                 .type(index)
 
             // Add an Intent 
@@ -65,13 +67,13 @@ export class button_suchen {
                 .click()
             
         })
-        //cy.wait(500)
+
         // Selecting Entire Table
         cy.selectEntireTbl()
-                           
+
         // Single Response
         cy.get('[data-cy="responsebutton-table-search"]')
-            .click({force:true})
+            //.click({force:true})
                 .type('weather')
 
         // Assert Return Result
@@ -81,18 +83,29 @@ export class button_suchen {
             .find('tr')
             .should('have.length', 1)
             .find('td:nth-child(2)')
-            .should('have.text', 'weather')
+            .should('contain', 'weather')
         
         // Multiple Response
         cy.get('[data-cy="responsebutton-table-search"]')
             .clear()
             .type('test')
 
+        // Assert Return Result
         cy.get('tbody')
             .find('tr')
-            //.should('have.length', >1)
+            .then((trLength) => {
+                var len = trLength.length
+                
+                if (len > 1) {
+                    cy.wrap(trLength).should('have.length', len)
+                }
+            })
+        // assert saved datat on table
+        cy.get('tbody')
+            .find('tr')
             .find('td:nth-child(2)')
             .should('contain','test')
+
 
         // Nonexisting Response
         cy.get('[data-cy="responsebutton-table-search"]')

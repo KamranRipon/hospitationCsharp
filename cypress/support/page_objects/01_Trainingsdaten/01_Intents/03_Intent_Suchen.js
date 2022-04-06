@@ -26,7 +26,7 @@ export class intent_suchen {
         })
         cy.wait(500)
 
-        // 1. Searching for single specific story 
+        // 1. Searching for single specific Intent 
         cy.get('[data-cy="intent-table-search"]')
             .type(singleEle)
             .wait(500)
