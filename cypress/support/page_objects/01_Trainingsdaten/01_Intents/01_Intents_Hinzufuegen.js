@@ -169,8 +169,7 @@ export class intent_hinzufuegen {
 
         cy.get('[data-cy="navDrawerIntents"]').click()
 
-        cy.get('[data-cy="intent-table-search"]')
-            .type('someName')
+        cy.get('[data-cy="intent-table-search"]').type('someName')
 
         // Select Entire Synonym Table
         cy.selectEntireTbl()

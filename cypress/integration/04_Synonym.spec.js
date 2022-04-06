@@ -1,11 +1,10 @@
-//import { onSynonym } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/Synonyms"
 import { onSynonymAnlegen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/01_Synonym_Anlegen"
 import { onSynonymBearbeiten } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/02_Synonym_Bearbeiten"
 import { onSynonymLoeschen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/03_Synonym_Loeschen"
 import { onSynonymSuchen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/04_Synonym_Suchen"
 import { onSynonymExmAnlegen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/05_Synonyms_Example_Anlegen"
 
-describe('Test Case 7: Synonyms', () => {
+describe('CCI-C5: Synonyms', () => {
 
     beforeEach('visit url', () => {
         cy.visit('/')
@@ -16,7 +15,7 @@ describe('Test Case 7: Synonyms', () => {
         onSynonymAnlegen.synonymAnlegen()
 
         // A. Synonym Anlegen
-        /* 
+        /*
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message
             1.2 Error Notification after unsuccessful save
@@ -33,27 +32,21 @@ describe('Test Case 7: Synonyms', () => {
         */
     })
 
-    it.skip('CCI-T27: Synonym Bearbeiten', () => {
+    it.only('CCI-T27: Synonym Bearbeiten', () => {
         onSynonymBearbeiten.synonymBearbeiten()
 
         // B. Synonym Bearbeiten
-        /* 
+        /*
         1. Edit Name should not be empty, error message should contain "Name"
             1.1 Synonym Name
                 1.1.1 Warning message
                 1.1.2 Warning Notification
-            1.2 Synonyms Example Name
-                1.1.1 Warning message
-                1.1.2 Warning Notification
         2. Check for duplicate name
-            2.1 Synonym Name
-            2.2 Synonym Example Name
+            2.1 Assert Notification
+            2.2 Assert in table
         3. Check for successfully saved values
             3.1 Assert Notification
             3.2 Assert in table
-                3.2.1 Assert Synonym name in Synonym talbe
-                3.2.2 Assert name in example table
-        4. Check number of example in Synonym Table
         4. Leave site via menu or breadcrump, data must be saved
         5. leave site via button "Abbrechen" navigates to table of synonyms and 
            does not save edited data
@@ -62,16 +55,31 @@ describe('Test Case 7: Synonyms', () => {
 
     it('CCI-T28: Synonym Loeschen', () => {
         onSynonymLoeschen.synonymLoeschen()
+
+        /*
+        C. Synonym Loeschen
+        1. Synonym Name can be remove form Synonym Table
+            1.1 Assert notification
+            1.2 Assert in Synonym Table
+        */
     })
 
     it('CCI-T29: Synonym Suchen', () => {
         onSynonymSuchen.synonymSuchen()
+
+        /* 
+        D. Synonym Suchen
+        1. Searching for single specific Synonym works
+        2. Searching for some chars multiple Synonym has in common filters correctly
+        3. Searching for some chars no Synonym has shows empty table
+        ** Assert All in Synonym Table**
+        */
     })
 
     it('CCI-T30: Synonym Example Anlegen', () => {
         onSynonymExmAnlegen.synonymExmAnlegen()
 
-        // A. Synonym Example Anlegen
+        // E. Synonym Example Anlegen
         /* 
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message
@@ -88,8 +96,15 @@ describe('Test Case 7: Synonyms', () => {
         */
     })
 
-    it.skip('CCI-T33: Synonym Example Loeschen', () => {
+    it('CCI-T33: Synonym Example Loeschen', () => {
         onSynonymLoeschen.synonymLoeschen()
+
+        /*
+        F. Synonym Example Loeschen
+        1. Synonym Example Name can be remove form Synonym Table
+            1.1 Assert notification
+            1.2 Assert in Synonym Example Table
+        */
     })
 
 })

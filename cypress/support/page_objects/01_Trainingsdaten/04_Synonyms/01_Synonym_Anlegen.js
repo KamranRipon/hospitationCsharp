@@ -1,8 +1,7 @@
-const t = Math.floor(Math.random() * 500);
-const c = Math.floor(Math.random() * 2500);
+const t = Math.floor(Math.random() * 65000);
+const c = Math.floor(Math.random() * 25000);
 
 const addValue = 'DummyValue'
-//const addExample = 'testExample'
 export class synonyms_anlegen {
 
     synonymAnlegen() {
@@ -13,13 +12,12 @@ export class synonyms_anlegen {
         // Assert URL after clicking Synonym
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/`);
 
-        // 1.1 Synonym Name
+        // 1. Name should not be empty, error message should contain "Name"
 
         // 1.1.1 Warning message
-        //Create Synonyms
         cy.get('[data-cy="synonym-create"]').click()
 
-        // checking url after clicking Intent Hinzufuegen
+        // Assert url after clicking Intent Hinzufuegen
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/synonym/neu/`);
 
         cy.get('[data-cy="synonym-name"]').click({force:true})
@@ -59,7 +57,7 @@ export class synonyms_anlegen {
         // Assert VAlue in Synonyms TAble
         cy.get('[data-cy="navDrawerSynonyms"]').click()
 
-        cy.log('Line 64')
+        cy.log('Line 60')
         cy.wait(300)
         cy.get('tbody')
             .find('tr')
@@ -70,9 +68,8 @@ export class synonyms_anlegen {
             })
 
         // 2. Check for duplicate name
-        // 2.1 Synonym Name
-        // 2.2 Synonym Example Name
 
+        // 2.1 Synonym Name
         cy.get('[data-cy="navDrawerSynonyms"]').click()
         cy.get('[data-cy="synonym-create"]').click()
         cy.get('[data-cy="synonym-name"]')
@@ -87,7 +84,7 @@ export class synonyms_anlegen {
 
         cy.get('[data-cy="navDrawerSynonyms"]').click()
 
-        // Assert Value in Synonym TAble
+        // Assert Value in Synonyms Table
         cy.get('[data-cy="synonym-table-search"]')
             .type(addValue+String(t))
     
@@ -97,6 +94,7 @@ export class synonyms_anlegen {
                         .should('contain', addValue+String(t))
                 }
             })
+
         // Clear the search field
         cy.get('[data-cy="synonym-table-search"]').clear()
 
@@ -104,13 +102,12 @@ export class synonyms_anlegen {
         //     3.2 Assert in table
         //         3.2.1 Assert Synonym name in Synonym talbe
         
-        cy.log('Line 109')
+        cy.log('Line 105')
 
         cy.get('[data-cy="synonym-create"]')
             .click({force:true})
         
         cy.get('[data-cy="synonym-name"]')
-            //.click({force:true})
             .type(addValue+String(c))
 
         cy.get('[data-cy="create-button"]').click()
@@ -126,12 +123,11 @@ export class synonyms_anlegen {
             .last()
             .find('td:nth-child(1)')
             .then(function($synName2) {
-
                 cy.wrap($synName2).should('contain', addValue+String(c))
             })
-
+        cy.log('Line 130')
         // 4. Leave site via menu or breadcrump, data must not be saved
-        cy.log('Line 378')
+        
         // 4.1 Synonym Name
         cy.get('[data-cy="navDrawerSynonyms"]').click()
 
