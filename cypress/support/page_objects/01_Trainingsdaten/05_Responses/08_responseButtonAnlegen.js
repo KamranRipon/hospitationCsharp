@@ -1,4 +1,5 @@
-const txa   = Math.floor(Math.random() * 4800);
+const txa   = Math.floor(Math.random() * 48000);
+const resbut   = Math.floor(Math.random() * 55000);
 const addValue = 'ResButDmyVal'
 
 export class button_anlegen {
@@ -9,7 +10,7 @@ export class button_anlegen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/response/`);
         cy.wait(500)      
 
         // 1. Text Name should not be empty, error message should contain "Texte"; /Currently Bug/
@@ -58,7 +59,40 @@ export class button_anlegen {
         // Locate Button Tab and enter to it
         cy.get('[role="tab"]')
             .contains('Buttons')
-            .click()     
+            .click()
+
+        // add respons button
+        const randonVal = ['responseBut1'+String(resbut), 'responseBut2'+String(resbut)]
+        cy.wrap(randonVal).each((index) => {
+
+            // Clicking Response Hinzufuegen
+            cy.get('[data-cy="responsebutton-create"]')
+                .click()
+
+            cy.get('[data-cy="responsebutton-title"]')
+                //.click({force:true})
+                .type(index)
+
+            // Add an Intent 
+            cy.get('[role="combobox"]')
+                .contains('Intent')
+                .click({force:true})
+                .get('[role="option"]')
+                .last()
+                .click()
+
+            // Click Anlegen
+            cy.get('[data-cy="create-button"]').eq(0)
+                .click()
+
+            cy.get('[role="tab"]')
+                .contains('Buttons')
+                .click()
+
+            cy.get('[data-cy="success-remove"]')
+                .click()
+                .wait(300)
+        })
 
         // Clicking responsebutton-create
         cy.get('[data-cy="responsebutton-create"]').click()
@@ -132,7 +166,7 @@ export class button_anlegen {
             .last()
             .find('td:nth-child(2)').then(function($text) {
                 const text = $text.text()
-                cy.wrap($text).should('have.text', addValue+String(txa))
+                cy.wrap($text).should('contain', addValue+String(txa))
             })
         
         // Clear search field
