@@ -5,6 +5,7 @@ import { onSynonymSuchen } from "../support/page_objects/01_Trainingsdaten/04_Sy
 import { onSynonymExmAnlegen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/05_Synonyms_Example_Anlegen"
 import { onSynonymExmBearbeiten } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/06_Synonyms_Example_Bearbeiten"
 import { onSynonymExmLoeschen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/07_Synonyms_Example_Loeschen"
+import { onSynonymExmSuchen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/08_Synonyms_Example_Suchen"
 
 describe('CCI-C5: Synonyms', () => {
 
@@ -19,10 +20,10 @@ describe('CCI-C5: Synonyms', () => {
         // A. Synonym Anlegen
         /*
         1. Name should not be empty, error message should contain "Name"
-            1.1 Warning message
-            1.2 Error Notification after unsuccessful save
+            1.1 Assert Warning message
+            1.2 Assert Error Notification after unsuccessful save
         2. Check for duplicate name
-            2.1 Error message after unsuccessful saving 
+            2.1 Assert Error message after unsuccessful saving 
             2.2 Table should not contain double value
         3. Check for successfully saved values
             3.1 Assert Success Notification
@@ -40,9 +41,8 @@ describe('CCI-C5: Synonyms', () => {
         // B. Synonym Bearbeiten
         /*
         1. Edit Name should not be empty, error message should contain "Name"
-            1.1 Synonym Name
-                1.1.1 Warning message
-                1.1.2 Warning Notification
+            1.1 Assert Warning message
+            1.2 Assert Warning Notification
         2. Check for duplicate name
             2.1 Assert Notification
             2.2 Assert in table
@@ -50,7 +50,7 @@ describe('CCI-C5: Synonyms', () => {
             3.1 Assert Notification
             3.2 Assert in table
         4. Leave site via menu or breadcrump, data must be saved
-        5. leave site via button "Abbrechen" navigates to table of synonyms and 
+        5. leave site via "Abbrechen" button navigates to table of synonyms and 
            does not save edited data
         */
     })
@@ -122,13 +122,25 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it('CCI-T32: Synonym Example Loeschen', () => {
+    it('CCI-T33: Synonym Example Loeschen', () => {
         onSynonymExmLoeschen.synonymExmLoeschen()
         /*
         F. Synonym Example Loeschen
         1. Synonym Example Name can be remove form Synonym Table
             1.1 Assert notification
             1.2 Assert in Synonym Example Table
+        */
+    })
+
+    it('CCI-T32: Synonym Example Suchen', () => {
+        onSynonymExmSuchen.synonymExmSuchen()
+
+        /* 
+        D. Synonym Suchen
+        1. Searching for single specific Synonym works
+        2. Searching for some chars multiple Synonym has in common filters correctly
+        3. Searching for some chars no Synonym has shows empty table
+        ** Assert All in Synonym Table**
         */
     })
 
