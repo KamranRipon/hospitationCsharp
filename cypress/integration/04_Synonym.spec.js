@@ -78,7 +78,7 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it.skip('CCI-T30: Synonym Example Anlegen', () => {
+    it('CCI-T30: Synonym Example Anlegen', () => {
         onSynonymExmAnlegen.synonymExmAnlegen()
 
         // E. Synonym Example Anlegen
