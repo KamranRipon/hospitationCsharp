@@ -1,5 +1,5 @@
-const t = Math.floor(Math.random() * 65000);
-const c = Math.floor(Math.random() * 25000);
+const addVal = Math.floor(Math.random() * 650000);
+const newVal = Math.floor(Math.random() * 250000);
 
 const addValue = 'DummyValue'
 export class synonyms_anlegen {
@@ -39,23 +39,23 @@ export class synonyms_anlegen {
         // 3. Saving saves data
         // add a valid synonyms name
         cy.get('[data-cy="synonym-name"]')
-            .type(addValue+String(t))
+            .type(addValue+String(addVal))
         
         // create-button
         cy.get('[data-cy="create-button"]').click()
 
         // 3.1 Assert Success Notification
         cy.get('[data-cy="successMessageTitle"]')
-            .should('have.text', ' Das Synonym'+' "'+addValue+String(t)+'" '+ 'wurde erfolgreich gespeichert ')
+            .should('have.text', ' Das Synonym'+' "'+addValue+String(addVal)+'" '+ 'wurde erfolgreich gespeichert ')
         
         // Closing Successfully Saved Notification
         cy.successRemove()
-
-        // Selecting Entire Table
-        cy.selectEntireTbl()
             
         // Assert VAlue in Synonyms TAble
         cy.get('[data-cy="navDrawerSynonyms"]').click()
+
+        // Selecting Entire Table
+        cy.selectEntireTbl()
 
         cy.log('Line 60')
         cy.wait(300)
@@ -64,7 +64,7 @@ export class synonyms_anlegen {
             .last()
             .find('td:nth-child(1)')
             .then(function($synName1) {
-                cy.wrap($synName1).should('contain', addValue+String(t))
+                cy.wrap($synName1).should('contain', addValue+String(addVal))
             })
 
         // 2. Check for duplicate name
@@ -73,7 +73,7 @@ export class synonyms_anlegen {
         cy.get('[data-cy="navDrawerSynonyms"]').click()
         cy.get('[data-cy="synonym-create"]').click()
         cy.get('[data-cy="synonym-name"]')
-            .type(addValue+String(t))
+            .type(addValue+String(addVal))
 
         cy.get('[data-cy="create-button"]').click()
 
@@ -86,12 +86,12 @@ export class synonyms_anlegen {
 
         // Assert Value in Synonyms Table
         cy.get('[data-cy="synonym-table-search"]')
-            .type(addValue+String(t))
+            .type(addValue+String(addVal))
     
         cy.get('tbody').find('tr').then(function($NrRow) {
                 if($NrRow.find('td:nth-child(1)').length <= 1) {
                     cy.wrap($NrRow.find('td:nth-child(1)'))
-                        .should('contain', addValue+String(t))
+                        .should('contain', addValue+String(addVal))
                 }
             })
 
@@ -108,7 +108,7 @@ export class synonyms_anlegen {
             .click({force:true})
         
         cy.get('[data-cy="synonym-name"]')
-            .type(addValue+String(c))
+            .type(addValue+String(newVal))
 
         cy.get('[data-cy="create-button"]').click()
         
@@ -123,7 +123,7 @@ export class synonyms_anlegen {
             .last()
             .find('td:nth-child(1)')
             .then(function($synName2) {
-                cy.wrap($synName2).should('contain', addValue+String(c))
+                cy.wrap($synName2).should('contain', addValue+String(newVal))
             })
         cy.log('Line 130')
         // 4. Leave site via menu or breadcrump, data must not be saved

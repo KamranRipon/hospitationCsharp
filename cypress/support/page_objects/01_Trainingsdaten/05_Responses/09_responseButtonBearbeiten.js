@@ -1,6 +1,7 @@
-const Resb     = Math.floor(Math.random() * 6500);
-const Resbdub  = Math.floor(Math.random() * 2500);
-const Resble   = Math.floor(Math.random() * 3500);
+const Resb     = Math.floor(Math.random() * 65000);
+const Resbdub  = Math.floor(Math.random() * 25000);
+const Resble   = Math.floor(Math.random() * 35000);
+const resbut   = Math.floor(Math.random() * 48000);
 const addValue = 'ResButbeDmyVal'
 
 export class button_bearbeiten {
@@ -58,9 +59,46 @@ export class button_bearbeiten {
         cy.get('[role="tab"]')
             .contains('Buttons')
             .click()
-            .wait(300)  
+            .wait(300)
+
+        // add some response button
+
+        const randonVal = ['responseBut1'+String(resbut), 'responseBut2'+String(resbut)]
+        cy.wrap(randonVal).each((index) => {
+
+            // Clicking Response Hinzufuegen
+            cy.get('[data-cy="responsebutton-create"]')
+                .click()
+
+            cy.get('[data-cy="responsebutton-title"]')
+                //.click({force:true})
+                .type(index)
+
+            // Add an Intent 
+            cy.get('[role="combobox"]')
+                .contains('Intent')
+                .click({force:true})
+                .get('[role="option"]')
+                .last()
+                .click()
+
+            // Click Anlegen
+            cy.get('[data-cy="create-button"]').eq(0)
+                .click()
+
+            cy.get('[role="tab"]')
+                .contains('Buttons')
+                .click()
+
+            cy.get('[data-cy="success-remove"]')
+                .click()
+                .wait(300)
+        })
+
+        cy.log('Line 98')
 
         // Entering to last row of Button table
+        cy.wait(400)
         cy.get('tbody')
             .find('tr')
             .last()
@@ -68,10 +106,10 @@ export class button_bearbeiten {
 
         // clear response name
         cy.get('[data-cy="responsebutton-title"]').clear()
-
+        cy.log('Line 109')
         //Assert warning notification
-        cy.get('[role="alert"]')
-            .should('have.text','Der Titel muss gesetzt sein      ')
+        cy.get('[role="alert"]').eq(0)
+            .should('have.text','Der Titel muss gesetzt sein')
 
         // add a space or '/' to input field /* Currently Bug, cannot be tested */
 

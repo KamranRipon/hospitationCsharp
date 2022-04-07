@@ -3,6 +3,9 @@ import { onSynonymBearbeiten } from "../support/page_objects/01_Trainingsdaten/0
 import { onSynonymLoeschen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/03_Synonym_Loeschen"
 import { onSynonymSuchen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/04_Synonym_Suchen"
 import { onSynonymExmAnlegen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/05_Synonyms_Example_Anlegen"
+import { onSynonymExmBearbeiten } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/06_Synonyms_Example_Bearbeiten"
+import { onSynonymExmLoeschen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/07_Synonyms_Example_Loeschen"
+import { onSynonymExmSuchen } from "../support/page_objects/01_Trainingsdaten/04_Synonyms/08_Synonyms_Example_Suchen"
 
 describe('CCI-C5: Synonyms', () => {
 
@@ -17,10 +20,10 @@ describe('CCI-C5: Synonyms', () => {
         // A. Synonym Anlegen
         /*
         1. Name should not be empty, error message should contain "Name"
-            1.1 Warning message
-            1.2 Error Notification after unsuccessful save
+            1.1 Assert Warning message
+            1.2 Assert Error Notification after unsuccessful save
         2. Check for duplicate name
-            2.1 Error message after unsuccessful saving 
+            2.1 Assert Error message after unsuccessful saving 
             2.2 Table should not contain double value
         3. Check for successfully saved values
             3.1 Assert Success Notification
@@ -38,9 +41,8 @@ describe('CCI-C5: Synonyms', () => {
         // B. Synonym Bearbeiten
         /*
         1. Edit Name should not be empty, error message should contain "Name"
-            1.1 Synonym Name
-                1.1.1 Warning message
-                1.1.2 Warning Notification
+            1.1 Assert Warning message
+            1.2 Assert Warning Notification
         2. Check for duplicate name
             2.1 Assert Notification
             2.2 Assert in table
@@ -48,7 +50,7 @@ describe('CCI-C5: Synonyms', () => {
             3.1 Assert Notification
             3.2 Assert in table
         4. Leave site via menu or breadcrump, data must be saved
-        5. leave site via button "Abbrechen" navigates to table of synonyms and 
+        5. leave site via "Abbrechen" button navigates to table of synonyms and 
            does not save edited data
         */
     })
@@ -76,7 +78,7 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
-    it.skip('CCI-T30: Synonym Example Anlegen', () => {
+    it('CCI-T30: Synonym Example Anlegen', () => {
         onSynonymExmAnlegen.synonymExmAnlegen()
 
         // E. Synonym Example Anlegen
@@ -93,15 +95,35 @@ describe('CCI-C5: Synonyms', () => {
             3.3 Assert example number for each synonym in synonym table
         4. Saving with button "Anlegen" saves example and 
            navigates to table of synonym examples
-        5. Saving with button "Anlegen & weiteres Example" saves example and 
-           navigates to creation mask for new example
-        6. Leave site via menu or breadcrump, data must not save
-        7. new example text is visible in table of synonyms 
+        5. Leave site via menu or breadcrump, data must not save
+        6. new example text is visible in table of synonyms 
         */
     })
 
-    it.skip('CCI-T33: Synonym Example Loeschen', () => {
-        onSynonymLoeschen.synonymLoeschen()
+    it('CCI-T31: Synonym Example Bearbeiten', () => {
+        onSynonymExmBearbeiten.synonymExmBearbeiten()
+
+        // E. Synonym Example Bearbeiten
+        /* 
+        1. Edited Name should not be empty, error message should contain "Name"
+            1.1 Warning message
+            1.2 Error Notification after unsuccessful save
+        2. Check for duplicate name
+            2.1 Error message after unsuccessful saving 
+            2.2 Table should not contain double value
+        3. Check for successfully saved values
+            3.1 Assert Success Notification
+            3.2 Assert in table
+            3.3 Assert example number for each synonym in synonym table
+        4. Saving with button "Anlegen" saves example and 
+           navigates to table of synonym examples
+        5. Leave site via menu or breadcrump, data must not save
+        6. new example text is visible in table of synonyms 
+        */
+    })
+
+    it('CCI-T33: Synonym Example Loeschen', () => {
+        onSynonymExmLoeschen.synonymExmLoeschen()
         /*
         F. Synonym Example Loeschen
         1. Synonym Example Name can be remove form Synonym Table
@@ -110,4 +132,15 @@ describe('CCI-C5: Synonyms', () => {
         */
     })
 
+    it('CCI-T32: Synonym Example Suchen', () => {
+        onSynonymExmSuchen.synonymExmSuchen()
+
+        /* 
+        D. Synonym Suchen
+        1. Searching for single specific Synonym works
+        2. Searching for some chars multiple Synonym has in common filters correctly
+        3. Searching for some chars no Synonym has shows empty table
+        ** Assert All in Synonym Table**
+        */
+    })
 })
