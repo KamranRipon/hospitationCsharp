@@ -1,11 +1,12 @@
 //const t = Math.floor(Math.random() * 500);
-const f = Math.floor(Math.random() * 1000);
-const b = Math.floor(Math.random() * 1500);
-const l = Math.floor(Math.random() * 2000);
+const f = Math.floor(Math.random() * 45000);
+const b = Math.floor(Math.random() * 35800);
+const l = Math.floor(Math.random() * 750000);
 //const c = Math.floor(Math.random() * 2500);
-const a = Math.floor(Math.random() * 3000);
+const a = Math.floor(Math.random() * 35500);
 //const x = Math.floor(Math.random() * 3500);
-const newVal = Math.floor(Math.random() * 65000);
+const newVal = Math.floor(Math.random() * 651000);
+const addVal = Math.floor(Math.random() * 750500);
 
 //const addValue = 'DummyValue'
 //const addValue_2 = 'DummyValue'
@@ -58,12 +59,32 @@ export class synonyms_Exmbearbeiten {
             inExName = name
         })
 
-        
-
         // enter to synonym-example
         cy.get('[role="tab"]')
             .contains('Examples')
             .click()
+
+        // add some example name
+        const randonVal = ['synExm1'+String(addVal), 'synExm2'+String(addVal)]
+        cy.wrap(randonVal).each((index) => {
+
+            // Clicking Synonym Example Hinzufuegen
+            cy.get('[data-cy="synonym-example-create"]').click()
+
+            cy.get('[data-cy="synonym-example-text"]').type(index)
+
+            // Click Anlegen
+            cy.get('[data-cy="create-button"]').eq(0)
+                .click()
+
+            cy.get('[role="tab"]')
+                .contains('Examples')
+                .click()
+
+            cy.get('[data-cy="success-remove"]')
+                .click()
+                .wait(300)
+        })
 
         // 1. Edit Name should not be empty, error message should contain "Name"
 
@@ -389,7 +410,7 @@ export class synonyms_Exmbearbeiten {
         
         cy.get('[data-cy="synonym-example-table-search"]')
             .click()
-            .type('addExample2')               
+            .type('addExample2')
 
         cy.get('tbody')
             .find('tr')
@@ -410,6 +431,27 @@ export class synonyms_Exmbearbeiten {
             .then(function($noOfExmRows) {
                 noRow = $noOfExmRows.length
             })
+
+        // delete added value
+        cy.log('Line 437')
+        // cy.wrap(randonVal).each((index) => {
+
+        //     cy.get('[data-cy="synonym-example-table-search"]').type(index)
+
+        //     cy.get('[data-cy="element-delete-button"]')
+        //         .last()
+        //         .click()
+
+        //     // confirm delete
+        //     cy.get('[class="v-btn__content"]')
+        //     .contains('Löschen')
+        //     .click()
+
+        //     // clear response-table-search
+        //     cy.get('[data-cy="synonym-example-table-search"]')
+        //         .clear()
+        // })
+        
         // return to Synonyms
         cy.get('[data-cy="navDrawerSynonyms"]').click()
 

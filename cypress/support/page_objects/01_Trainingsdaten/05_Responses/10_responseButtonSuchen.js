@@ -40,7 +40,7 @@ export class button_suchen {
             .wait(300)  
         cy.log('Line 40')
         // Anlegen Some Random response-button-title
-        const randonVal = ['test'+String(test1), 'test'+String(test2), 'weather']
+        const randonVal = ['test'+String(test1), 'test'+String(test2), 'weather'+String(test2)]
         cy.wrap(randonVal).each((index) => {
 
             // Clicking Response Hinzufuegen
@@ -48,7 +48,6 @@ export class button_suchen {
             cy.wait(300)
 
             cy.get('[data-cy="responsebutton-title"]')
-                //.click({force:true})
                 .type(index)
 
             // Add an Intent 
@@ -69,11 +68,10 @@ export class button_suchen {
         })
 
         // Selecting Entire Table
-        cy.selectEntireTbl()
+        //cy.selectEntireTbl()
 
         // Single Response
         cy.get('[data-cy="responsebutton-table-search"]')
-            //.click({force:true})
                 .type('weather')
 
         // Assert Return Result

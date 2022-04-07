@@ -143,5 +143,4 @@ describe('CCI-C5: Synonyms', () => {
         ** Assert All in Synonym Table**
         */
     })
-
 })
