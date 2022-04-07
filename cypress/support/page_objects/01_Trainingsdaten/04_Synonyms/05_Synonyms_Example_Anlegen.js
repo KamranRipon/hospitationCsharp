@@ -7,7 +7,7 @@ const l = Math.floor(Math.random() * 3500000);
 //const x = Math.floor(Math.random() * 3500);
 
 const addValue = 'DummyValue'
-//const addValue_2 = 'DummyValue'
+const addValue_2 = 'DummyValue'
 const addExample = 'testExample'
 
 export class synonyms_exampleAnlegen {
