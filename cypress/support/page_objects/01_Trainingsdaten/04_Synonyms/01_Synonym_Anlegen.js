@@ -50,12 +50,12 @@ export class synonyms_anlegen {
         
         // Closing Successfully Saved Notification
         cy.successRemove()
-
-        // Selecting Entire Table
-        cy.selectEntireTbl()
             
         // Assert VAlue in Synonyms TAble
         cy.get('[data-cy="navDrawerSynonyms"]').click()
+
+        // Selecting Entire Table
+        cy.selectEntireTbl()
 
         cy.log('Line 60')
         cy.wait(300)

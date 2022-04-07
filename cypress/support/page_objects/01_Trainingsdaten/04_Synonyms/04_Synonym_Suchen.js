@@ -61,6 +61,9 @@ export class synonyms_suchen {
             // Click Anlegen
             cy.get('[data-cy="create-button"]')
                 .click()
+
+            cy.get('[data-cy="navDrawerSynonyms"]')
+                .click()
         })
 
         // 1. Searching for single specific Synonyms

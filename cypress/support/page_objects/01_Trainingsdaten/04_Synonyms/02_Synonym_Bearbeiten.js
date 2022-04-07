@@ -23,9 +23,12 @@ export class synonyms_bearbeiten {
             .type(addValue+String(addVal))
 
         cy.get('[data-cy="create-button"]').click()
-
+        cy.log('Line 26')
         // remove success message
         cy.successRemove()
+
+        // return to synonyms table
+        cy.get('[data-cy="navDrawerSynonyms"]').click()
        
         const value1   = ['', addValue+String(addVal)]
         
