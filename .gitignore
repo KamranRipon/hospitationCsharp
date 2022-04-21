@@ -5,3 +5,4 @@ cypress/results
 output.html
 *.pyc
 **/**/__pycache__
+.idea
