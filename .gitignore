@@ -6,3 +6,4 @@ output.html
 *.pyc
 **/**/__pycache__
 .idea
+cypress/screenshots
