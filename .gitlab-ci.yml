@@ -32,9 +32,9 @@ restart test environment:
       "
     - exit
   only:
-    - dev
     - main
     - web
+    - schedules
 
 testJob:
   image: docker.artifactory-extern.dataport.de/node:16
@@ -61,6 +61,6 @@ testJob:
       junit: cypress/results/junit/result-*.xml
     expire_in: 1 week
   only:
-    - dev
     - main
     - web
+    - schedules
