@@ -41,6 +41,8 @@ restart test environment:
       exit
       "
     - exit
+  only:
+    - main
 
 testJob:
   #image: tmaier/docker-compose:latest
@@ -58,6 +60,8 @@ testJob:
     - npm run CyTest
     - npm run merge
     - npm run generateMocha_Report
+  only:
+    - main
   artifacts:
     paths:
       - cypress/results/junit/*.xml

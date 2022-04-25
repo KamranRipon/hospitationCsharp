@@ -1,12 +1,10 @@
-import { capitalize, find, first, values } from "lodash"
-
-const t = Math.floor(Math.random() * 3000);
-const f = Math.floor(Math.random() * 3500);
-const b = Math.floor(Math.random() * 4000);
-const l = Math.floor(Math.random() * 4500);
-const c = Math.floor(Math.random() * 5000);
-const a = Math.floor(Math.random() * 5500);
-const tx = Math.floor(Math.random() * 5500);
+const t = Math.floor(Math.random() * 30000);
+const f = Math.floor(Math.random() * 35000);
+const b = Math.floor(Math.random() * 40000);
+const l = Math.floor(Math.random() * 45000);
+const c = Math.floor(Math.random() * 50000);
+const a = Math.floor(Math.random() * 55000);
+const tx = Math.floor(Math.random() * 55000);
 
 const addValue = 'DummyValue'
 const addValue_2 = 'DummyValue'
@@ -19,37 +17,17 @@ export class slots {
         /* Slot Hinzufuegen Testing */
         
         // Entering to Trainingsdaten
-        if (cy.get('[class="v-list-group__header v-list-item v-list-item--link theme--light"]')) {
-
-            cy.log('If Statement True')
-
-            cy.get('[class="v-list-item__title pl-4"]')
-            .contains('Trainingsdaten')
-            .click()
-
-            cy.get('[data-cy="navDrawerSlots"]')
-            .contains('Slots')
-                .click()
-        }
-        else {
-            cy.log('If Statement False')
-            cy.get('[data-cy="navDrawerSlots"]')
-            .contains('Slots')
-                .click()
-        }
+        cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
 
         // Assert URL after clicking Slot
-        cy.url().should("eq", "http://localhost/trainingsdaten/slot/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/`);
         
         // Clicking Slot Hinzufuegen
         cy.get('[data-cy="slot-create"]')
-            .should('have.attr', 'href')
-            .then(($href) => {
-                   cy.visit($href)
-                        })
+            .click()
 
         // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", "http://localhost/trainingsdaten/slot/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/neu/`);
 
         /*
         1. Check for notification for invalid Name
@@ -133,7 +111,6 @@ export class slots {
                     .find('[value=false]')
                     .click({force:true})
                     .should('be.checked')
-
 
                 cy.get('[data-cy="slot-influence-conversation"]')
                     .find('[value=true]')
@@ -256,37 +233,21 @@ export class slots {
                 //     .contains('Float')
                 //     .click({force:true})
 
-                /* Checking correctness of error Message */
-                // for non-numeric there should be a warning message
+                /* Checking correctness of error Messages */
 
+                cy.log('Line 241')
                 //Minimum
-                cy.get('[data-cy="slot-float-minvalue"]')
-                    .clear()
-                    .type('notNumeric')
-                    .wait(500)
-                cy.get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der minimale Wert eines Slots des Typs „Float” muss nummerisch sein!')
-                
-                cy.get('[data-cy="slot-float-minvalue"]')
-                    .click({force:true})
-                    .clear()
-                    .wait(500)
-                    .type(-1)
-                    .wait(200)
-                    .get('[class="v-messages__wrapper"]')
-                    .should('not.have.text','Der minimale Wert eines Slots des Typs „Float” muss nummerisch sein!')
-                    .get('[data-cy="slot-float-minvalue"]')
-                    .click({force:true})
-                    .clear()
-                    .type(0)
-                    .wait(200)
-                    .get('[class="v-messages__wrapper"]')
-                    .should('not.have.text', 'Der minimale Wert eines Slots des Typs „Float” muss nummerisch sein!')
-                
+                cy.get('[placeholder="Default: 0,0"]').clear().type('1')
+
+                cy.get('[role="alert"]')
+                    .should('contain','Die vorliegende Formatierung des minimalen Wertes ist nicht zulässig!')
+
+                cy.get('[placeholder="Default: 0,0"]').clear().type('1,0')
+
                 //Maximale
                 cy.get('[data-cy="slot-float-maxvalue"]')
                     .clear()
-                    .type('notNumeric')
+                    .type(2)
     
                 cy.get('[class="v-messages__wrapper"]')
                     .should('have.text','Der maximale Wert eines Slots des Typs „Float” muss nummerisch sein!')
