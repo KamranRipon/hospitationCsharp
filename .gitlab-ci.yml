@@ -51,6 +51,7 @@ testJob:
     # evaluate the status of the tests
     - if [ $FAILED ]; then exit 1; fi
   artifacts:
+    when: always
     paths:
       - cypress/results/junit/*.xml
       - cypress/results/mochawesome/output.json
