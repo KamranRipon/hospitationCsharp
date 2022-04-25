@@ -54,7 +54,7 @@ Cypress.Commands.add('loginiFunction',(Username, Password) => {
     cy.get('#rememberMe')
         .click({force:true})
         
-    cy.get('#kc-login')
+    cy.get('#kc-login-btn-custom')
         .click()
         .wait(500)
 })
