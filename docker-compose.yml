@@ -1,17 +1,29 @@
-version: "3"
+version: "3.9"
+
 services:
-  frontend:
-    #network_mode: host
-    image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/frontend
-  backend:
-    image: dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/backend
+  proxy-e2e:
+    image: "docker.artifactory-extern.dataport.de/nginx:mainline"
     ports:
-      - "8080:8080"
+      - "8083:80"
+    volumes:
+      - ./deployment/local/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - e2e
+  frontend-e2e:
+    image: "dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/frontend-distroless:latest"
+    networks:
+      - e2e
+  backend-e2e:
+    image: "dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/backend-distroless:latest"
     environment:
-      - spring.profiles.active=test
-  e2etest:
-    #network_mode: host
-    depends_on:
-      - frontend
-      - backend
-    build: .
+      - spring.profiles.active=e2e
+      - chatbot.model.path=/app/models
+      - keycloak.url=http://localhost:8083/auth/realms/dataport
+    volumes:
+      - ./deployment/local/models:/app/models
+    networks:
+      - e2e
+networks:
+  e2e:
+    external:
+      name: cci_e2e_network
