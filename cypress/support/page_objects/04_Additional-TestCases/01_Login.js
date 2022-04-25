@@ -1,7 +1,7 @@
 export class einfacher_login {
 
     testLogin() {   
-        cy.log('Loged in Successful')
+        cy.log('Login Successful')
         cy.visit('/')
         cy.wait(500)
         cy.visit(`${Cypress.config().baseUrl}/trainingsdaten/intent/`)
