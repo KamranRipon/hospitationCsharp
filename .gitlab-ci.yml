@@ -41,6 +41,10 @@ restart test environment:
       exit
       "
     - exit
+  only:
+    - dev
+    - main
+    - web
 
 testJob:
   #image: tmaier/docker-compose:latest
@@ -56,14 +60,20 @@ testJob:
     #- npm install xvfb
     - npm install cypress
     - npm install
-    - npm run CyTest
+    # force gitlab to continue the execution
+    - npm run CyTest || true
     - npm run merge
     - npm run generateMocha_Report
   artifacts:
     paths:
       - cypress/results/junit/*.xml
       - cypress/results/mochawesome/output.json
+      - cypress/screenshots/*
       - ./output.html
     reports:
-      junit: output.html
+      junit: cypress/results/junit/result-*.xml
     expire_in: 1 week
+  only:
+    - dev
+    - main
+    - web
