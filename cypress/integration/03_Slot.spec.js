@@ -17,7 +17,7 @@ describe("Test Case 6: Slots", () => {
         onSlotHizufuegen.slotHinzufuegen()
     })
 
-    it.only("Slot Bearbeiten", () => {
+    it("Slot Bearbeiten", () => {
         onSlotBearbeiten.slotBearbeiten()
     })
 
