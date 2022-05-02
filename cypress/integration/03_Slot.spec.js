@@ -27,7 +27,7 @@ describe("Test Case 6: Slots", () => {
         onSlotSuchen.slotSuchen()
     })
 
-    it.only("Slot Loeschen", () => {
+    it("Slot Loeschen", () => {
         onSlotLoeschen.slotLoeschen()
     })
 })
