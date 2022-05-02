@@ -1,5 +1,7 @@
 import { onSlotHizufuegen } from "../support/page_objects/01_Trainingsdaten/03_Slots/01_Slot_Hinzufuegen"
 import { onSlotBearbeiten } from "../support/page_objects/01_Trainingsdaten/03_Slots/02_Slot_Bearbeiten"
+import { onSlotSuchen } from '../support/page_objects/01_Trainingsdaten/03_Slots/03_Slot_Suchen';
+import { onSlotLoeschen } from '../support/page_objects/01_Trainingsdaten/03_Slots/04_Slot_Loeschen';
 
 describe("Test Case 6: Slots", () => {
    
@@ -22,10 +24,10 @@ describe("Test Case 6: Slots", () => {
     })
 
     it("Slot Suchen", () => {
-        onSlot.slotSuchen()
+        onSlotSuchen.slotSuchen()
     })
 
-    it("Slot Loeschen", () => {
-        onSlot.slotLoeschen()
+    it.only("Slot Loeschen", () => {
+        onSlotLoeschen.slotLoeschen()
     })
 })
