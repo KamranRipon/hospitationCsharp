@@ -76,9 +76,6 @@ export class sotries_bearbeiten {
             .click()
             .get('[role="option"]').last()
             .click()
-        // click "+" button
-        cy.get('[data-cy="story-step-add"]')
-            .click()
 
         // save edited story name
         cy.get('[data-cy="save-button"]').click()

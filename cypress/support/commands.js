@@ -183,9 +183,6 @@ Cypress.Commands.add('storiesAnlegen', (addval) => {
         .get('[role="option"]').last()
         .click({force:true})
 
-    cy.get('[data-cy="story-step-add"]')
-        .click()
-
     // Click Anlegen
     cy.get('[data-cy="create-button"]')
         .click()

@@ -40,9 +40,9 @@ export class rules_suchen {
         cy.get('[role="option"]').contains('Action')
             .click({force:true})
         cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
-        cy.get('[role="option"]').last().click()
-        // Add a step by clicking "+"
-        cy.get('[data-cy="rule-add-step"]').click()
+        cy.get('[role="option"]')
+            .last()
+            .click()
 
         // Try to save with empty name
         // Click Anlegen
