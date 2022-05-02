@@ -70,35 +70,7 @@ export class sotries_hinzufuegen {
         // 4.1 Assert Notification
         // Add a story name and assert notification & Assert in story table
         cy.storiesAnlegen(addValue+String(ac))
-        ///////////////////////////////
-        // cy.get('[data-cy="story-name"]')
-        //     .type(addValue+String(ac))
 
-        // cy.get('[data-cy="story-step-element-autocomplete"]').eq(0)
-        //     .click()
-        // cy.get('[role="option"]').last()
-        //     .click()
-
-        // cy.get('[data-cy="story-step-type-select"]').eq(1)
-        //     .click({force:true})
-
-        // cy.get('[role="option"]')
-        //     .contains('Action')
-        //     .click()
-        
-        // cy.get('[data-cy="story-step-element-autocomplete"]').eq(1)
-        //     .click()
-        //     .get('[role="option"]').last()
-        //     .click({force:true})
-
-        // cy.get('[data-cy="story-step-add"]')
-        //     .click()
-
-        // // Click Anlegen
-        // cy.get('[data-cy="create-button"]')
-        //     .click()
-        ///////////////////////////////
-        // cy.wait(500)
 
         //6. Click on "Anlegen" navigates to table of strories
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/story/")
@@ -191,16 +163,12 @@ export class sotries_hinzufuegen {
         cy.get('[data-cy="story-step-element-autocomplete"]').eq(1).click()
             .get('[role="option"]').last().click()
 
-        cy.get('[data-cy="story-step-add"]').click()
-
         cy.get('[data-cy="story-step-type-select"]').eq(2).click({force:true})
             .get('[role="listbox"]')
             .contains('Intent').click()
 
         cy.get('[data-cy="story-step-element-autocomplete"]').eq(2).click()
             .get('[role="option"]').last().click()
-
-        cy.get('[data-cy="story-step-add"]').click()
 
         //click Anlegen
         cy.get('[data-cy="create-button"]').click()

@@ -129,9 +129,10 @@ export class rules_bearbeiten {
         cy.get('[role="option"]').contains('Action')
             .click({force:true})
         cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
-        cy.get('[role="option"]').last().click()
-        // Add a step by clicking "+"
-        cy.get('[data-cy="rule-add-step"]').click()
+        cy.get('[role="option"]')
+            .last()
+            .click()
+
         // create
         cy.get('[data-cy="create-button"]').click()
         // remove success message
@@ -207,9 +208,9 @@ export class rules_bearbeiten {
         // Select Action or Response from list
         cy.get('[role="option"]').contains('Action').click({force:true})
         cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
-        cy.get('[role="option"]').last().click()
-        // Add a step by clicking "+"
-        cy.get('[data-cy="rule-add-step"]').click()
+        cy.get('[role="option"]')
+            .last()
+            .click()
 
         // // leave site with breadcrump
         cy.get('[class="v-breadcrumbs__item"]')
@@ -314,35 +315,7 @@ export class rules_bearbeiten {
             .type(addValue+String(x))
 
         // Select step
-        // cy.get('[class="v-select__slot"]')
         cy.log('Line 699')
-        // cy.get('[class="col col-4"]').eq(1)
-        //     .contains('Step Typ auswählen')
-        //     .click({force:true})
-
-        // Select a step
-        // cy.get('[data-cy="rule-new-step-type-select"]').click({force:true})
-        // cy.get('[role="option"]').contains('Action')
-        //     .click({force:true})
-        // cy.get('[data-cy="rule-new-step-item-autocomplete"]').click()
-        // cy.get('[role="option"]').last().click()
-        // // Add a step by clicking "+"
-        // cy.get('[data-cy="rule-add-step"]').click()
-
-        // cy.get('[class="v-list-item__title"]').eq(2)
-        //     .click()
-
-        // cy.get('[data-cy="rule-new-step-item-autocomplete"]')
-        //     .click()
-
-        // cy.get('[class="v-menu__content theme--light menuable__content__active v-autocomplete__content"]')
-        //     .find('[role="listbox"]')
-        //     .contains('Action')
-        //     .click({force:true})
-
-        // // Add a step by clicking "+"
-        // cy.get('[data-cy="rule-add-step"]')
-        //     .click()
 
         cy.get('[class="v-breadcrumbs__item"]')
             .contains('Rules')
