@@ -113,48 +113,6 @@ export class button_suchen {
         cy.get('tbody')
             .find('tr')
             .should('contain',"")
-        
-        const randonValue = ['test', 'weather']
-        cy.wrap(randonValue).each((index) => {
-            // delete button
-            cy.get('[data-cy="responsebutton-table-search"]')
-            .clear()
-            .type(index)
-
-            cy.get('tbody')
-                .find('tr')
-                .find('td:nth-child(5)')
-                .first()
-                .click()
-
-            // Confirm delete
-            cy.get('[type="button"]')
-                .contains('Löschen')
-                .click()
-
-            // clear response-table-search
-            cy.get('[data-cy="responsebutton-table-search"]')
-                .clear()
-        })
-        // delete rest of the test
-        cy.get('[data-cy="responsebutton-table-search"]')
-            .clear()
-            .type('test')
-
-        cy.get('tbody')
-            .find('tr')
-            .find('td:nth-child(5)')
-            .first()
-            .click()
-
-        // Confirm delete
-        cy.get('[type="button"]')
-        .contains('Löschen')
-        .click()
-        
-        // clear response-table-search
-        cy.get('[data-cy="responsebutton-table-search"]')
-            .clear()
     }
 }
 // Exportint class frontEnd to End2End to test

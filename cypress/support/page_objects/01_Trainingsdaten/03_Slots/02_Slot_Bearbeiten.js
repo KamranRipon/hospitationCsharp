@@ -13,11 +13,11 @@ const addExample = 'testExample-1'
 export class slot_bearbeiten {
 
     slotBearbeiten() {
-
         /* Slot Bearbeiten */
 
         // Entering to Trainingsdaten
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/slot/");
 
         cy.get('[data-cy="slot-table-search"]').type('Category')
 
@@ -51,8 +51,10 @@ export class slot_bearbeiten {
         // remove succcess message
         cy.successRemove()
 
-        // Enter First row of the Slot Table
-        //cy.get('[class="v-icon notranslate editIcon theme--light primary--text"]')
+        cy.get('[data-cy="slot-table-search"]')
+            .click()
+            .type('Text')
+
         cy.get('tbody')
             .find('tr')
             .first()
@@ -76,6 +78,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Der Slot konnte nicht gespeichert werden. ')
 
+        cy.errorRemove();
         /* 1.2 name should not contain space or forward Slash (/)
         Checking for space or "/" within a Name
         */
@@ -119,6 +122,7 @@ export class slot_bearbeiten {
         Checking for Duplicate Name: Name cannot be known in Slot
         3.1 Existing name cannot save double
         */
+        cy.errorRemove();
         cy.log('Checking for Duplicate Name')
         cy.log('Line 1276')
 
@@ -167,6 +171,7 @@ export class slot_bearbeiten {
                     expect(errorMsg).to.have.text(' Der Slot konnte nicht gespeichert werden. ')
                 })
 
+        cy.errorRemove();
         cy.log('Passed 1')
 
         // Giving a valid Name to return to Slot
@@ -185,6 +190,7 @@ export class slot_bearbeiten {
             .click()
             .wait(300)
 
+        cy.successRemove();
         /* Slot-Typ */
         // 1. Text
 
@@ -318,6 +324,8 @@ export class slot_bearbeiten {
             .contains('Slots')
                 .click()
 
+        cy.successRemove();
+
         // // Add a Slot value where Slot-Type is "List"
         cy.get('[data-cy="slot-create"]')
             .click({force:true})
@@ -378,6 +386,8 @@ export class slot_bearbeiten {
             .click()
             .wait(500)
 
+        cy.successRemove();
+
         // Selecting Entire Table
         cy.get('[class="v-select__slot"]').click({force:true})
         cy.get('[class="v-list-item__content"]')
@@ -418,7 +428,9 @@ export class slot_bearbeiten {
     // Back to Slot-page by clicking Slot
     cy.get('[data-cy="navDrawerSlots"]')
         .contains('Slots')
-            .click()
+        .click()
+
+    cy.successRemove();
 
     // Add a Slot value where Slot-Type is "Any"
     cy.get('[data-cy="slot-create"]')
@@ -477,6 +489,8 @@ export class slot_bearbeiten {
         .contains('Slots')
             .click()
 
+    cy.successRemove();
+
     cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/`);
 
     // Selecting Entire Table
@@ -512,6 +526,8 @@ export class slot_bearbeiten {
             .contains('Slots')
                 .click()
 
+        cy.successRemove();
+
         // Assert Saved value, Empty
         cy.get('[data-cy="slot-table-search"]')
             .click()
@@ -543,6 +559,8 @@ export class slot_bearbeiten {
             .contains('Slots')
                 .click()
 
+        cy.successRemove();
+
         // Assert Saved value, Initial:Wahr
         cy.get('[data-cy="slot-table-search"]')
             .click()
@@ -573,6 +591,8 @@ export class slot_bearbeiten {
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
                 .click()
+
+        cy.successRemove();
 
         // Assert Saved value, Initial:Wahr
         cy.get('[data-cy="slot-table-search"]')
@@ -639,6 +659,9 @@ export class slot_bearbeiten {
                     .click()
             }
         })
+
+        cy.successRemove();
+
         cy.log('Line 1803')
         // Assert Saved value, Empty
         cy.get('[data-cy="slot-table-search"]')
@@ -681,6 +704,8 @@ export class slot_bearbeiten {
         cy.get('[data-cy="navDrawerSlots"]')
             .click()
 
+        cy.successRemove();
+
         cy.log('inName1')
         cy.log(inName1)
 
@@ -722,6 +747,8 @@ export class slot_bearbeiten {
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
                 .click()
+
+        cy.successRemove();
 
         // Assert Saved value, Empty
         cy.get('[data-cy="slot-table-search"]')
@@ -777,6 +804,8 @@ export class slot_bearbeiten {
             .contains('Slots')
                 .click()
 
+        cy.successRemove();
+
         //add values to slot for test search field
         var floatValues = [{min: '0,0', max: '1,0'}, {min:'1,0', max: '2,0'}, {min:'1,5', max: '2,5'}, {min:'2,0', max: '3,0'}]
         cy.wrap(floatValues).each((value) => {
@@ -808,6 +837,8 @@ export class slot_bearbeiten {
             cy.get('[data-cy="navDrawerSlots"]')
                 .contains('Slots')
                     .click()
+
+            cy.successRemove();
 
             cy.get('[data-cy="slot-table-search"]')
                 .click()
@@ -857,6 +888,8 @@ export class slot_bearbeiten {
         cy.get('[data-cy="navDrawerSlots"]')
         .contains('Slots')
             .click()
+
+        cy.successRemove();
 
         // Assert Saved value, Empty
         cy.get('[data-cy="slot-table-search"]')

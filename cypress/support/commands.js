@@ -131,12 +131,16 @@ Cypress.Commands.add('errorMessageBody',(errorMessage) => {
 
 Cypress.Commands.add('successRemove', () => {
     // remove success notification
-    cy.get('[data-cy="success-remove"]').click()
+    // dont let the test fail if the success messages removed themself
+    cy.wait(200);
+    cy.get('[data-cy="success-remove"]').click({force: true});
 })
 
 Cypress.Commands.add('errorRemove', () => {
     // Close Error Notification
-    cy.get('[data-cy="error-remove"]').click()
+    // dont let the test fail if the error messages removed themself
+    cy.wait(200);
+    cy.get('[data-cy="error-remove"]').click({force: true});
 })
 
 Cypress.Commands.add('addRandValue', (randVAl, create, name, button, backNav) => {
