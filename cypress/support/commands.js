@@ -24,10 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-const { capitalize } = require("lodash")
-
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 Cypress.Commands.add('login', (username, password) => {
     cy.session([username, password], () => {
         cy.visit('/login')
@@ -49,21 +45,18 @@ Cypress.Commands.add('login', (username, password) => {
 
 Cypress.Commands.add('loginiFunction',(Username, Password) => {
     // Login Function
-    cy.contains('Benutzername')
-        .click({force:true})
+    cy.get('#username')
         .type('admin')
 
-    cy.contains('Passwort')
-        .click({force:true})
+    cy.get('#password')
         .type('cciAdmin#2022+')
 
-    cy.get('[data-cy="login-keep-logged-in"]')
+    cy.get('#rememberMe')
         .click({force:true})
-        .wait(300)
         
-    cy.contains('Anmelden')
+    cy.get('#kc-login-btn-custom')
         .click()
-        .wait(300)
+        .wait(500)
 })
 
 Cypress.Commands.add('Trainingsdaten', (tabName, navDrawer) => {

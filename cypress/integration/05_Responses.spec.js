@@ -21,7 +21,7 @@ describe('Test Case : Responses', () => {
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it('Test Case CCI-T53: Response Anlegen', () => {
+    it.only('Test Case CCI-T53: Response Anlegen', () => {
         onResponseAnlegen.responseAnlegen()
         /*
         A. Response Anlegen 
@@ -40,7 +40,7 @@ describe('Test Case : Responses', () => {
         */
     })
 
-    it('Test Case CCI-T54: Response Bearbeiten', () => {
+    it.only('Test Case CCI-T54: Response Bearbeiten', () => {
         onResponseBearbeiten.responseBearbeiten()
         /* 
         B. Response Bearbeiten
@@ -62,7 +62,7 @@ describe('Test Case : Responses', () => {
         */
     })
 
-    it('Test Case CCI-T63: Response Suchen', () => {
+    it.only('Test Case CCI-T63: Response Suchen', () => {
         onResponseSuchen.responseSuchen()
         /*
         C. Response Suchen

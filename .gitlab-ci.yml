@@ -1,4 +1,3 @@
-image: docker.artifactory-extern.dataport.de/docker/compose:debian-1.29.2
 stages:
   - restart_test_environment
   - test
@@ -8,18 +7,9 @@ variables:
   https_proxy: "http://10.61.16.6:3128"
   no_proxy: "git.dataport.de,10.61.135.11,sonarqube.dataport.de,127.0.0.1,minio.gitlab-runner-minio.svc.cluster.local,al.s3.dataport.de,docker:2375,docker:2376,artifactory-extern.dataport.de,localhost:80"
   ARTIFACT_ROOT: "dchatbot-docker-development.artifactory-extern.dataport.de"
-  IMAGE_PATH: "/conplat/cci/endtoendtests"
-  CONTAINER_NAME: "cci-frontend"
-  TAG_LATEST: $CI_COMMIT_REF_NAME:latest
-  TAG_COMMIT: $CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
-  TAGNAME: ccie2e
-  DOCKER_DRIVER: overlay2
-  DOCKER_HOST: tcp://docker:2375
-  DOCKER_TLS_CERTDIR: ""
-  DOCKER_URL: "docker.artifactory-extern.dataport.de"
 
 restart test environment:
-  image: debian:11-slim
+  image: docker.artifactory-extern.dataport.de/debian:11-slim
   stage: restart_test_environment
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
@@ -42,31 +32,34 @@ restart test environment:
       "
     - exit
   only:
+    - dev
     - main
+    - web
 
 testJob:
-  #image: tmaier/docker-compose:latest
   image: docker.artifactory-extern.dataport.de/node:16
   stage: test
   script:
-    # - docker login -u $CONPLAT_ARTIFACTORY_USER -p $CONPLAT_ARTIFACTORY_PASS $ARTIFACT_ROOT
-    # - docker build .
-    # - sleep 10
-    #- docker run e2e-tests_e2etest:latest
     - apt-get update -y && apt-get upgrade -y
     - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
     - npm install cypress
     - npm install
-    - npm run CyTest
+    # force gitlab to continue the execution
+    - npm run CyTest || FAILED=true
     - npm run merge
     - npm run generateMocha_Report
-  only:
-    - main
+    # evaluate the status of the tests
+    - if [ $FAILED ]; then exit 1; fi
   artifacts:
     paths:
       - cypress/results/junit/*.xml
       - cypress/results/mochawesome/output.json
+      - cypress/screenshots/*
       - ./output.html
     reports:
-      junit: output.html
+      junit: cypress/results/junit/result-*.xml
     expire_in: 1 week
+  only:
+    - dev
+    - main
+    - web
