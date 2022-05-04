@@ -30,7 +30,9 @@ export class slot_loeschen {
                 .click({force:true})
 
             cy.get('[data-cy="dialog-accept"]').click()
-            cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
+            cy.get('[data-cy="navDrawerSlots"]')
+                .contains('Slots')
+                .click()
             cy.wait(500)
 
             cy.get('tbody')

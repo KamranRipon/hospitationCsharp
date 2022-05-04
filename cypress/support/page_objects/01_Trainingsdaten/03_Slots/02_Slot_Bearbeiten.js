@@ -13,35 +13,37 @@ const addExample = 'testExample-1'
 export class slot_bearbeiten {
 
     slotBearbeiten() {
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
         /* Slot Bearbeiten */
 
         // Entering to Trainingsdaten
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
+        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/slot/");
+
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
 
         cy.get('[data-cy="slot-table-search"]').type('Category')
 
@@ -75,8 +77,10 @@ export class slot_bearbeiten {
         // remove succcess message
         cy.successRemove()
 
-        // Enter First row of the Slot Table
-        //cy.get('[class="v-icon notranslate editIcon theme--light primary--text"]')
+        cy.get('[data-cy="slot-table-search"]')
+            .click()
+            .type('Text')
+
         cy.get('tbody')
             .find('tr')
             .first()
