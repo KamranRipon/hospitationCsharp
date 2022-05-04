@@ -19,32 +19,6 @@ export class slot_bearbeiten {
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
         cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/slot/");
 
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-        cy.errorRemove();
-
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-        cy.successRemove();
-
         cy.get('[data-cy="slot-table-search"]').type('Category')
 
         // Add Slot hinzufuegen for Typ: Text

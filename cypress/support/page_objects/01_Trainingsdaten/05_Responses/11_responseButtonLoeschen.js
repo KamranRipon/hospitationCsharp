@@ -69,16 +69,10 @@ export class button_loeschen {
             .clear()
             .type(index)
 
-            cy.get('tbody')
-                .find('tr')
-                .find('td:nth-child(5)')
-                .first()
+            cy.get('[data-cy="element-delete-button"')
                 .click()
 
-            // Confirm delete
-            cy.get('[class="v-btn__content"]')
-            .contains('Löschen')
-            .click()
+            cy.get('[data-cy="dialog-accept"]').click()
 
             // clear response-table-search
             cy.get('[data-cy="responsebutton-table-search"]')
