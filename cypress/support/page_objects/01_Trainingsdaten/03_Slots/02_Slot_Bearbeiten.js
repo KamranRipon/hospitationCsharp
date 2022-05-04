@@ -13,7 +13,31 @@ const addExample = 'testExample-1'
 export class slot_bearbeiten {
 
     slotBearbeiten() {
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
+        cy.errorRemove();
 
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
+        cy.successRemove();
         /* Slot Bearbeiten */
 
         // Entering to Trainingsdaten

@@ -131,12 +131,28 @@ Cypress.Commands.add('errorMessageBody',(errorMessage) => {
 
 Cypress.Commands.add('successRemove', () => {
     // remove success notification
-    cy.get('[data-cy="success-remove"]').click()
+    // dont let the test fail if the success messages removed themself
+    cy.document().then(($document) => {
+        const documentResult = $document.querySelectorAll('[data-cy="success-remove"]')
+        if (documentResult.length) {
+            cy.get('[data-cy="success-remove"]').click()
+        } else {
+            cy.log('WARN: Success-Remove not found')
+        }
+    })
 })
 
 Cypress.Commands.add('errorRemove', () => {
     // Close Error Notification
-    cy.get('[data-cy="error-remove"]').click()
+    // dont let the test fail if the error messages removed themself
+    cy.document().then(($document) => {
+        const documentResult = $document.querySelectorAll('[data-cy="error-remove"]')
+        if (documentResult.length) {
+            cy.get('[data-cy="error-remove"]').click()
+        } else {
+            cy.log('WARN: Error-Remove not found')
+        }
+    })
 })
 
 Cypress.Commands.add('addRandValue', (randVAl, create, name, button, backNav) => {
