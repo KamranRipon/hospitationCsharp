@@ -29,7 +29,7 @@ export class slot_loeschen {
                 .find('[data-cy="element-delete-button"]')
                 .click({force:true})
 
-            cy.get('[data-cy="dialog-accept"]')
+            cy.get('[data-cy="dialog-accept"]').click()
             cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
             cy.wait(500)
 
