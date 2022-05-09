@@ -871,7 +871,7 @@ export class slot_bearbeiten {
             .find('tr')
             .last()
             .find('td:nth-child(4)').eq(0)
-            .should('contain', 'min: 1,0 max: 2,0 | initial: 1,0')
+            .should('contain', 'min: 1,0 max: 2,0  | initial: 1,0')
 
         // Clear Search
         cy.get('[data-cy="slot-table-search"]')

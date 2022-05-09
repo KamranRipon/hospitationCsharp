@@ -70,9 +70,9 @@ export class role_based_testing {
             .click()
 
         cy.get('[data-cy="navDrawerModels"]').click()
-        cy.get('[data-cy="model-create"]').click()
-        cy.get('[data-cy="model-name"]').type('Model'+String(modelNr))
-        cy.get('[data-cy="create-button"]').click()
+        cy.get('[data-cy="model-create"]').should('be.visible')
+        // cy.get('[data-cy="model-name"]').type('Model'+String(modelNr))
+        // cy.get('[data-cy="create-button"]').click()
     }
 
     user_redakteur() {   
@@ -222,6 +222,29 @@ export class role_based_testing {
         cy.get('[data-cy="logout-button"]')
             .click()
         cy.loginiFunction('e2e_accountmanager', 'password')
+
+        // check user 
+        var rollen = ["operator","redakteur", "accountmanager", "datenadmin"]
+
+        cy.wrap(rollen).each((index) => {
+
+            cy.get('[data-cy="user-table-search"]').type(index)
+
+            cy.wait(500)
+            cy.get('tbody')
+                .find('tr')
+                .find('td:nth-child(1)').should('contain', 'e2e_'+index)
+
+            cy.get('tbody')
+                .find('tr')
+                .find('td:nth-child(2)').should('contain', 'Ja')
+
+            cy.get('tbody')
+                .find('tr')
+                .find('td:nth-child(5)').should('be.visible')
+
+            cy.get('[data-cy="user-table-search"]').clear()
+        })
     }
 
     user_datenadmin () {
@@ -270,7 +293,7 @@ export class role_based_testing {
                 else {
                     cy.log('If Statement False')
                     cy.get('[role="option"]')
-                        .contains('Datenadmin:in')
+                        .contains('Datenadministrator:in')
                         .click()
                 }
             })

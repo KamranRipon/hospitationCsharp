@@ -31,10 +31,10 @@ restart test environment:
       exit
       "
     - exit
-  # only:
-  #   - main
-  #   - web
-  #   - schedules
+  only:
+    - main
+    - web
+    - schedules
 
 testJob:
   image: docker.artifactory-extern.dataport.de/node:16
