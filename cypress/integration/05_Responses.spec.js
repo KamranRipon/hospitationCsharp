@@ -21,7 +21,7 @@ describe('Test Case : Responses', () => {
         cy.loginiFunction('admin', 'cciAdmin#2022+')
     })
 
-    it.only('Test Case CCI-T53: Response Anlegen', () => {
+    it('Test Case CCI-T53: Response Anlegen', () => {
         onResponseAnlegen.responseAnlegen()
         /*
         A. Response Anlegen 
@@ -40,7 +40,7 @@ describe('Test Case : Responses', () => {
         */
     })
 
-    it.only('Test Case CCI-T54: Response Bearbeiten', () => {
+    it('Test Case CCI-T54: Response Bearbeiten', () => {
         onResponseBearbeiten.responseBearbeiten()
         /* 
         B. Response Bearbeiten
@@ -62,7 +62,7 @@ describe('Test Case : Responses', () => {
         */
     })
 
-    it.only('Test Case CCI-T63: Response Suchen', () => {
+    it('Test Case CCI-T63: Response Suchen', () => {
         onResponseSuchen.responseSuchen()
         /*
         C. Response Suchen
@@ -133,14 +133,17 @@ describe('Test Case : Responses', () => {
         onResponsesButtonAnlegen.buttonAnlegen()
         /* 
         H. Response Button Anlegen
-        1. Button Name should not be empty, error message should contain "Name"; /Currently Bug/
+        1. Button Name should not be empty, error message should contain "Name"
             1.1 Test Button Name
                 1.1.1 Warning message below input field
                 1.1.2 Error message after unsuccessful saving  /Currently Bug/
         2. Check for successfully saved values
             2.1 Assert successfully saved Notification
             2.2 Assert in the Texte table
-        3. Leave site via menu or breadcrump does not save value
+        3. Test Inline / Ist Permanent Option
+            3.1 Case 1: Inline Button as Nein, Ist Permanent must be disable
+            3.2 Case 2: Inline Button as Ja, Ist Permanent must be enable
+        4. Leave site via menu or breadcrump does not save value
         */
     })
 

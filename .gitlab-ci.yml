@@ -31,10 +31,10 @@ restart test environment:
       exit
       "
     - exit
-  only:
-    - dev
-    - main
-    - web
+  # only:
+  #   - main
+  #   - web
+  #   - schedules
 
 testJob:
   image: docker.artifactory-extern.dataport.de/node:16
@@ -51,6 +51,7 @@ testJob:
     # evaluate the status of the tests
     - if [ $FAILED ]; then exit 1; fi
   artifacts:
+    when: always
     paths:
       - cypress/results/junit/*.xml
       - cypress/results/mochawesome/output.json
@@ -59,7 +60,7 @@ testJob:
     reports:
       junit: cypress/results/junit/result-*.xml
     expire_in: 1 week
-  only:
-    - dev
-    - main
-    - web
+  # only:
+  #   - main
+  #   - web
+  #   - schedules

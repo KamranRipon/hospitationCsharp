@@ -53,12 +53,8 @@ export class response_text_anlegen {
         // Clicking Anlegen Button while Text field is empty
         cy.get('[data-cy="create-button"]').click()
 
-        // success-remove
-        cy.successRemove()
-
-        // Add a valid Text Name
-        cy.get('[data-cy="responsetext-create"]')
-            .click()
+        // error-remove
+        cy.errorRemove()
 
         cy.get('[data-cy="responsetext-text"]')
             .type(addValue+String(txa))

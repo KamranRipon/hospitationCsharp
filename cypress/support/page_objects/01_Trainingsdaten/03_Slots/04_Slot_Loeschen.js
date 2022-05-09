@@ -1,0 +1,51 @@
+export class slot_loeschen {
+    slotLoeschen() {
+
+        cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
+
+        // Entering Slot tab
+        cy.get('[data-cy="navDrawerSlots"]')
+            .contains('Slots')
+            .click()
+
+        // Select Whole Table
+        cy.get('[class="v-select__slot"]').click()
+        cy.get('[class="v-list-item__content"]')
+            .contains('Alle').click()
+        cy.wait(500)
+
+        // Check saved example saved or Not
+        cy.get('tbody')
+            .find('tr')
+            .last()
+            .find('td:nth-child(1)').then(function($text) {
+            cy.log($text.text())
+            const rowValue = $text.text()
+            cy.log(rowValue)
+
+            cy.get('tbody')
+                .find('tr')
+                .last()
+                .find('[data-cy="element-delete-button"]')
+                .click({force:true})
+
+            cy.get('[data-cy="dialog-accept"]').click()
+            //cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
+            //cy.wait(500)
+
+            cy.get('[data-cy="slot-table-search"]').type(rowValue)
+
+            cy.get('tbody')
+                .find('tr')
+                .last()
+                .find('td:nth-child(1)').then(function($text2) {
+                cy.wrap($text2).should('not.contain', rowValue)
+            })
+
+            cy.get('[data-cy="slot-table-search"]').clear()
+        })
+    }
+
+}
+// Export class
+export const onSlotLoeschen = new slot_loeschen()

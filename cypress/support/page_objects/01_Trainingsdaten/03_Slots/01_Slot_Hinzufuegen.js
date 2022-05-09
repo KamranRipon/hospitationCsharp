@@ -89,6 +89,7 @@ export class slot_hinzufuegen {
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
+                cy.errorRemove()
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
@@ -141,6 +142,7 @@ export class slot_hinzufuegen {
                         expect(successMsg).to.have.text(' Der Slot "'+ addValue+String(t) +'" wurde erfolgreich gespeichert ')
                 })
 
+                cy.successRemove()
                 // Assert Saved value, Case: Text
                 cy.get('[data-cy="slot-table-search"]').type('Text')
 
@@ -198,17 +200,7 @@ export class slot_hinzufuegen {
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
 
-                // cy.get('[data-cy="slot-create"]')
-                //     .click()
-                
-                // cy.get('[class="v-select__slot"]')
-                //     .contains('Slot-Typ')
-                //     .click({force:true})
-
-                // // 1. Selecting Floot
-                // cy.get('[class="v-list-item__content"]')
-                //     .contains('Float')
-                //     .click({force:true})
+                cy.errorRemove();
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
@@ -218,17 +210,6 @@ export class slot_hinzufuegen {
                 cy.get('[data-cy="slot-description"]')
                     .click({force:true})
                     .type(addValue+String(f))
-                
-                // cy.get('[class="v-select__slot"]')
-                //     .contains('Slot-Typ')
-                //     .click({force:true})
-
-                // // 1. Selecting Floot
-                // cy.get('[class="v-list-item__content"]')
-                //     .contains('Float')
-                //     .click({force:true})
-
-                /* Checking correctness of error Messages */
 
                 cy.log('Line 241')
                 //Minimum
@@ -256,17 +237,10 @@ export class slot_hinzufuegen {
                     .get('[class="v-messages__wrapper"]')
                     .should('have.text', 'Die vorliegende Formatierung des maximalen Wertes ist nicht zulässig!')
                     .get('[placeholder="Default: 1,0"]')
-                    //.click({force:true})
                     .clear()
                     .type("2,0")
                     .wait(200)
-                    // .get('[class="v-messages__wrapper"]')
-                    // .should('not.have.text', 'Der maximale Wert eines Slots des Typs „Float” muss nummerisch sein!')
-                    // .get('[data-cy="slot-float-minvalue"]')
-                    // .click({force:true})
-                    // .clear()
-                    // .type(1)
-                
+
                 cy.get('[data-cy="slot-float-initialvalue"]')
                     .find('[class="v-input__slot"]')
                     .click({force:true})
@@ -316,6 +290,8 @@ export class slot_hinzufuegen {
                     .then((successMsg) => {
                         expect(successMsg).to.have.text(' Der Slot "'+ addValue+String(f) +'" wurde erfolgreich gespeichert ')
                 })
+
+                cy.successRemove();
 
                 // Assert Saved value, Case: Text
                 cy.get('[data-cy="slot-table-search"]')
@@ -377,9 +353,7 @@ export class slot_hinzufuegen {
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
-                
-                // cy.get('[data-cy="slot-create"]')
-                //     .click()
+                cy.errorRemove();
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
@@ -390,16 +364,7 @@ export class slot_hinzufuegen {
                     .click({force:true})
                     .clear()
                     .type('addValue type')
-                
-                // cy.get('[class="v-select__slot"]')
-                //     .contains('Slot-Typ')
-                //     .click({force:true})
 
-                // // 1. Selecting Bool
-                // cy.get('[class="v-list-item__content"]')
-                //     .contains('Bool')
-                //     .click({force:true})
-                
                 cy.get('[data-cy="slot-bool-initialvalue"]')
                     .find('[value="false"]')
                     .click({force:true})
@@ -439,7 +404,7 @@ export class slot_hinzufuegen {
                     //.should('be.visible')
                     .click({force:true})
                 
-                cy.wait(500)
+                cy.successRemove();
                 
                 // Assert Saved Sort valud
                 cy.get('[class="v-select__slot"]').click()
@@ -517,9 +482,7 @@ export class slot_hinzufuegen {
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
-                
-                // cy.get('[data-cy="slot-create"]')
-                //     .click()
+                cy.errorRemove();
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
@@ -667,6 +630,7 @@ export class slot_hinzufuegen {
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
+                cy.errorRemove();
 
                 cy.log('c '+ String(c))
                 
@@ -698,19 +662,13 @@ export class slot_hinzufuegen {
                     .click({force:true})
                     .clear()
                     .type('Category'+String(l))
-
-                cy.get('[class="v-input__append-outer"]')
-                    .last()
-                    .click()
+                    .blur()
                 
                 cy.get('[data-cy="slot-categorical-new"]')
                     .click({force:true})
                     .clear()
                     .type('Category'+String(b))
-
-                cy.get('[class="v-input__append-outer"]')
-                    .last()
-                    .click()
+                    .blur()
 
                 cy.get('[class="v-select__slot"]')
                     .contains('Initiale Kategorie')
@@ -744,7 +702,7 @@ export class slot_hinzufuegen {
                 cy.get('[class="v-btn__content"]')
                     .contains('Anlegen')
                     .click({force:true})
-                
+                cy.successRemove();
                 cy.wait(500)
                 
                 // Assert Saved Sort valud
@@ -835,8 +793,7 @@ export class slot_hinzufuegen {
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
-
-                // Let's save with a valid Name
+                cy.errorRemove();
 
                 // Add a Name
                 cy.get('[data-cy="slot-name"]')
@@ -889,8 +846,7 @@ export class slot_hinzufuegen {
                 cy.get('[class="v-btn__content"]')
                     .contains('Anlegen')
                     .click({force:true})
-                
-                cy.wait(500)
+                cy.successRemove();
                 
                 // Assert Saved Sort valud
                 cy.get('[class="v-select__slot"]').click()
@@ -1077,15 +1033,15 @@ export class slot_hinzufuegen {
             .should('be.visible')
                 .click()
 
-        cy.wait(500)
-
         cy.get('[class="alert error white--text"]')
             .find('[data-cy="errorMessageTitle"]')
                 //Der Slot konnte nicht gespeichert werden. 
                 .then((errorMsg) => {
                     expect(errorMsg).to.have.text(' Der Slot konnte nicht gespeichert werden. ')
                 })
-        
+
+        cy.errorRemove();
+
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
                 .click()
@@ -1117,7 +1073,8 @@ export class slot_hinzufuegen {
                     
             cy.get('[class="v-btn__content"]')
                 .contains('Anlegen')
-                        .click()
+                        .click();
+            cy.successRemove();
         })
     }
 }

@@ -46,10 +46,10 @@ Cypress.Commands.add('login', (username, password) => {
 Cypress.Commands.add('loginiFunction',(Username, Password) => {
     // Login Function
     cy.get('#username')
-        .type('admin')
+        .type(Username)
 
     cy.get('#password')
-        .type('cciAdmin#2022+')
+        .type(Password)
 
     cy.get('#rememberMe')
         .click({force:true})
@@ -182,9 +182,6 @@ Cypress.Commands.add('storiesAnlegen', (addval) => {
         .click()
         .get('[role="option"]').last()
         .click({force:true})
-
-    cy.get('[data-cy="story-step-add"]')
-        .click()
 
     // Click Anlegen
     cy.get('[data-cy="create-button"]')

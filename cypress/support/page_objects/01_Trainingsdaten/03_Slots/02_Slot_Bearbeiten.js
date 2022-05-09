@@ -62,23 +62,23 @@ export class slot_bearbeiten {
         cy.get('[class="v-input__append-inner"]')
             .first()
             .click()
-        
+
         cy.get('[data-cy="slot-name"]')
             .click({force:true})
             .get('[class="v-messages__wrapper"]')
             .should('have.text','Der Name muss gesetzt sein')
 
         // Click save button
-        cy.get('[data-cy="save-button"]')   
+        cy.get('[data-cy="save-button"]')
             .click()
 
         // Assert Error Message Notification
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Der Slot konnte nicht gespeichert werden. ')
-        
+
         /* 1.2 name should not contain space or forward Slash (/)
         Checking for space or "/" within a Name
-        */    
+        */
         cy.get('[data-cy="slot-name"]')
             .click({force:true})
             .type(' ') // t for Text
@@ -89,20 +89,20 @@ export class slot_bearbeiten {
 
         // Click save button
         cy.get('[data-cy="save-button"]')
-            .click()    
+            .click()
 
         // Assert Notification
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Der Slot konnte nicht gespeichert werden. ')
-        
+
         // cy.get('[class="v-text-field__slot"]')
         //     .contains('Name')
         //         .click({force:true})
-        
+
         // cy.get('[class="v-text-field__details"]')
         //     .contains('Der Name muss gesetzt sein')
         //     .should('be.visible')
-        
+
         // /* 1.2 name should not contain space or forward Slash (/)
         // Checking for space or "/" within a Name
         // */
@@ -115,13 +115,13 @@ export class slot_bearbeiten {
         //     .contains('Der Name enthält ungültige Zeichen!')
         //     .should('be.visible')
 
-        /* 
+        /*
         Checking for Duplicate Name: Name cannot be known in Slot
         3.1 Existing name cannot save double
         */
         cy.log('Checking for Duplicate Name')
         cy.log('Line 1276')
-        
+
         cy.get('[data-cy="slot-name"]')
             .clear()
 
@@ -146,7 +146,7 @@ export class slot_bearbeiten {
             .get('[class="v-select__selections"]')
             .find('input')
             .should('have.disabled', 'disabled')
-        
+
         // cy.get('[class="v-text-field__slot"]')
         //     .contains('Initialer Wert')
         //     .click({force:true})
@@ -159,10 +159,10 @@ export class slot_bearbeiten {
         cy.get('[data-cy="save-button"]')
             .click()
             .wait(500)
-        
+
         cy.get('[class="alert error white--text"]')
             .find('[data-cy="errorMessageTitle"]')
-                //Der Slot konnte nicht gespeichert werden. 
+                //Der Slot konnte nicht gespeichert werden.
                 .then((errorMsg) => {
                     expect(errorMsg).to.have.text(' Der Slot konnte nicht gespeichert werden. ')
                 })
@@ -174,7 +174,7 @@ export class slot_bearbeiten {
             .first()
             .click({force:true})
             .type(addValue+String(l*t))
-        
+
         // // Back to Slot-page by clicking Slot
         // cy.get('[data-cy="navDrawerSlots"]')
         //     .contains('Slots')
@@ -184,10 +184,10 @@ export class slot_bearbeiten {
         cy.get('[data-cy="save-button"]')
             .click()
             .wait(300)
-        
+
         /* Slot-Typ */
         // 1. Text
-            
+
         cy.log('Text')
         cy.log('Line 1372')
 
@@ -213,7 +213,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
                 .click()
- 
+
         // Add a Slot value where Slot-Type is "Text"
         cy.get('[data-cy="slot-create"]')
             .click({force:true})
@@ -226,7 +226,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-description"]')
             .click({force:true})
             .type(addValue+String(t))
-        
+
         cy.get('[class="v-select__slot"]')
             .contains('Slot-Typ')
             .click({force:true})
@@ -235,7 +235,7 @@ export class slot_bearbeiten {
         cy.get('[class="v-list-item__content"]')
             .contains('Text')
             .click({force:true})
-        
+
         cy.get('[data-cy="slot-text-initialvalue"]')
             .click({force:true})
             // Typing Text
@@ -246,7 +246,7 @@ export class slot_bearbeiten {
             .contains('Anlegen')
             .click({force:true})
             .wait(500)
-            
+
         cy.log('Line 1428')
         cy.get('tbody')
             .find('tr')
@@ -277,27 +277,27 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Text')
-        
+
         cy.log('Line 1453')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(4)')
             .first()
-            .should('have.text', 'initial: ' +'„New Value'+String(t)+'“') 
+            .should('have.text', 'initial: ' +'„New Value'+String(t)+'“')
             .wait(200)
 
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .clear()
             .type('List')
-        
+
         //2. List
         cy.log('2. List')
 
         // cy.get('[data-cy="slot-table-search"]')
         //     .click()
         //     type('List')
-        
+
         cy.log('Line 1468')
         cy.get('tbody')
             .find('tr')
@@ -307,7 +307,7 @@ export class slot_bearbeiten {
 
         // // // Remove Name by clicking "X"        // temporary turn off
         // cy.log('Remove Name by clicking "X"')    // take a look later
-        
+
         // cy.get('[class="v-input__append-inner"]').eq(3).click()
         cy.get('[data-cy="slot-list-initialvalue"]')
             .click()
@@ -317,7 +317,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
                 .click()
-    
+
         // // Add a Slot value where Slot-Type is "List"
         cy.get('[data-cy="slot-create"]')
             .click({force:true})
@@ -330,7 +330,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-description"]')
             .click({force:true})
             .type(addValue+String(l))
-        
+
         cy.get('[class="v-select__slot"]')
             .contains('Slot-Typ')
             .click({force:true})
@@ -339,7 +339,7 @@ export class slot_bearbeiten {
         cy.get('[class="v-list-item__content"]')
             .contains('List')
             .click({force:true})
-        
+
         cy.get('[data-cy="slot-list-initialvalue"]')
             .click({force:true})
             // Typing Value
@@ -360,7 +360,7 @@ export class slot_bearbeiten {
         cy.get('[class="v-list-item__content"]')
             .contains('Alle')
                 .click()
-        
+
         cy.log('Line 1524')
         cy.get('tbody')
             .find('tr')
@@ -382,19 +382,19 @@ export class slot_bearbeiten {
         cy.get('[class="v-select__slot"]').click({force:true})
         cy.get('[class="v-list-item__content"]')
             .contains('Alle')
-                .click()
+                .click({force: true})
 
         cy.log('l '+String(l))
-        
+
         cy.log('Line 1549')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(4)')
             .contains('New Value'+String(l))
-            .should('have.text', 'initial: ' +'„New Value'+String(l)+'“') 
+            .should('have.text', 'initial: ' +'„New Value'+String(l)+'“')
 
         //3. Any
-        
+
         cy.log('3. Any')
 
         // Selecting Entire Table
@@ -402,7 +402,7 @@ export class slot_bearbeiten {
         cy.get('[class="v-list-item__content"]')
             .contains('Alle')
                 .click()
-    
+
     cy.log('Line 1568')
     cy.get('tbody')
         .find('tr')
@@ -412,8 +412,8 @@ export class slot_bearbeiten {
 
     // Remove Name by clicking "X"
     cy.get('[class="v-input__append-inner"]').eq(3)
-        .click()       
-        .wait(500)     
+        .click()
+        .wait(500)
 
     // Back to Slot-page by clicking Slot
     cy.get('[data-cy="navDrawerSlots"]')
@@ -432,7 +432,7 @@ export class slot_bearbeiten {
     cy.get('[data-cy="slot-description"]')
         .click({force:true})
         .type(addValue+String(a))
-    
+
     cy.get('[class="v-select__slot"]')
         .contains('Slot-Typ')
         .click({force:true})
@@ -441,7 +441,7 @@ export class slot_bearbeiten {
     cy.get('[class="v-list-item__content"]')
         .contains('Any')
         .click({force:true})
-    
+
     cy.get('[data-cy="slot-any-initialvalue"]')
         .click({force:true})
         // Typing Text
@@ -459,7 +459,7 @@ export class slot_bearbeiten {
     cy.get('[class="v-list-item__content"]')
         .contains('Alle')
             .click()
-    
+
     cy.log('Line 1623')
     cy.get('tbody')
         .find('tr')
@@ -484,17 +484,17 @@ export class slot_bearbeiten {
     cy.get('[class="v-list-item__content"]')
         .contains('Alle')
             .click()
-    
+
     cy.log('Line 1648')
     cy.get('tbody')
         .find('tr')
         .find('td:nth-child(4)')
         .contains('New Value'+String(a))
-        .should('have.text', 'initial: ' +'„New Value'+String(a)+'“') 
+        .should('have.text', 'initial: ' +'„New Value'+String(a)+'“')
         .wait(200)
 
         //4. Bool
-            
+
         cy.log('Bool')
         cy.log('Line 1662')
         cy.get('tbody')
@@ -516,24 +516,24 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Bool')
-        
+
         cy.log('Line 1683')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(4)').eq(0)
             .should('have.text', '')
- 
+
         // Add Initial Value "True"
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(3)')
             .contains('Bool')
             .click({force:true})
-        
+
         cy.get('[class="v-label theme--light"]')
             .contains('Wahr')
             .click()
-            
+
         cy.get('[class="v-input--selection-controls__input"]')
             .find('[value="true"]').eq(0)
             .should('be.checked')
@@ -547,7 +547,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Bool')
-        
+
         cy.log('Line 1714')
         cy.get('tbody')
             .find('tr')
@@ -560,11 +560,11 @@ export class slot_bearbeiten {
             .find('td:nth-child(3)')
             .contains('Bool')
             .click({force:true})
-        
+
         cy.get('[class="v-input--selection-controls__input"]')
             .find('[value="false"]').eq(0)
             .click({force:true})
-            
+
         cy.get('[class="v-input--selection-controls__input"]')
             .find('[value="false"]').eq(0)
             .should('be.checked')
@@ -578,7 +578,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Bool')
-        
+
         cy.log('Line 1745')
         cy.get('tbody')
             .find('tr')
@@ -591,7 +591,7 @@ export class slot_bearbeiten {
             .clear()
 
         //4. Categorical
-            
+
         cy.log('Categorical')
 
         cy.get('[data-cy="slot-table-search"]')
@@ -612,7 +612,7 @@ export class slot_bearbeiten {
             .get('[class="v-select__selections"]')
             .find('input')
             .should('have.disabled', 'disabled')
-        
+
         // Remove Name by clicking "X"
         cy.log('Not Clicking "X" if length less than 3')
         cy.log('Line 616')
@@ -638,14 +638,14 @@ export class slot_bearbeiten {
                     .contains('Slots')
                     .click()
             }
-        })          
+        })
         cy.log('Line 1803')
         // Assert Saved value, Empty
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Categorical')
         cy.log('l '+String(l)+', '+'b '+String(b))
-        
+
         cy.get('tbody')
             .find('tr')
             .first()
@@ -657,7 +657,7 @@ export class slot_bearbeiten {
         cy.get('[class="v-text-field__slot"]')
             .find('[data-cy="slot-categorical-name"]').eq(0)
             .invoke('val').as('name1')
-                    
+
         cy.get('@name1').then((name1) => {
             cy.log(name1) //prints name
             inName1 = name1
@@ -667,11 +667,11 @@ export class slot_bearbeiten {
         cy.get('[class="v-text-field__slot"]')
             .find('[data-cy="slot-categorical-name"]').eq(1)
             .invoke('val').as('name2')
-                
+
         cy.get('@name2').then((name2) => {
             cy.log(name2) //prints name
             inName2 = name2
-            
+
             cy.log(inName2)
         })
 
@@ -680,10 +680,10 @@ export class slot_bearbeiten {
         // back to slots
         cy.get('[data-cy="navDrawerSlots"]')
             .click()
-        
+
         cy.log('inName1')
         cy.log(inName1)
-        
+
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Categorical')
@@ -699,7 +699,7 @@ export class slot_bearbeiten {
                 expect($categoryAssert).to.contain(''+inName1+', '+inName2+' ')
                 //expect($categoryAssert).to.contain.text(inName1+', '+inName2+' '+'| '+'initial: '+inName2)
             })
- 
+
         // Add Initial Value "True"
         cy.log('Line 1864')
         cy.get('tbody')
@@ -713,11 +713,11 @@ export class slot_bearbeiten {
             //.find('[type="text"]').eq(1)
             .find('[type="text"]')
             .click({force:true})
-        
+
         cy.get('[class="v-list-item v-list-item--link theme--light"]')
             .last()
             .click()
-            
+
         // Back to Slot-page by clicking Slot
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
@@ -727,7 +727,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .type('Categorical')
-        
+
         cy.log('Line 1888')
         cy.get('tbody')
             .find('tr')
@@ -742,7 +742,7 @@ export class slot_bearbeiten {
         cy.get('[data-cy="slot-table-search"]')
             .click()
             .clear()
-        
+
         // 5. Float
         cy.log('Float')
         cy.log('Line 1903')
@@ -751,7 +751,7 @@ export class slot_bearbeiten {
             .find('td:nth-child(3)')
             .contains('Float')
             .click({force:true})
-        
+
         cy.log('Slot-Type: Float Mast be disabled')
 
         cy.get('[class="v-label v-label--active v-label--is-disabled theme--light"]')
@@ -771,30 +771,15 @@ export class slot_bearbeiten {
 
         // abort-button
         cy.get('[data-cy="abort-button"]').click()
-            
+
         // Back to Slot-page by clicking Slot
         cy.get('[data-cy="navDrawerSlots"]')
             .contains('Slots')
                 .click()
 
-        // Assert Saved value, Empty
-        cy.get('[data-cy="slot-table-search"]')
-            .click()
-            .type('Float')
-        cy.log('Line 779')
-        cy.get('tbody')
-            .find('tr')
-            .find('td:nth-child(4)').eq(0)
-            .should('contain', 'min: 1,0 max: 2,0 ')
-           
-        // Clear Search
-        cy.get('[data-cy="slot-table-search"]')
-            .click()
-            .clear()
-
         //add values to slot for test search field
-        var flotValue = ['0,0', '1,0','1,5','2,0']
-        cy.wrap(flotValue).each((index) => {
+        var floatValues = [{min: '0,0', max: '1,0'}, {min:'1,0', max: '2,0'}, {min:'1,5', max: '2,5'}, {min:'2,0', max: '3,0'}]
+        cy.wrap(floatValues).each((value) => {
 
             // Add Only Min Value
             cy.get('tbody')
@@ -802,17 +787,23 @@ export class slot_bearbeiten {
             .find('td:nth-child(3)')
             .contains('Float')
             .click({force:true})
-            
+
             cy.log('Line 806')
 
-            cy.get('[placeholder="Default: 0,0"]')
+            cy.get('[data-cy="slot-float-minvalue"]')
+                .find("input")
                 .clear()
-                .type(index)
+                .type(value.min)
 
-            cy.get('[placeholder="Default: 1,0"]')
+            cy.get('[data-cy="slot-float-maxvalue"]')
+                .find("input")
                 .clear()
-                .type(index+1)
-            
+                .type(value.max)
+
+            cy.get('[data-cy="slot-float-initialvalue"]')
+                .find("input")
+                .clear()
+
             // Back to Slot-page by clicking Slot
             cy.get('[data-cy="navDrawerSlots"]')
                 .contains('Slots')
@@ -821,25 +812,13 @@ export class slot_bearbeiten {
             cy.get('[data-cy="slot-table-search"]')
                 .click()
                 .type('Float')
-            
+
             cy.log('Line 823')
 
-            const maxIndex = index + 1
-            if (maxIndex == 0) {
-
-                let maxIndex = 1
-
-                cy.get('tbody')
-                    .find('tr')
-                    .find('td:nth-child(4)').eq(0)
-                    .should('have.text', 'min: '+String(index)+ ' max: '+String(maxIndex)+' ')
-            }
-            else {
-                cy.get('tbody')
-                .find('tr')
-                .find('td:nth-child(4)').eq(0)
-                .should('have.text', 'min: '+String(index)+ ' max: '+String(maxIndex)+' ')
-            }
+            cy.get('tbody')
+            .find('tr')
+            .find('td:nth-child(4)').eq(0)
+            .should('have.text', 'min: '+value.min+' max: '+value.max+' ')
 
             cy.get('[data-cy="slot-table-search"]')
                 .click()
@@ -855,24 +834,32 @@ export class slot_bearbeiten {
 
         // Clear Min, Max, Initial Value
         cy.get('[data-cy="slot-float-minvalue"]')
+            .find("input")
             .clear()
         cy.get('[data-cy="slot-float-maxvalue"]')
+            .find("input")
             .clear()
         cy.get('[data-cy="slot-float-initialvalue"]')
+            .find("input")
             .clear()
             .type(5)
 
         // Assert Error Message
         cy.get('[class="v-messages__message"]')
-        .should('have.text', 'Der initiale Wert eines Slots des Typs „Float” muss zwischen minimalem und maximalem Wert liegen')
+        //.should('have.text', 'Der initiale Wert eines Slots des Typs „Float” muss zwischen minimalem und maximalem Wert liegen')
+            .should('contain', 'Die vorliegende Formatierung des initial Wertes ist nicht zulässig!')
 
         cy.get('[data-cy="slot-float-initialvalue"]')
+            .find("input")
             .clear()
-            .type(1)
+            .type("1,0")
 
         // Back to Slot-page by clicking Slot
-        cy.get('[data-cy="navDrawerSlots"]')
-        .contains('Slots')
+        // cy.get('[data-cy="navDrawerSlots"]')
+        //     .contains('Slots')
+        //     .click()
+
+        cy.get('[data-cy="abort-button"]')
             .click()
 
         // Assert Saved value, Empty
@@ -882,8 +869,9 @@ export class slot_bearbeiten {
 
         cy.get('tbody')
             .find('tr')
+            .last()
             .find('td:nth-child(4)').eq(0)
-            .should('have.text', 'min: 0 max: 1 | initial: 1')
+            .should('contain', 'min: 1,0 max: 2,0 | initial: 1,0')
 
         // Clear Search
         cy.get('[data-cy="slot-table-search"]')
