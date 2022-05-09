@@ -659,12 +659,14 @@ export class slot_hinzufuegen {
                 
                 // Add Categorical
                 cy.get('[data-cy="slot-categorical-new"]')
+                    .first()
                     .click({force:true})
                     .clear()
                     .type('Category'+String(l))
                     .blur()
                 
                 cy.get('[data-cy="slot-categorical-new"]')
+                    .last()
                     .click({force:true})
                     .clear()
                     .type('Category'+String(b))

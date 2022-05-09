@@ -76,6 +76,8 @@ export class slot_bearbeiten {
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Der Slot konnte nicht gespeichert werden. ')
 
+        cy.get('[data-cy="error-remove"]').click()
+
         /* 1.2 name should not contain space or forward Slash (/)
         Checking for space or "/" within a Name
         */
@@ -94,6 +96,8 @@ export class slot_bearbeiten {
         // Assert Notification
         cy.get('[data-cy="errorMessageTitle"]')
             .should('have.text',' Der Slot konnte nicht gespeichert werden. ')
+
+        cy.get('[data-cy="error-remove"]').click()
 
         // cy.get('[class="v-text-field__slot"]')
         //     .contains('Name')
@@ -167,6 +171,8 @@ export class slot_bearbeiten {
                     expect(errorMsg).to.have.text(' Der Slot konnte nicht gespeichert werden. ')
                 })
 
+        cy.get('[data-cy="error-remove"]').click()
+
         cy.log('Passed 1')
 
         // Giving a valid Name to return to Slot
@@ -191,10 +197,13 @@ export class slot_bearbeiten {
         cy.log('Text')
         cy.log('Line 1372')
 
+        //cy.get('[data-cy="error-remove"]').click()
+
         // Selecting Entire Table
         cy.get('[class="v-select__slot"]')
             .click()
             .wait(500)
+
         cy.get('[class="v-list-item__content"]')
             .contains('Alle')
                 .click()
@@ -318,7 +327,7 @@ export class slot_bearbeiten {
             .contains('Slots')
                 .click()
 
-        // // Add a Slot value where Slot-Type is "List"
+        // Add a Slot value where Slot-Type is "List"
         cy.get('[data-cy="slot-create"]')
             .click({force:true})
 
@@ -378,6 +387,8 @@ export class slot_bearbeiten {
             .click()
             .wait(500)
 
+        //cy.get('[data-cy="error-remove"]').click()
+
         // Selecting Entire Table
         cy.get('[class="v-select__slot"]').click({force:true})
         cy.get('[class="v-list-item__content"]')
@@ -396,12 +407,13 @@ export class slot_bearbeiten {
         //3. Any
 
         cy.log('3. Any')
-
+        cy.wait(500)
+        //cy.get('[data-cy="error-remove"]').click()
         // Selecting Entire Table
         cy.get('[class="v-select__slot"]').click()
         cy.get('[class="v-list-item__content"]')
             .contains('Alle')
-                .click()
+            .click()
 
     cy.log('Line 1568')
     cy.get('tbody')
@@ -411,9 +423,9 @@ export class slot_bearbeiten {
         .click({force:true})
 
     // Remove Name by clicking "X"
-    cy.get('[class="v-input__append-inner"]').eq(3)
-        .click()
-        .wait(500)
+    // cy.get('[class="v-input__append-inner"]').eq(3)
+    //     .click()
+    //     .wait(500)
 
     // Back to Slot-page by clicking Slot
     cy.get('[data-cy="navDrawerSlots"]')
@@ -453,6 +465,7 @@ export class slot_bearbeiten {
         .click({force:true})
 
     cy.wait(500)
+    //cy.get('[data-cy="error-remove"]').click()
 
     // Selecting Entire Table
     cy.get('[class="v-select__slot"]').click()
@@ -478,6 +491,9 @@ export class slot_bearbeiten {
             .click()
 
     cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/`);
+    cy.wait(500)
+
+    //cy.get('[data-cy="error-remove"]').click()
 
     // Selecting Entire Table
     cy.get('[class="v-select__slot"]').click()

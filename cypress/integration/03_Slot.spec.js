@@ -3,7 +3,7 @@ import { onSlotBearbeiten } from "../support/page_objects/01_Trainingsdaten/03_S
 import { onSlotSuchen } from '../support/page_objects/01_Trainingsdaten/03_Slots/03_Slot_Suchen';
 import { onSlotLoeschen } from '../support/page_objects/01_Trainingsdaten/03_Slots/04_Slot_Loeschen';
 
-describe.only("Test Case 6: Slots", () => {
+describe("Test Case 6: Slots", () => {
    
     beforeEach('visit url', () => {
         //cy.login('admin', 'cciAdmin#2022+')

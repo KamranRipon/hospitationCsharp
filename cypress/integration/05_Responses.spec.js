@@ -167,11 +167,11 @@ describe('Test Case : Responses', () => {
         */
     })
 
-    it('Test Case CCI-T61: Response Button Suchen', () => {
+    it.skip('Test Case CCI-T61: Response Button Suchen', () => {
         onResponsesButtonSuchen.buttonSuchen()
     })
 
-    it('Test Case: Response Button Loeschen', () => {
+    it.skip('Test Case: Response Button Loeschen', () => {
         onResponsesButtonLoeschen.buttonLoeschen()
     })
 
