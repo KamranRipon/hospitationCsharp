@@ -59,7 +59,7 @@ testJob:
     reports:
       junit: cypress/results/junit/result-*.xml
     expire_in: 1 week
-  # only:
-  #   - main
-  #   - web
-  #   - schedules
+  only:
+    - main
+    - web
+    - schedules
