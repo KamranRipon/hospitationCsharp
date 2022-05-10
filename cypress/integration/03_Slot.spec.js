@@ -17,6 +17,17 @@ describe("Test Case 6: Slots", () => {
 
     it("Slot Hinzufuegen", () => {
         onSlotHizufuegen.slotHinzufuegen()
+        /*
+        1. Check for error message for invalid Name
+            1.1 Name should not be empty
+            1.2 name should not contain space or Slash (/)
+        2. Check for successfully saved or not
+            2.1 success Notification
+            2.2 check saved data on table
+        3. Check for duplicate name
+        4. Leave site via menu or breadcrump, data must not be saved
+        5. click on "Anlegen" navigates to table of slots
+        */
     })
 
     it("Slot Bearbeiten", () => {

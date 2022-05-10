@@ -147,20 +147,7 @@ export class role_based_testing {
 
         cy.get('[data-cy="navDrawerModels"]').click()
 
-        // Enter to a Model
-        cy.wait(500)
-        cy.get('tbody')
-            .find('tr')
-            .first()
-            .click()
-
-        // enter to Deployment
-        cy.get('[role="tab"]')
-            .contains('Deployment')
-            .click()
-
-        // Check visibility of "Nach QS übertragen" Button
-        cy.get('[type="button"]').should('be.visible')
+        cy.get('[data-cy="model-create"]').should('be.visible')
     }
 
     user_accountmanager () {
