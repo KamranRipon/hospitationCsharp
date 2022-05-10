@@ -37,15 +37,14 @@ restart test environment:
     - schedules
 
 testJob:
-  image: docker.artifactory-extern.dataport.de/node:16
+  image: docker.artifactory-extern.dataport.de/cypress/browsers:node16.14.0-slim-chrome99-ff97
   stage: test
-  script:
-    - apt-get update -y && apt-get upgrade -y
-    - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+  before_script:
     - npm install cypress
-    - npm install
-    # force gitlab to continue the execution
-    - npm run CyTest || FAILED=true
+    - npm ci
+  script:
+    # you can use :chrome or :firefox
+    - npm run ci-test:chrome || FAILED=true
     - npm run merge
     - npm run generateMocha_Report
     # evaluate the status of the tests

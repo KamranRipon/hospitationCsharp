@@ -644,7 +644,9 @@ export class slot_hinzufuegen {
                     .clear()
                     .type('Category'+String(l))
                     .blur()
-                
+
+                cy.wait(200)
+
                 cy.get('[data-cy="slot-categorical-new"]')
                     .last()
                     .click({force:true})
