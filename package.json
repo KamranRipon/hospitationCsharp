@@ -16,6 +16,9 @@
     "cy:run_browser": "npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser firefox & npm run cy:run_spec -- --browser electron",
     "CyTest-1": "npm run prereport && npm run cypress:run && npm run merge && npm run generateMocha_Report",
     "CyTest": "npm run prereport && npm run cypress:run",
+    "ci-test": "npx cypress run --spec 'cypress/integration/*.spec.js' --headless",
+    "ci-test:chrome": "npm run ci-test -- --browser chrome",
+    "ci-test:ff": "npm run ci-test -- --browser firefox",
     "cySpec": "npx cypress run --spec 'cypress/integration/03_Slot.spec.js'"
   },
   "author": "Abdullah",
