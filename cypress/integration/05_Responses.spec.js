@@ -133,14 +133,17 @@ describe('Test Case : Responses', () => {
         onResponsesButtonAnlegen.buttonAnlegen()
         /* 
         H. Response Button Anlegen
-        1. Button Name should not be empty, error message should contain "Name"; /Currently Bug/
+        1. Button Name should not be empty, error message should contain "Name"
             1.1 Test Button Name
                 1.1.1 Warning message below input field
                 1.1.2 Error message after unsuccessful saving  /Currently Bug/
         2. Check for successfully saved values
             2.1 Assert successfully saved Notification
             2.2 Assert in the Texte table
-        3. Leave site via menu or breadcrump does not save value
+        3. Test Inline / Ist Permanent Option
+            3.1 Case 1: Inline Button as Nein, Ist Permanent must be disable
+            3.2 Case 2: Inline Button as Ja, Ist Permanent must be enable
+        4. Leave site via menu or breadcrump does not save value
         */
     })
 
@@ -164,11 +167,11 @@ describe('Test Case : Responses', () => {
         */
     })
 
-    it('Test Case CCI-T61: Response Button Suchen', () => {
+    it.skip('Test Case CCI-T61: Response Button Suchen', () => {
         onResponsesButtonSuchen.buttonSuchen()
     })
 
-    it('Test Case: Response Button Loeschen', () => {
+    it.skip('Test Case: Response Button Loeschen', () => {
         onResponsesButtonLoeschen.buttonLoeschen()
     })
 

@@ -4,42 +4,24 @@ const b = Math.floor(Math.random() * 40000);
 const l = Math.floor(Math.random() * 45000);
 const c = Math.floor(Math.random() * 50000);
 const a = Math.floor(Math.random() * 55000);
-const tx = Math.floor(Math.random() * 55000);
+//const tx = Math.floor(Math.random() * 55000);
 
 const addValue = 'DummyValue'
-const addValue_2 = 'DummyValue'
-const addExample = 'testExample-1'
+//const addValue_2 = 'DummyValue'
+//const addExample = 'testExample-1'
 
 export class slot_hinzufuegen {
 
     slotHinzufuegen() {
-
-         /*
-        1. Check for notification for invalid Name
-            1.1 Name should not be empty
-            1.2 name should not contain space or forward Slash (/)
-        2. Check for successfully saved or not
-            2.1 Notification
-                2.1.1 Text
-                -- Float
-            2.2 check table
-        3. Check for duplicate name
-            3.1 Existing name cannot save double
-        */
-
-        /* Slot Hinzufuegen Testing */
         
-        // Entering to Trainingsdaten
+        // Entering to Trainingsdaten > Slots
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
 
         // Assert URL after clicking Slot
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/`);
         
-        // Clicking Slot Hinzufuegen
+        // Slot Hinzufuegen
         cy.get('[data-cy="slot-create"]').click()
-
-        // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/neu/`);
 
         /* Check Successfully saved */
 
@@ -58,8 +40,6 @@ export class slot_hinzufuegen {
 
             if  (index == 'Text') {
                 
-                cy.log(' -- Text -- ')
-
                 cy.get('[class="v-select__slot"]')
                     .contains('Slot-Typ')
                     .click({force:true})
@@ -659,6 +639,7 @@ export class slot_hinzufuegen {
                 
                 // Add Categorical
                 cy.get('[data-cy="slot-categorical-new"]')
+                    .first()
                     .click({force:true})
                     .clear()
                     .type('Category'+String(l))
@@ -667,6 +648,7 @@ export class slot_hinzufuegen {
                 cy.wait(200)
 
                 cy.get('[data-cy="slot-categorical-new"]')
+                    .last()
                     .click({force:true})
                     .clear()
                     .type('Category'+String(b))
