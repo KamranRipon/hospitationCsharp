@@ -1,0 +1,48 @@
+version: "3.3"
+services:
+  keycloak-e2e:
+    image: "docker.artifactory-extern.dataport.de/jboss/keycloak:16.1.1"
+    volumes:
+      - ./deployment/local/realm.json:/tmp/realm.json
+      - ./deployment/local/theme/cci/:/opt/jboss/keycloak/themes/cci/
+    environment:
+      - PROXY_ADDRESS_FORWARDING=true
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_IMPORT=/tmp/realm.json
+    ports:
+      - "8080:8080"
+    networks:
+      - cci
+  proxy-e2e:
+    image: "docker.artifactory-extern.dataport.de/nginx:mainline"
+    ports:
+      - "8081:80"
+    volumes:
+      - ./deployment/local/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - cci
+    depends_on:
+      - backend-e2e
+  frontend-e2e:
+    image: "dchatbot-docker-development.artifactory-extern.dataport.de/conplat/cci/frontend-distroless:latest"
+    volumes:
+      - ./deployment/local/config.js:/usr/share/nginx/html/config.js:ro
+    networks:
+      - cci
+  backend-e2e:
+    build : ../backend
+    environment:
+      - spring.profiles.active=e2e
+      - chatbot.model.path=/app/models
+      - keycloak.url=http://keycloak-e2e:8080/auth/realms/dataport
+    volumes:
+      - ../backend/models:/app/models
+    networks:
+      - cci
+    depends_on:
+      - keycloak-e2e
+networks:
+  cci:
+    external:
+      name: cci_dev_network

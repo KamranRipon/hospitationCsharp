@@ -1,0 +1,57 @@
+body {
+    background-color: #eee;
+    height:100%;
+}
+
+.cci-green{
+    color:#39756f
+}
+
+#filter-green{
+    max-width: 15rem;
+    fill: rgb(57, 117, 111);
+}
+
+.cci-logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .cci-logo-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .loading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    /* height: 30vh; */
+  }
+
+/* change color of blue default bootstrap glow */
+.form-control:focus {
+    border-color: #39756f;
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, 1), 0 0 0px rgba(57, 117, 111, 1);
+  }
+
+  /* color for checkbox */
+  .form-check-input:checked{
+      background-color: #39756f;
+      border-color: #39756f;
+      /* box-shadow: inset 0 1px 1px rgba(57, 117, 111, 1), 0 0 8px rgba(57, 117, 111, 1); */
+  }
+  /* color for login button */
+  #kc-login-btn-custom{
+    background-color:#39756f;
+    border-color:#39756f;
+}
+/* remember me text warning */
+#rememberMeWarning{
+    color:#444444;
+}
