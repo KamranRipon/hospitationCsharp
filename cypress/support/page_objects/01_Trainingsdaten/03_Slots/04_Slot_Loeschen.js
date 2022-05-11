@@ -30,20 +30,19 @@ export class slot_loeschen {
                 .click({force:true})
 
             cy.get('[data-cy="dialog-accept"]').click()
-            cy.get('[data-cy="navDrawerSlots"]')
-                .contains('Slots')
-                .click()
-            cy.wait(500)
+            //cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
+            //cy.wait(500)
+
+            cy.get('[data-cy="slot-table-search"]').type(rowValue)
 
             cy.get('tbody')
                 .find('tr')
                 .last()
                 .find('td:nth-child(1)').then(function($text2) {
-                cy.log($text2.text())
-                cy.log(rowValue)
-
-                cy.wrap($text2).should('not.have.text', rowValue)
+                cy.wrap($text2).should('not.contain', rowValue)
             })
+
+            cy.get('[data-cy="slot-table-search"]').clear()
         })
     }
 

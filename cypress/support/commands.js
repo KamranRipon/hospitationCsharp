@@ -46,10 +46,10 @@ Cypress.Commands.add('login', (username, password) => {
 Cypress.Commands.add('loginiFunction',(Username, Password) => {
     // Login Function
     cy.get('#username')
-        .type('admin')
+        .type(Username)
 
     cy.get('#password')
-        .type('cciAdmin#2022+')
+        .type(Password)
 
     cy.get('#rememberMe')
         .click({force:true})
