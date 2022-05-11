@@ -1,14 +1,12 @@
-const t = Math.floor(Math.random() * 30000);
-const f = Math.floor(Math.random() * 35000);
-const b = Math.floor(Math.random() * 40000);
-const l = Math.floor(Math.random() * 45000);
-const c = Math.floor(Math.random() * 50000);
-const a = Math.floor(Math.random() * 55000);
-//const tx = Math.floor(Math.random() * 55000);
+const t = Math.floor(Math.random() * 700000);
+const f = Math.floor(Math.random() * 357000);
+const b = Math.floor(Math.random() * 456000);
+const l = Math.floor(Math.random() * 456000);
+const c = Math.floor(Math.random() * 550000);
+const a = Math.floor(Math.random() * 655000);
+const le = Math.floor(Math.random() * 955000);
 
 const addValue = 'DummyValue'
-//const addValue_2 = 'DummyValue'
-//const addExample = 'testExample-1'
 
 export class slot_hinzufuegen {
 
@@ -40,30 +38,31 @@ export class slot_hinzufuegen {
 
             if  (index == 'Text') {
                 
-                cy.get('[class="v-select__slot"]')
+                //cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 1. Selecting Text
-                cy.get('[class="v-list-item__content"]')
+                //cy.get('[class="v-list-item__conten"]')
+                cy.get('[role="option"]')
                     .contains('Text')
                     .click({force:true})
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der Name muss gesetzt sein')
+                    .get('[role="alert"]')
+                    .should('contain','Der Name muss gesetzt sein')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
                     .type(' ') // t for Text
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Der Name enthält ungültige Zeichen!')
+                    .get('[role="alert"]')
+                    .should('contain', 'Der Name enthält ungültige Zeichen!')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
                         .click()
 
                 // Assert Error Message
@@ -72,12 +71,12 @@ export class slot_hinzufuegen {
                 cy.errorRemove()
 
                 cy.get('[data-cy="slot-name"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(t))
 
                 cy.get('[data-cy="slot-description"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .type(addValue+String(t))
                 
                 
@@ -107,32 +106,26 @@ export class slot_hinzufuegen {
                     .click({force:true})
                     .should('be.checked')
 
-                // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                .contains('Anlegen')
-                    .should('be.visible')
-                        .click()
+                cy.get('[data-cy="create-button"]')
+                    .click()
                 
-                // Assert Notification Message
+                // Assert success Notification Message
                 cy.wait(500)
                 // Saved Notification Must appear after successfully saved
-                cy.get('[class="row align-center no-gutters"]')
-                    .find('[data-cy="successMessageTitle"]')
+                //cy.get('[class="row align-center no-gutter"]')
+                cy.get('[data-cy="successMessageTitle"]')
                     .then((successMsg) => {
                         expect(successMsg).to.have.text(' Der Slot "'+ addValue+String(t) +'" wurde erfolgreich gespeichert ')
                 })
 
                 cy.successRemove()
                 // Assert Saved value, Case: Text
-                cy.get('[data-cy="slot-table-search"]').type('Text')
+                //cy.get('[data-cy="slot-table-search"]').type('Text')
+                cy.get('[data-cy="slot-table-search"]').type(addValue+String(t))
 
-                // Assert Successfully Saved Notification
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]')
-                    .contains('Alle')
-                    .click({force:true})
+                cy.selectEntireTbl()
                 
-                cy.log('Line 153')
+                cy.log('Line 144')
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)').last()
@@ -146,35 +139,34 @@ export class slot_hinzufuegen {
             }
 
             else if (index == 'Float') {
-                cy.log(index)
 
                 cy.get('[data-cy="slot-create"]').click()
 
-                cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 1. Selecting Text
-                cy.get('[class="v-list-item__content"]')
+                //cy.get('[class="v-list-item__content"]')
+                cy.get('[role="option"]')
                     .contains('Float')
                     .click({force:true})
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der Name muss gesetzt sein')
+                    .get('[role="alert"]')
+                    .should('contain','Der Name muss gesetzt sein')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
                     .type(' ') // t for Text
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Der Name enthält ungültige Zeichen!')
+                    .get('[role="alert"]')
+                    .should('contain', 'Der Name enthält ungültige Zeichen!')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
-                        .click()
+                cy.get('[data-cy="create-button"]')
+                    .click()
 
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
@@ -183,15 +175,15 @@ export class slot_hinzufuegen {
                 cy.errorRemove();
 
                 cy.get('[data-cy="slot-name"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(f))
 
                 cy.get('[data-cy="slot-description"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .type(addValue+String(f))
 
-                cy.log('Line 241')
+                cy.log('Line 205')
                 //Minimum
                 cy.get('[placeholder="Default: 0,0"]').clear().type('1')
 
@@ -211,7 +203,7 @@ export class slot_hinzufuegen {
                 cy.get('[placeholder="Default: 1,0"]')
                     .click({force:true})
                     .clear()
-                    .wait(500)
+                    //.wait(500)
                     .type(0)
                     .wait(200)
                     .get('[class="v-messages__wrapper"]')
@@ -219,7 +211,7 @@ export class slot_hinzufuegen {
                     .get('[placeholder="Default: 1,0"]')
                     .clear()
                     .type("2,0")
-                    .wait(200)
+                    //.wait(200)
 
                 cy.get('[data-cy="slot-float-initialvalue"]')
                     .find('[class="v-input__slot"]')
@@ -255,11 +247,8 @@ export class slot_hinzufuegen {
                     .find('[value=true]').last()
                     .click({force:true})
 
-                // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                .contains('Anlegen')
-                    .should('be.visible')
-                        .click()
+                cy.get('[data-cy="create-button"]')
+                    .click()
                 
                 cy.wait(500)
                 
@@ -275,15 +264,12 @@ export class slot_hinzufuegen {
 
                 // Assert Saved value, Case: Text
                 cy.get('[data-cy="slot-table-search"]')
-                    .type('Float')
+                    //.type('Float')
+                    .type(addValue+String(f))
 
-                // Assert Successfully Saved Notification
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]')
-                    .contains('Alle')
-                    .click({force:true})
+                cy.selectEntireTbl()
 
-                cy.log('Line 359')
+                cy.log('Line 300')
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)').last()
@@ -295,6 +281,9 @@ export class slot_hinzufuegen {
 
                 cy.get('[data-cy="slot-table-search"]')
                     .clear()
+
+                // Test Minimum value Greater than maximum 
+
             }
 
             else if (index == 'Bool') {
@@ -304,30 +293,30 @@ export class slot_hinzufuegen {
                 cy.get('[data-cy="slot-create"]')
                     .click()
 
-                cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 1. Selecting Text
-                cy.get('[class="v-list-item__content"]')
+                cy.get('[role="option"]')
                     .contains('Bool')
                     .click({force:true})
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der Name muss gesetzt sein')
+                    .get('[role="alert"]')
+                    .should('contain','Der Name muss gesetzt sein')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
                     .type(' ') // t for Text
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Der Name enthält ungültige Zeichen!')
+                    .get('[role="alert"]')
+                    .should('contain', 'Der Name enthält ungültige Zeichen!')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
                         .click()
 
                 // Assert Error Message
@@ -379,37 +368,18 @@ export class slot_hinzufuegen {
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
                     //.should('be.visible')
                     .click({force:true})
                 
                 cy.successRemove();
-                
-                // Assert Saved Sort valud
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]').contains('Alle').click({force:true})
-                cy.wait(300)
-                // Check saved example saved or Not
-                cy.get('tbody')
-                    .find('tr')
-                        //.contains('Bool')
-                        .last()
-                    .find('td:nth-child(1)').then(function($text) {
-                        cy.log($text.text())
-                        //const text = $text.text()
-                        cy.wrap($text).should('have.text', addValue+String(b))
-                    })
 
                 // Assert Saved value, Case: Text
                 cy.get('[data-cy="slot-table-search"]')
-                    .type('Bool')
+                    .type(addValue+String(b))
 
-                // Assert Successfully Saved Notification
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]')
-                    .contains('Alle')
-                    .click({force:true})
+                cy.selectEntireTbl()
                 
                 cy.log('Assert Bool')
                 cy.log('Line 493')
@@ -433,30 +403,30 @@ export class slot_hinzufuegen {
                 cy.get('[data-cy="slot-create"]')
                     .click()
 
-                cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 1. Selecting List
-                cy.get('[class="v-list-item__content"]')
+                cy.get('[role="option"]')
                     .contains('List')
                     .click({force:true})
 
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der Name muss gesetzt sein')
+                    .get('[role="alert"]')
+                    .should('contain','Der Name muss gesetzt sein')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
                     .type(' ')
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Der Name enthält ungültige Zeichen!')
+                    .get('[role="alert"]')
+                    .should('contain', 'Der Name enthält ungültige Zeichen!')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
                         .click()
 
                 // Assert Error Message
@@ -465,23 +435,15 @@ export class slot_hinzufuegen {
                 cy.errorRemove();
 
                 cy.get('[data-cy="slot-name"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(l))
 
                 cy.get('[data-cy="slot-description"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(l))
                 
-                // cy.get('[class="v-select__slot"]')
-                //     .contains('Slot-Typ')
-                //     .click({force:true})
-
-                // // 1. Selecting List
-                // cy.get('[class="v-list-item__content"]')
-                //     .contains('List')
-                //     .click({force:true})
                 
                 cy.get('[data-cy="slot-list-initialvalue"]')
                     .click({force:true})
@@ -506,7 +468,7 @@ export class slot_hinzufuegen {
                     .should('be.checked')
 
                 cy.get('[data-cy="slot-autofill"]')
-                .find('[value=false]')
+                    .find('[value=false]')
                     .click({force:true})
                 
                 cy.get('[data-cy="slot-autofill"]')
@@ -518,43 +480,20 @@ export class slot_hinzufuegen {
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
                     .click({force:true})
                 
                 cy.wait(500)
                 
-                // Assert Saved Sort valud
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]').contains('Alle').click({force:true})
-                cy.wait(300)
-                // Check saved value saved or Not
-                cy.get('tbody')
-                    .find('tr')
-                        .last()
-                    .find('td:nth-child(1)').then(function($text) {
-                        cy.log($text.text())
-                        cy.wrap($text).should('have.text', addValue+String(l))
-                    }) 
-                
                 // Assert Saved value, Case: List
                 cy.get('[data-cy="slot-table-search"]')
-                    .type('List')
+                    .type(addValue+String(l))
 
-                // Assert Successfully Saved Notification
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]')
-                    .contains('Alle')
-                    .click({force:true})
-
-                // Assert Successfully Saved Notification
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]')
-                    .contains('Alle')
-                    .click({force:true})
+                cy.selectEntireTbl()
                 
                 cy.log('Assert List')
-                cy.log('Line 655')
+                cy.log('Line 574')
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)').last()
@@ -577,12 +516,12 @@ export class slot_hinzufuegen {
                     .click()
 
                 // Slot-Typ
-                cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 5. Selecting Categorical
-                cy.get('[class="v-list-item__content"]')
+                cy.get('[role="option"]')
                     .contains('Categorical')
                     .click({force:true})
 
@@ -592,50 +531,37 @@ export class slot_hinzufuegen {
                 */
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der Name muss gesetzt sein')
+                    .get('[role="alert"]')
+                    .should('contain','Der Name muss gesetzt sein')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
                     .type(' ')
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Der Name enthält ungültige Zeichen!')
+                    .get('[role="alert"]')
+                    .should('contain', 'Der Name enthält ungültige Zeichen!')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
-                        .click()
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
+                    .click()
 
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
                     .should('have.text', ' Der Slot konnte nicht gespeichert werden. ')
                 cy.errorRemove();
 
-                cy.log('c '+ String(c))
-                
-                // Let's save with a valid Name
-
                 // Add a Name
                 cy.get('[data-cy="slot-name"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(c)) // "c" stand for Category
 
                 // Add a Short Description
                 cy.get('[data-cy="slot-description"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(c))
-                
-                // cy.get('[class="v-select__slot"]')
-                //     .contains('Slot-Typ')
-                //     .click({force:true})
-
-                // // 1. Selecting Categorical
-                // cy.get('[class="v-list-item__content"]')
-                //     .contains('Categorical')
-                //     .click({force:true})
                 
                 // Add Categorical
                 cy.get('[data-cy="slot-categorical-new"]')
@@ -683,11 +609,11 @@ export class slot_hinzufuegen {
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
                     .click({force:true})
                 cy.successRemove();
-                cy.wait(500)
+                //cy.wait(500)
                 
                 // Assert Saved Sort valud
 
@@ -695,13 +621,10 @@ export class slot_hinzufuegen {
 
                 // Assert Saved value, Case: Categorical
                 cy.get('[data-cy="slot-table-search"]')
-                    .type('Categorical')
+                    .type(addValue+String(c))
 
                 // Select Entire Sort Table
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]')
-                    .contains('Alle')
-                    .click({force:true})
+                cy.selectEntireTbl()
 
                 // Check saved value, saved or Not
                 // Name
@@ -718,7 +641,7 @@ export class slot_hinzufuegen {
                 // // Assert Saved value, Case: Categorical
                 // cy.get('[data-cy="slot-table-search"]')
                 //     .type('Categorical')
-                cy.log('Line 790')
+                cy.log('Line 731')
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)').last()
@@ -744,12 +667,12 @@ export class slot_hinzufuegen {
                     .click()
 
                 // Slot-Typ
-                cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 6. Selecting Any
-                cy.get('[class="v-list-item__content"]')
+                cy.get('[role="option"]')
                     .contains('Any')
                     .click({force:true})
 
@@ -759,20 +682,20 @@ export class slot_hinzufuegen {
                 */
                 cy.get('[data-cy="slot-name"]')
                     .click({force:true})
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text','Der Name muss gesetzt sein')
+                    .get('[role="alert"]')
+                    .should('contain','Der Name muss gesetzt sein')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
                     .type(' ')
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Der Name enthält ungültige Zeichen!')
+                    .get('[role="alert"]')
+                    .should('contain', 'Der Name enthält ungültige Zeichen!')
                     .get('[data-cy="slot-name"]')
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
-                        .click()
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
+                    .click()
 
                 // Assert Error Message
                 cy.get('[data-cy="errorMessageTitle"]')
@@ -781,28 +704,28 @@ export class slot_hinzufuegen {
 
                 // Add a Name
                 cy.get('[data-cy="slot-name"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(a))
 
                 // Add a Short Description
                 cy.get('[data-cy="slot-description"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(a))
                 
                 // Add Categorical
-                cy.get('[class="v-select__slot"]')
+                cy.get('[role="button"]')
                     .contains('Slot-Typ')
                     .click({force:true})
 
                 // 6. Selecting Any
-                cy.get('[class="v-list-item__content"]')
+                cy.get('[role="option"]')
                     .contains('Any')
                     .click({force:true})
                 
                 cy.get('[data-cy="slot-any-initialvalue"]')
-                    .click({force:true})
+                    //.click({force:true})
                     .clear()
                     .type(addValue+String(a))
 
@@ -827,30 +750,16 @@ export class slot_hinzufuegen {
                     .click({force:true})
 
                 // Click Anlegen
-                cy.get('[class="v-btn__content"]')
-                    .contains('Anlegen')
+                cy.get('[data-cy="create-button"]')
+                    //.contains('Anlegen')
                     .click({force:true})
                 cy.successRemove();
-                
-                // Assert Saved Sort valud
-                cy.get('[class="v-select__slot"]').click()
-                cy.get('[class="v-list-item__content"]').contains('Alle').click({force:true})
-                cy.wait(500)
-                // Check saved value saved or Not
-                cy.get('tbody')
-                    .find('tr')
-                        .last()
-                    .find('td:nth-child(1)').then(function($text) {
-                        cy.log($text.text())
-                        cy.wrap($text).should('have.text', addValue+String(a))
-                    })
 
                 // Assert Saved value, Case: List
                 cy.get('[data-cy="slot-table-search"]')
-                    .type('Any')
-                
-                cy.log('Assert Any')
-                cy.log('Line 924')
+                    .type(addValue+String(a))
+
+                cy.log('Line 863')
                 cy.get('tbody')
                     .find('tr')
                     .find('td:nth-child(1)').last()
@@ -865,29 +774,6 @@ export class slot_hinzufuegen {
             }
         })
         
-        // 2.2 Testing saved value in Slot Table
-        // Selecting Whole Table
-        cy.get('[class="v-select__slot"]')
-            .click()
-            .wait(500)
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle').click({force:true})
-
-        cy.get('[data-cy="slot-table-search"]')
-            .type('Any')
-
-        cy.log('Any')
-
-        // Check saved example saved or Not
-        cy.get('tbody')
-            .find('tr')
-                .last()
-            .find('td:nth-child(1)').then(function($text) {
-                cy.log($text.text())
-                //const text = $text.text()
-                cy.wrap($text).should('have.text', addValue+String(a))
-            }) 
-
         // Leave Site with menu or Breadcrump without Anlage which doesn't save value
         // Clicking Slot Hinzufuegen
         cy.get('[data-cy="slot-create"]')
@@ -897,12 +783,12 @@ export class slot_hinzufuegen {
         cy.get('[class="v-text-field__slot"]')
             .contains('Name')
             .click({force:true})
-            .type(addValue+String(l))
+            .type(addValue+String(le))
 
         cy.get('[class="v-text-field__slot"]')
             .contains('Beschreibung')
             .click({force:true})
-            .type(addValue+String(l))
+            .type(addValue+String(le))
         
         // Slot-Typ
         cy.get('[class="v-select__slot"]')
@@ -919,19 +805,12 @@ export class slot_hinzufuegen {
             .contains('Slots')
                 .click()
 
-        // Check Value saved or Not
-        // Select Whole Table
-        cy.get('[class="v-select__slot"]')
-            .click()
-            .wait(500)
-        cy.get('[class="v-list-item__content"]')
-            .contains('Alle')
-                .click()
+        cy.selectEntireTbl()
 
         cy.get('[data-cy="slot-table-search"]')
-            .type('Text')
+            .type(addValue+String(le))
 
-        cy.log('Line 1003')
+        cy.log('Line 921')
 
         // Check saved example saved or Not
         cy.get('tbody')
@@ -939,42 +818,8 @@ export class slot_hinzufuegen {
                 .last()
             .find('td:nth-child(1)').then(function($text) {
                 cy.log($text.text())
-                cy.wrap($text).should('not.have.text', addValue+String(l))
+                cy.wrap($text).should('not.have.text', addValue+String(le))
             })
-        
-        // /* Chicking for Invalid Name Notification
-        // 1.1 Name should not be empty Notification
-        // */
-        // // Slot hinzufugen
-        // //cy.wait(500)
-        // cy.get('[data-cy="slot-create"]')
-        //     .click()
-
-        // // Checking for a valid Name Notifications
-        // cy.get('[class="v-input pb-6 v-input--has-state theme--light v-text-field v-text-field--is-booted v-text-field--enclosed v-text-field--outlined error--text"]')
-        //     .find('[class="v-text-field__details"]')
-        //     .contains('Der Name muss gesetzt sein')
-        //     .should('be.visible')
-        
-        // cy.get('[class="v-text-field__slot"]')
-        //     .contains('Name')
-        //         .click({force:true})
-        
-        // cy.get('[class="v-text-field__details"]')
-        //     .contains('Der Name muss gesetzt sein')
-        //     .should('be.visible')
-        
-        /* 1.2 name should not contain space or forward Slash (/)
-        Checking for space or "/" within a Name
-        */
-
-        // cy.get('[class="v-label v-label--active theme--light error--text"]')
-        // .should('be.visible')
-        //     .type(' ')
-
-        // cy.get('[class="v-text-field__details"]')
-        //     .contains('Der Name enthält ungültige Zeichen!')
-        //     .should('be.visible')
         
         /* 
         Checking for Duplicate Name: Name cannot be known in Intent

@@ -52,7 +52,7 @@ export class role_based_testing {
                 else {
                     cy.log('If Statement False')
                     cy.get('[role="option"]')
-                        .contains('Operator:in')
+                        .contains('Operator')
                         .click()
                 }
             })
@@ -123,7 +123,7 @@ export class role_based_testing {
                 else {
                     cy.log('If Statement False')
                     cy.get('[role="option"]')
-                        .contains('Redakteur:in')
+                        .contains('Redakteur')
                         .click()
                 }
             })
@@ -198,7 +198,7 @@ export class role_based_testing {
                 else {
                     cy.log('If Statement False')
                     cy.get('[role="option"]')
-                        .contains('Accountmanager:in')
+                        .contains('Accountmanager')
                         .click()
                 }
             })
@@ -280,7 +280,7 @@ export class role_based_testing {
                 else {
                     cy.log('If Statement False')
                     cy.get('[role="option"]')
-                        .contains('Datenadministrator:in')
+                        .contains('Datenadministrator')
                         .click()
                 }
             })
