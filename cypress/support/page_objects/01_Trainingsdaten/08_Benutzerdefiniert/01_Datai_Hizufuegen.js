@@ -8,13 +8,15 @@ export class datai_anlegen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerBenutzerdefiniert"]');
         
         // Assert URL after clicking Benutzerdefiniert
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/");
 
         // Clicking Benutzerdefiniert Hinzufuegen
         cy.createButton('[data-cy="benutzerdefiniert-create"]')
 
         // checking url after clicking Datai Hinzufuegen
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/neu/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/neu/");
         
         // 1. Name should not be empty, error message should contain "Name"
         //    1.1 Action title

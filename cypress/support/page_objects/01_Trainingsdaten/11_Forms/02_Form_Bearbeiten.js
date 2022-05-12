@@ -9,7 +9,8 @@ export class form_bearbeiten {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerForms"]')
 
         // Assert URL after clicking Form
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/form/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/form/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/form/");
         
         // Add a Form Name
         //cy.get('[data-cy="navDrawerForms"]').click()

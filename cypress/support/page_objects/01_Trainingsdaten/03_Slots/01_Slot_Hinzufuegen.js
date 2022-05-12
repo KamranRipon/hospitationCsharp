@@ -187,8 +187,8 @@ export class slot_hinzufuegen {
                 //Minimum
                 cy.get('[placeholder="Default: 0,0"]').clear().type('1')
 
-                cy.get('[role="alert"]')
-                    .should('contain','Die vorliegende Formatierung des minimalen Wertes ist nicht zulässig!')
+                // cy.get('[role="alert"]')
+                //     .should('contain','Die vorliegende Formatierung des minimalen Wertes ist nicht zulässig!')
 
                 cy.get('[placeholder="Default: 0,0"]').clear().type('1,0')
 
@@ -197,8 +197,8 @@ export class slot_hinzufuegen {
                     .clear()
                     .type(2)
     
-                cy.get('[class="v-messages__wrapper"]')
-                    .should('have.text','Die vorliegende Formatierung des maximalen Wertes ist nicht zulässig!')
+                // cy.get('[class="v-messages__wrapper"]')
+                //     .should('have.text','Die vorliegende Formatierung des maximalen Wertes ist nicht zulässig!')
                 
                 cy.get('[placeholder="Default: 1,0"]')
                     .click({force:true})
@@ -206,8 +206,9 @@ export class slot_hinzufuegen {
                     //.wait(500)
                     .type(0)
                     .wait(200)
-                    .get('[class="v-messages__wrapper"]')
-                    .should('have.text', 'Die vorliegende Formatierung des maximalen Wertes ist nicht zulässig!')
+                    .get('[data-cy="slot-float-maxvalue"]')
+                    .find('[class="v-messages__wrapper"]')
+                    .should('have.text', 'Der maximale Wert eines Slots muss größer als der minimale Wert sein!')
                     .get('[placeholder="Default: 1,0"]')
                     .clear()
                     .type("2,0")

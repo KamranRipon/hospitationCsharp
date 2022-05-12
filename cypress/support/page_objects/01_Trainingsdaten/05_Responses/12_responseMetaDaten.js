@@ -12,7 +12,7 @@ export class metadaten {
             .find('td:nth-child(2)')
             .then(($testFunc2) => {
                 const vall2 = $testFunc2.text()
-                const sp_vall2 = vall2.split(' ')                                                
+                const sp_vall2 = vall2.split(' ')
                 var num2
                 for (num2=0; num2 < sp_vall2.length; num2++){                                                                           
                     if(Number(sp_vall2[num2]) > max_val2) {

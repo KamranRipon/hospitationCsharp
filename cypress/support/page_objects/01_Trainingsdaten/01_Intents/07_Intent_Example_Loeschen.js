@@ -8,7 +8,8 @@ export class intent_example_loeschen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
                 
         // checking url after clicking Inten Button
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
 
         // Enter to first row to intent table
         cy.wait(300)

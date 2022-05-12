@@ -8,13 +8,15 @@ export class responses_anlegen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/response/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
 
         // Clicking Response Anlegen
         cy.createButton('[data-cy="response-create"]')
 
         // checking url after clicking Intent Hinzufuegen
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/response/neu/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/neu/");
         
         // 1. Name should not be empty, error message should contain "Name"
         //    1.1 Response

@@ -10,7 +10,8 @@ export class responses_text_suchen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerResponses"]')
 
         // Assert URL after clicking Rules
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/response/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/response/");
         cy.wait(300)
 
         // Selecting Entire Table
