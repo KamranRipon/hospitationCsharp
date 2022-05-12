@@ -10,7 +10,7 @@ export class entity_hinzufuegen {
         // checking url after clicking Entity Button
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/entity/`);
 
-        // Entity Hinzufuegen testing 
+        // Entity Hinzufuegen testing
         cy.createButton('[data-cy="entity-create"]')
         
         // checking url after clicking Intent Hinzufuegen

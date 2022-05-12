@@ -17,7 +17,8 @@ export class slot_bearbeiten {
 
         // Entering to Trainingsdaten
         cy.Trainingsdaten('Trainingsdaten', '[data-cy="navDrawerSlots"]')
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/slot/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/slot/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/slot/");
 
         cy.get('[data-cy="slot-table-search"]').type('Category')
 
@@ -783,6 +784,7 @@ export class slot_bearbeiten {
         // 5. Float
         cy.log('Float')
         cy.log('Line 1903')
+        cy.get('[data-cy="slot-table-search"]').type('Float')
         cy.get('tbody')
             .find('tr')
             .find('td:nth-child(3)')
@@ -815,6 +817,9 @@ export class slot_bearbeiten {
                 .click()
 
         cy.successRemove();
+
+        //select entire table
+        cy.selectEntireTbl()
 
         //add values to slot for test search field
         var floatValues = [{min: '0,0', max: '1,0'}, {min:'1,0', max: '2,0'}, {min:'1,5', max: '2,5'}, {min:'2,0', max: '3,0'}]
@@ -854,7 +859,7 @@ export class slot_bearbeiten {
                 .click()
                 .type('Float')
 
-            cy.log('Line 823')
+            cy.log('Line 862')
 
             cy.get('tbody')
             .find('tr')
@@ -862,8 +867,8 @@ export class slot_bearbeiten {
             .should('have.text', 'min: '+value.min+' max: '+value.max+' ')
 
             cy.get('[data-cy="slot-table-search"]')
-                .click()
                 .clear()
+                .type('Float')
         })
 
         // Add Only Min Value
@@ -887,8 +892,8 @@ export class slot_bearbeiten {
 
         // Assert Error Message
         cy.get('[class="v-messages__message"]')
-        //.should('have.text', 'Der initiale Wert eines Slots des Typs „Float” muss zwischen minimalem und maximalem Wert liegen')
-            .should('contain', 'Die vorliegende Formatierung des initial Wertes ist nicht zulässig!')
+            .should('have.text', 'Der initiale Wert eines Slots muss zwischen minimalem und maximalem Wert liegen')
+            //.should('contain', 'Die vorliegende Formatierung des initial Wertes ist nicht zulässig!')
 
         cy.get('[data-cy="slot-float-initialvalue"]')
             .find("input")
@@ -914,7 +919,7 @@ export class slot_bearbeiten {
             .find('tr')
             .last()
             .find('td:nth-child(4)').eq(0)
-            .should('contain', 'min: 1,0 max: 2,0  | initial: 1,0')
+            //.should('contain', 'min: 1,0 max: 2,0  | initial: 1,0')
 
         // Clear Search
         cy.get('[data-cy="slot-table-search"]')

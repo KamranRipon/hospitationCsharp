@@ -8,13 +8,15 @@ export class action_anlegen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerActions"]')
         
         // Assert URL after clicking Actions
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/action/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/action/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/action/");
 
         // Clicking Action Hinzufuegen
         cy.createButton('[data-cy="action-create"]')
 
         // checking url after clicking Action Hinzufuegen
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/action/neu/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/action/neu/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/action/neu/");
         
         // 1. Name should not be empty, error message should contain "Name"
         //    1.1 Action title
@@ -56,7 +58,8 @@ export class action_anlegen {
         cy.get('[data-cy="create-button"]').click()
 
         // 7. Click on "Anlegen" navigates to table of actions
-        cy.url().should('eq', 'http://10.61.135.11:8081/trainingsdaten/action/')
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/action/`);
+        //cy.url().should('eq', 'http://10.61.135.11:8081/trainingsdaten/action/')
         
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')

@@ -14,7 +14,8 @@ export class form_hinzufuegen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerForms"]')
         
         // Assert URL after clicking Form Button
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/form/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/form/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/form/");
         
         // Clicking Form Hinzufuegen
         cy.get('[data-cy="form-create"]').click()

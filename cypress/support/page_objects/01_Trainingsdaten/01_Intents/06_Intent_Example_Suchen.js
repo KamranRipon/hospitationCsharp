@@ -10,7 +10,8 @@ export class intent_example_suchen {
         cy.Trainingsdaten('Trainingsdaten','[data-cy="navDrawerIntents"]')
 
         // Assert URL after clicking Story
-        cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
+        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/intent/");
 
         // Entering to first row of the Intent Table
         cy.log('Line 16')
