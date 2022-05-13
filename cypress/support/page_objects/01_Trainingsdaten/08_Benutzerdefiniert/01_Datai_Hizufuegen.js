@@ -1,5 +1,5 @@
-const ac     = Math.floor(Math.random() * 6500);
-const bd     = Math.floor(Math.random() * 6500);
+const ac     = Math.floor(Math.random() * 65000);
+const bd     = Math.floor(Math.random() * 75000);
 const addValue = 'BenutzerAnDummy'
 export class datai_anlegen {
     dataiAnlegen() {
@@ -9,22 +9,21 @@ export class datai_anlegen {
         
         // Assert URL after clicking Benutzerdefiniert
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/`);
-        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/");
 
         // Clicking Benutzerdefiniert Hinzufuegen
         cy.createButton('[data-cy="benutzerdefiniert-create"]')
 
         // checking url after clicking Datai Hinzufuegen
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/neu/`);
-        //cy.url().should("eq", "http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/neu/");
         
         // 1. Name should not be empty, error message should contain "Name"
-        //    1.1 Action title
-        //        1.1.1 Assert warning message below the input field
+        // 1.1 Warning message below input field
+        // 1.2 Error message after unsuccessful saving 
         
         //Assert warning notification
         cy.warningNotification('[role="alert"]')
-        cy.log('Line 24')
+
+        cy.log('Line 25')
         // add a space or '/' to input field
         const space   = [' ', '/']
         cy.wrap(space).each((index) => {
@@ -34,10 +33,20 @@ export class datai_anlegen {
             //Assert warning notification
             cy.get('[role="alert"]').eq(0)
                 .should('have.text','Der Name enthält ungültige Zeichen!')
+
+            // Click Anlegen
+            cy.get('[data-cy="create-button"]').click()
+        
+            //Assert Error message, indication didn't able to save data
+            cy.errorMessageTitle('[data-cy="errorMessageTitle"]', 'Die','benutzerdefinierte Datei')
+            // Close Error Notification
+            cy.get('[data-cy="error-remove"]').click()
                 
             // Remove space or '/'
             cy.get('[data-cy="benutzerdefiniert-name"]').clear()
         })
+
+        cy.log('Line 47')
     
         // Click Anlegen
         cy.get('[data-cy="create-button"]').click()
@@ -48,8 +57,8 @@ export class datai_anlegen {
         // Close Error Notification
         cy.get('[data-cy="error-remove"]').click()
         
-        // 3. Check for successfully saved values
-        // 3.1 Assert Notification
+        // 5. Check for successfully saved values
+        // 5.1 Assert Notification
         // Add a response name with and assert notification & Assert in action table
         cy.get('[data-cy="benutzerdefiniert-name"]')
             .type(addValue+String(ac))
@@ -58,7 +67,7 @@ export class datai_anlegen {
         cy.get('[data-cy="create-button"]').click()
 
         // 7. Click on "Anlegen" navigates to table of actions
-        cy.url().should('eq', `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/`)
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/`);
         
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')
@@ -79,14 +88,15 @@ export class datai_anlegen {
         cy.get('tbody').find('tr')
             .find('td:nth-child(1)')
             .then(function($synName1) {
-                cy.wrap($synName1).should('have.text', addValue+String(ac))
+                //cy.wrap($synName1).should('have.text', addValue+String(ac))
+                cy.wrap($synName1).should('contain', addValue+String(ac))
             })
 
         // clear search field
         cy.get('[data-cy="benutzerdefiniert-table-search"]').clear()
         
-        // 2. Check for duplicate name
-        // 2.1 Response
+        // 3. Check for duplicate name
+        // 3.1 Datai
         //     2.1.1 Error message after unsuccessful saving 
         cy.get('[data-cy="benutzerdefiniert-create"]').click()
 
@@ -102,10 +112,6 @@ export class datai_anlegen {
         // Close Error Notification
         cy.get('[data-cy="error-remove"]').click()
 
-        // 2. Check for duplicate name
-        // 2.1 Action
-        //     2.1.2 Valaue should be in the Action table, assert Action Table
-        // return to Action
         cy.get('[data-cy="navDrawerBenutzerdefiniert"]').click()
 
         // action-table-search

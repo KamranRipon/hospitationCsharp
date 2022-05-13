@@ -1,6 +1,6 @@
-const b     = Math.floor(Math.random() * 1000);
-const x     = Math.floor(Math.random() * 3500);
-const xle   = Math.floor(Math.random() * 5500);
+const b     = Math.floor(Math.random() * 659000);
+const x     = Math.floor(Math.random() * 758000);
+const xle   = Math.floor(Math.random() * 858000);
 const addValue = 'resBearbeitDmy'
 
 export class datei_bearbeiten {
@@ -15,7 +15,7 @@ export class datei_bearbeiten {
         //     1.1.1 Warning message below input field
         //     1.1.2 Error message after unsuccessful saving
         
-        // Entering to first of
+        // Entering to first row of Response Table
         cy.wait(300)
         cy.get('tbody')
             .find('tr')

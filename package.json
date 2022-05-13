@@ -19,7 +19,7 @@
     "ci-test": "npx cypress run --spec 'cypress/integration/*.spec.js' --headless",
     "ci-test:chrome": "npm run ci-test -- --browser chrome",
     "ci-test:ff": "npm run ci-test -- --browser firefox",
-    "cySpec": "npx cypress run --spec 'cypress/integration/03_Slot.spec.js'"
+    "cySpec": "npx cypress run --spec 'cypress/integration/10_Benutzerdefiniert.spec.js'"
   },
   "author": "Abdullah",
   "license": "ISC",
