@@ -55,7 +55,7 @@ describe.skip('Test Case - 2: Menu Elements', () => {
         cy.get('[tabindex="0"]').contains('Trainingsdaten').click()
         cy.wait(500)
         cy.get("[data-cy=navDrawerIntents]").click()
-        cy.url().should("eq", "10.61.135.11:8081/trainingsdaten/intent/");
+        cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/intent/`);
     })
 
     it('Testing Menu', () => {

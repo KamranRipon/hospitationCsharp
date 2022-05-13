@@ -58,7 +58,7 @@ export class datai_anlegen {
         cy.get('[data-cy="create-button"]').click()
 
         // 7. Click on "Anlegen" navigates to table of actions
-        cy.url().should('eq', 'http://10.61.135.11:8081/trainingsdaten/benutzerdefiniert/')
+        cy.url().should('eq', `${Cypress.config().baseUrl}/trainingsdaten/benutzerdefiniert/`)
         
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')
