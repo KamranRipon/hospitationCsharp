@@ -1,0 +1,112 @@
+{
+  "enabled": true,
+  "realm": "dataport",
+  "accessTokenLifespan": 300,
+  "ssoSessionMaxLifespan": 28800,
+  "rememberMe": true,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 30,
+  "loginTheme": "cci",
+  "smtpServer": {
+    "from": "keycloak-config-cli@example.com",
+    "fromDisplayName": "keycloak-config-cli",
+    "host": "mailing.example.com",
+    "auth": true,
+    "envelopeFrom": "keycloak-config-cli@example.com",
+    "user": "username",
+    "password": "password"
+  },
+  "clients": [
+    {
+      "clientId": "cci-client-id",
+      "directAccessGrantsEnabled": true,
+      "name": "cci-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "my-special-client-secret",
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ],
+       "publicClient": true
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "lastName": "admin",
+      "firstName": "user",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "cciAdmin#2022+"
+        }
+      ],
+      "clientRoles": {
+        "realm-management": [
+          "realm-admin"
+        ],
+        "account": [
+          "manage-account"
+        ]
+      }
+    },
+    {
+      "username": "e2e_redakteur",
+      "lastName": "e2e_redakteur",
+      "firstName": "user",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ]
+    },
+    {
+      "username": "e2e_operator",
+      "lastName": "e2e_operator",
+      "firstName": "user",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ]
+    },
+    {
+      "username": "e2e_accountmanager",
+      "lastName": "e2e_accountmanager",
+      "firstName": "user",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ]
+    },
+    {
+      "username": "e2e_datenadmin",
+      "lastName": "e2e_datenadmin",
+      "firstName": "user",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password"
+        }
+      ]
+    }
+  ]
+}
