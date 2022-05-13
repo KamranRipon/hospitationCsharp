@@ -31,15 +31,6 @@ describe("Test Case: Role Based Testing", () => {
         */
     })
 
-    it("CCI-T92: Login as Accountmanager:in", () => {
-        onRoleBasedTesting.user_accountmanager()
-        /* 
-        1. Log in as Redakteur:in
-        2. Logout and login as admin
-        3. select and save role
-        */
-    })
-
     it("CCI-T93: Login as Datenadmin:in", () => {
         onRoleBasedTesting.user_datenadmin()
         /* 
@@ -47,6 +38,15 @@ describe("Test Case: Role Based Testing", () => {
         2. Logout and login as admin
         3. select and save role
         4. Test only Import
+        */
+    })
+
+    it("CCI-T92: Login as Accountmanager:in", () => {
+        onRoleBasedTesting.user_accountmanager()
+        /* 
+        1. Log in as Redakteur:in
+        2. Logout and login as admin
+        3. select and save role
         */
     })
 })

@@ -7,7 +7,7 @@ describe ('Test Case : Benutzerdefiniert', () => {
 
     beforeEach('visit url', () => {
         cy.visit('/')
-        Cypress.Cookies.preserveOnce('session_id', 'remember_token')
+        //Cypress.Cookies.preserveOnce('session_id', 'remember_token')
         cy.loginiFunction('admin', 'cciAdmin#2022+')
         cy.wait(500)
     })
@@ -19,22 +19,25 @@ describe ('Test Case : Benutzerdefiniert', () => {
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Error message after unsuccessful saving 
-        2. Check for duplicate name
+        2. Name should not contain space or "/"
+            2.1 warning message under input field
+            2.2 Failed notification after unsuccessful save
+        3. Check for duplicate name
             2.1 Error message after unsuccessful saving 
-            2.2 Valaue should be in the Story table, assert action Table
-        3. Saving on validation error not possible
+            2.2 Valaue should be in the Story table, assert Table
+        4. Saving on validation error not possible
             3.1 Case 1: "no intent is chossen"    --> Assert error message
             3.2 Case 2: multiple intents in a row --> Assert error message
             3.3 Case 3: intents is last step      --> Assert error message
-        4. Check for successfully saved values
+        5. Check for successfully saved values
             4.1 Assert Notification
             4.2 Assert in table
-        5. Leave site via menu or breadcrump, data must not be saved
-        6. Click on "Anlegen" navigates to table of strories
+        6. Leave site via menu or breadcrump, data must not be saved
+        7. Click on "Anlegen" navigates to table of strories
         */
     })
 
-    it('Test Case CCI-T70: Datai Bearbeiten', () => {
+    it('Test Case CCI-T80: Datai Bearbeiten', () => {
         onDataiBearbeiten.dateiBearbeiten()
         /* 
         B. Datai Bearbeiten
@@ -55,7 +58,7 @@ describe ('Test Case : Benutzerdefiniert', () => {
         */
     })
 
-    it('Test Case CCI-T71: Datai Suchen', () => {
+    it('Test Case CCI-T81: Datai Suchen', () => {
         onDateiSuchen.dateiSuchen()
         /*
         C. Action Suchen
@@ -66,10 +69,9 @@ describe ('Test Case : Benutzerdefiniert', () => {
         3.searching for some chars no actions has shows empty table
             3.1 Action table should display no element
         */
-        
     })
 
-    it('Test Case CCI-T75: Datei Löschen', () => {
+    it('Test Case CCI-T82: Datei Löschen', () => {
         onDateiLoeschen.dateiLoeschen()
         /*
         D. Datei Loeschen
