@@ -1,10 +1,9 @@
-const intent = Math.floor(Math.random() * 5000);
-const besheibung = Math.floor(Math.random() * 1000);
-const rule = Math.floor(Math.random() * 1500);
-const action = Math.floor(Math.random() * 2000);
+const intent = Math.floor(Math.random() * 65000);
+const besheibung = Math.floor(Math.random() * 91000);
+const rule = Math.floor(Math.random() * 19500);
+const action = Math.floor(Math.random() * 72000);
 
 const addValue = 'DummyValue'
-
 export class rules_anlegen {
 
     rulesAnlegen() {
@@ -21,7 +20,7 @@ export class rules_anlegen {
         // Clicking Action Hinzufuegen
         cy.get('[data-cy="action-create"]').click()
         
-        // add a Name to action
+        // add an Action Name
         cy.get('[data-cy="action-name"]')
             .type('aktion'+String(action))
         

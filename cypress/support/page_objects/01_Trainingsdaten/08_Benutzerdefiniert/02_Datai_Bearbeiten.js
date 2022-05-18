@@ -19,7 +19,7 @@ export class datei_bearbeiten {
         cy.wait(300)
         cy.get('tbody')
             .find('tr')
-            .first()
+            .last()
             .click()
 
         // clear action name
@@ -170,7 +170,7 @@ export class datei_bearbeiten {
         // 4. Leave site via menu or breadcrump, data must be saved
         cy.get('tbody')
             .find('tr')
-            .first()
+            .last()
             .click()
 
         // clear response-name
@@ -212,7 +212,7 @@ export class datei_bearbeiten {
         // entering to first row of action table
         cy.get('tbody')
             .find('tr')
-            .first()
+            .last()
             .click()
 
         // Clear action-name

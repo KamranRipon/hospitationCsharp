@@ -80,7 +80,7 @@ export class responses_text_suchen {
         cy.get('[data-cy="responsetext-table-search"]')
             .clear()
             .type(t)
-            .wait(300)
+            .wait(1000)
         cy.get('tbody')
             .find('tr')
             .first()
