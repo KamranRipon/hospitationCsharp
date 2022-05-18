@@ -1,6 +1,7 @@
 import { onActionAnlegen } from "../support/page_objects/01_Trainingsdaten/06_Actions/01_Action_Hinzufuegen"
 import { onActionBearbeiten } from "../support/page_objects/01_Trainingsdaten/06_Actions/02_Action_Bearbeiten"
 import { onActionSuchen } from "../support/page_objects/01_Trainingsdaten/06_Actions/03_Action_Suchen"
+import { onActionLoeschen } from "../support/page_objects/01_Trainingsdaten/06_Actions/04_Action_Loeschen"
 
 describe('Test Case : Actions', () => {
 
@@ -66,5 +67,15 @@ describe('Test Case : Actions', () => {
             3.1 Action table should display no element
         */
         
+    })
+
+    it('Test Case CCI-T95: Actions Loeschen', () => {
+        onActionLoeschen.actionLoeschen()
+        /*
+        D. Action Loeschen
+        1. Action Name can be remove form Action Table
+            1.1 Assert notification
+            1.2 Assert in Action Table
+        */
     })
 })
