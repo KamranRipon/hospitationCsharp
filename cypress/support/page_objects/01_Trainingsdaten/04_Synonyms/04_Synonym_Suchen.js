@@ -61,6 +61,7 @@ export class synonyms_suchen {
             // Click Anlegen
             cy.get('[data-cy="create-button"]')
                 .click()
+                .wait(1000)
 
             cy.get('[data-cy="navDrawerSynonyms"]')
                 .click()

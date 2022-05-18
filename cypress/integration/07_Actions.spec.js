@@ -18,8 +18,8 @@ describe('Test Case : Actions', () => {
         1. Name should not be empty, error message should contain "Name"
             1.1 Warning message below input field
             1.2 Error message after unsuccessful saving
-        2. Name should not contain "Space" or "/" 
-        3. name should not be known already for an action, 
+        2. Name should not contain "Space" or "/"
+        3. name should not be known already for an action,
            error message should contain "Action"
             2.1 Error message after unsuccessful saving 
             2.2 Valaue should be in the Action table, assert action Table
