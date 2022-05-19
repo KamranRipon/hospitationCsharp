@@ -117,7 +117,7 @@ export class synonyms_anlegen {
         // Select Entire Synonym Table
         cy.selectEntireTbl()
         
-        cy.wait(300)
+        cy.wait(500)
             .get('tbody')
             .find('tr')
             .last()
