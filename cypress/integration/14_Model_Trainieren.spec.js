@@ -1,6 +1,6 @@
 import { onModel } from "../support/page_objects/04_Additional-TestCases/03_Models"
 
-describe("Test Case: Role Based Testing", () => {
+describe.skip("Test Case: Role Based Testing", () => {
    
     beforeEach('visit url', () => {
         
