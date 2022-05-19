@@ -2,6 +2,7 @@ import { onActionAnlegen } from "../support/page_objects/01_Trainingsdaten/06_Ac
 import { onActionBearbeiten } from "../support/page_objects/01_Trainingsdaten/06_Actions/02_Action_Bearbeiten"
 import { onActionSuchen } from "../support/page_objects/01_Trainingsdaten/06_Actions/03_Action_Suchen"
 import { onActionLoeschen } from "../support/page_objects/01_Trainingsdaten/06_Actions/04_Action_Loeschen"
+import { onActionVerwendungen } from "../support/page_objects/01_Trainingsdaten/06_Actions/05_Actions_Verwendungen"
 
 describe('Test Case : Actions', () => {
 
@@ -76,6 +77,28 @@ describe('Test Case : Actions', () => {
         1. Action Name can be remove form Action Table
             1.1 Assert notification
             1.2 Assert in Action Table
+        */
+    })
+
+    it.only('Test Case CCI-T96: Actions Verwendungen', () => {
+        onActionVerwendungen.actionVerwendungen()
+        /*
+        D. Action Verwendungen
+        1.  Add an Actions „action_used“
+        2.	Navigate to Intents-Rules
+        3.	Add a new Rules with steps “action_used”
+        4.	Add a new Form
+        5.	Navigate to POST RULE
+        6.	Add a step
+        7.	Add a story with step “action_used” 
+        8.	Enter to saved action button through action search (search this action button)
+        9.	Navigate to Verwendungen
+        10.	Assert buttons used this action button
+        11.	Click Intent Rules button 
+        12.	Assert portion of url
+        13.	Return to  action button 
+        14.	Do the save for Post-Form Rule & Stories
+
         */
     })
 })

@@ -59,7 +59,6 @@ export class action_anlegen {
 
         // 7. Click on "Anlegen" navigates to table of actions
         cy.url().should("eq", `${Cypress.config().baseUrl}/trainingsdaten/action/`);
-        //cy.url().should('eq', 'http://10.61.135.11:8081/trainingsdaten/action/')
         
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')

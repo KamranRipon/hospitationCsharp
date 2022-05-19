@@ -37,7 +37,7 @@ services:
       - chatbot.model.path=/app/models
       - keycloak.url=http://keycloak-e2e:8080/auth/realms/dataport
     volumes:
-      - ../backend/models
+      - ../backend/models:/temp/models
     networks:
       - cci
     depends_on:
