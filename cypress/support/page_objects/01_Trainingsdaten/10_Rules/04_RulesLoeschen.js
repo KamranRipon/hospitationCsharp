@@ -62,7 +62,12 @@ export class rules_loeschen {
             .click()
 
         // Delete Row from Rules Table
-        cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+        //cy.get('.v-data-table__wrapper > table:nth-child(1) > tbody:nth-child(3)')
+
+        // select Entire Table
+        cy.selectEntireTbl()
+        
+        cy.get('tbody')
             .find('tr')
             .then(function($rulesRowCount) {
                 const countValue = $rulesRowCount.length

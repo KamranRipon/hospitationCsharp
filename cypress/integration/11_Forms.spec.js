@@ -1,6 +1,8 @@
 import { onFormHinzufuegen } from "../support/page_objects/01_Trainingsdaten/11_Forms/01_Form_Hinzufuegen"
 import { onFormBearbeiten } from "../support/page_objects/01_Trainingsdaten/11_Forms/02_Form_Bearbeiten"
 import { onFormSuchen } from "../support/page_objects/01_Trainingsdaten/11_Forms/04_Form_Suchen"
+import { onPostRule } from "../support/page_objects/01_Trainingsdaten/11_Forms/05_Form_POST_RULE"
+import { onFormVerwendungen } from "../support/page_objects/01_Trainingsdaten/11_Forms/06_Form_Verwendungen"
 
 describe ('Test Case - CCI-C11: Forms', () => {
 
@@ -53,15 +55,35 @@ describe ('Test Case - CCI-C11: Forms', () => {
     it('Test Case CCI-T86: Form Suchen', () => {
         onFormSuchen.formSuchen()
         /*
-        C. Action Suchen
-        1. Searching for single specific action works
-           1.1 Action table should display single element
-        2. searching for some chars multiple actions has in common filters correctly
-            2.1 Action table should display multiple elements
-        3.searching for some chars no actions has shows empty table
-            3.1 Action table should display no element
+        C. Form Suchen
+        1. Searching for single specific Form works
+           1.1 Form table should display single element
+        2. searching for some chars multiple Forms has in common filters correctly
+            2.1 Form table should display multiple elements
+        3.searching for some chars no Forms has shows empty table
+            3.1 Form table should display no element
         */
         
     })
 
+    it('Test Case CCI-T99: POST RULE', () => {
+        onPostRule.postRule()
+        /*
+        C. Form Post Rules
+        1. Step-Typ could be selected as many as want, There is no limit.
+        2. All the Step-Typ could be deleted and save.
+        */
+        
+    })
+
+    it('Test Case CCI-T100-101: Form Verwendungen', () => {
+        onFormVerwendungen.verwendugen()
+        /*
+        C. Form Form Verwendungen
+             1. Test the existance of Verwendungen column in Form Table. 
+             2. Compare showed uses number on Form table with under Verwendungen tab
+             3. Under Verwendungen tab enter to each element and assert where it uses
+        */
+        
+    })
 })

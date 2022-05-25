@@ -108,7 +108,9 @@ export class action_verwendungen {
             .click()
 
         // create button
-        cy.get('[data-cy="save-button"]').click()
+        cy.get('[data-cy="save-button"]')
+            .click()
+            .wait(1000)
 
         //8. Navigate to Stories and add a story with step “action_used” 
         cy.get('[data-cy="navDrawerStories"]')

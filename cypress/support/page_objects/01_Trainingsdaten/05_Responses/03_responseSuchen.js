@@ -23,6 +23,7 @@ export class response_suchen {
             // Back to Response Tab
             cy.get('[data-cy="navDrawerResponses"]')
                 .click()
+                .wait(500)
         })
         
         // Selecting Entire Table
