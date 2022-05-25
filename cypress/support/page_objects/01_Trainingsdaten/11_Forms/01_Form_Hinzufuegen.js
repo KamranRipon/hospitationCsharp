@@ -55,7 +55,7 @@ export class form_hinzufuegen {
 
         // Assert Successful Notification
         cy.get('[data-cy="successMessageTitle"]')
-            .should('have.text', ' Das Form'+' "'+addValue+String(fr)+'" '+ 'wurde erfolgreich gespeichert ')
+            .should('have.text', ' Die Form'+' "'+addValue+String(fr)+'" '+ 'wurde erfolgreich gespeichert ')
         
         // Closing Successfully Saved Notification
         cy.get('[class="v-icon notranslate theme--dark"]').eq(1)

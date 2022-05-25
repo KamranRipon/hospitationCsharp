@@ -109,7 +109,7 @@ export class form_bearbeiten {
         cy.get('[data-cy="save-button"]').click()
         cy.wait(500)
         cy.get('[data-cy="successMessageTitle"]')
-            .should('have.text', ' Das Form'+' "'+addValue+String(b)+'" '+ 'wurde erfolgreich gespeichert ')
+            .should('have.text', ' Die Form'+' "'+addValue+String(b)+'" '+ 'wurde erfolgreich gespeichert ')
             cy.wait(300)
         // Closing saved Notification
         cy.successRemove()
