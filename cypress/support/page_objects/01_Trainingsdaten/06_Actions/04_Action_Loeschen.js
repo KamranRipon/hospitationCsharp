@@ -88,6 +88,9 @@ export class action_loeschen {
         // clear search field 
         cy.get('[data-cy="action-table-search"]').clear()
 
+        //select entire Action table
+        cy.selectEntireTbl()
+
         // delete a button
         cy.get('tbody')
             .find('tr')

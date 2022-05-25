@@ -80,7 +80,7 @@ describe('Test Case : Actions', () => {
         */
     })
 
-    it.only('Test Case CCI-T96: Actions Verwendungen', () => {
+    it('Test Case CCI-T96: Actions Verwendungen', () => {
         onActionVerwendungen.actionVerwendungen()
         /*
         D. Action Verwendungen
