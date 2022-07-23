@@ -1,0 +1,15 @@
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/bin/Debug/net6.0/_01HelloWorld
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/bin/Debug/net6.0/_01HelloWorld.deps.json
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/bin/Debug/net6.0/_01HelloWorld.runtimeconfig.json
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/bin/Debug/net6.0/_01HelloWorld.dll
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/bin/Debug/net6.0/_01HelloWorld.pdb
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.csproj.AssemblyReference.cache
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.AssemblyInfoInputs.cache
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.AssemblyInfo.cs
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.csproj.CoreCompileInputs.cache
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.dll
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/refint/_01HelloWorld.dll
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.pdb
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/_01HelloWorld.genruntimeconfig.cache
+/home/riponmd/Documents/Tutorial/LearnC-Sharp/cSharpFundamental/_01HelloWorld/obj/Debug/net6.0/ref/_01HelloWorld.dll
