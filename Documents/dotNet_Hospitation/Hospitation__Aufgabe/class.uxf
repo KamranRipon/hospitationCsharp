@@ -1,0 +1,33 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>40</x><y>90</y><w>210</w><h>190</h></coordinates><panel_attributes>Class Program
+
+--
++Main: void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>90</y><w>210</w><h>190</h></coordinates><panel_attributes>Class ToDoEntry
+--
++title: string
++description: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>540</x><y>400</y><w>210</w><h>200</h></coordinates><panel_attributes>Class ToDoList
+--
++title: string
++description: string
++toDoList: List
+--
++RequestToDos: void
++AllToDoList: List
++RemoveItemInt: void
++RemoveItem: void
++CheckItemNameForRemove: string
++GenerateCsv: void
++ReadingCSVFile: void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>400</y><w>210</w><h>160</h></coordinates><panel_attributes>Class CheckToDos
+--
+
+--
++AddItemToList: void
++ReadExistingToDos: void
++RemoveCompletedToDos: void
++SaveToCSV: void
++ReadCSVFile: void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>270</y><w>130</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>110;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>270</y><w>200</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;130;180;10</additional_attributes></element><element><id>Relation</id><coordinates><x>120</x><y>270</y><w>140</w><h>250</h></coordinates><panel_attributes>lt=-
+m1=0..n
+m2=0..1
+teaches to &gt;</panel_attributes><additional_attributes>10;10;10;220;120;220</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>480</y><w>120</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>100;10;10;10</additional_attributes></element></diagram>

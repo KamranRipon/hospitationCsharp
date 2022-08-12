@@ -1,0 +1,5 @@
+/home/riponmd/Documents/dotNet_Hospitation/Hospitation__Aufgabe/bin/Debug/net6.0/publish/Hospitation__Aufgabe
+/home/riponmd/Documents/dotNet_Hospitation/Hospitation__Aufgabe/bin/Debug/net6.0/publish/Hospitation__Aufgabe.dll
+/home/riponmd/Documents/dotNet_Hospitation/Hospitation__Aufgabe/bin/Debug/net6.0/publish/Hospitation__Aufgabe.deps.json
+/home/riponmd/Documents/dotNet_Hospitation/Hospitation__Aufgabe/bin/Debug/net6.0/publish/Hospitation__Aufgabe.runtimeconfig.json
+/home/riponmd/Documents/dotNet_Hospitation/Hospitation__Aufgabe/bin/Debug/net6.0/publish/Hospitation__Aufgabe.pdb
