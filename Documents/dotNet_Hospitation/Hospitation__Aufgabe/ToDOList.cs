@@ -2,12 +2,12 @@ using System.Text;
 
 namespace Hospitation__Aufgabe
 {
-    class ToDoList : IToDoList
+    class ToDoList
     {
-
         public ToDoList() // constractor without parameters
         {
             ToDoEntry toDo = new ToDoEntry();
+            bDB = new BuildDB();
 
             string Title = "Email";
             string Description = "Write Emails to Customer";
@@ -15,7 +15,7 @@ namespace Hospitation__Aufgabe
             toDo.title = Title;
             toDo.description = Description;
 
-            toDoList.Add(toDo);
+            bDB.InsertData(toDo);
         }
 
         public ToDoList(string title, string description) // constractor with parameters
@@ -28,104 +28,47 @@ namespace Hospitation__Aufgabe
             toDo.title = Title;
             toDo.description = Description;
 
-            toDoList.Add(toDo);
+            bDB.InsertData(toDo);
         }
-        private List<ToDoEntry> toDoList = new List<ToDoEntry>();
+        private BuildDB bDB;
 
         public void RequestToDos(string title, string description)
         {
             ToDoEntry toDo = new ToDoEntry();
 
+
             toDo.title = title;
             toDo.description = description;
 
-            toDoList.Add(toDo);
+            bDB.InsertData(toDo);
         }
 
-        public List<ToDoEntry> AllToDoList()
+        public List<ToDoEntry> ReadElementsFromDB()
         {
-            return toDoList;
+            //return bDB.returnList;
+
+            return bDB.ReadData();
         }
 
-        // Remove Item From List
-        public void RemoveItemInt(int index)
+        public void RemoveElementFromDB(string title)
         {
-            if (toDoList.Count > 1)
-            {
-                toDoList.RemoveAt(index);
-            }
-            else
-            {
-                toDoList.RemoveAt(0);
-            }
-        }
-        public void RemoveItem(string title)
-        {
-            var itemIndex = toDoList.FindIndex(toDoEntry => toDoEntry.title == title);
+            var readDB = bDB.ReadData();
 
-            toDoList.RemoveAt(itemIndex);
+            var toDoEntry = readDB.First(entry => entry.title == title);
+
+            bDB.RemoveData(toDoEntry);
         }
 
-        public string CheckItemNameForRemove(string itemTitle)
+        public void UpdateElementToDB(string titleOld, string titleNew, string description)
         {
-            foreach (var item in toDoList)
-            {
-                if (item.title == itemTitle)
-                {
-                    //toDoList.RemoveItem(itemTitle);
-                    continue;
-                }
-                else
-                {
-                    itemTitle = "";
-                    Console.WriteLine(itemTitle);
-                }
-            }
+            var updateDB = bDB.ReadData();
 
-            return itemTitle;
-        }
+            var toDoEntry = updateDB.First(entry => entry.title == titleOld);
 
-        public void GenerateCsv(List<ToDoEntry> listData, string path)
-        {
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-            using (StreamWriter file = File.CreateText(path))
-            {
-                foreach (var item in listData)
-                {
-                    file.WriteLine("{0},{1}", item.title, item.description);
-                }
-            }
-        }
-        public void ReadingCSVFile(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                StreamReader reader = new StreamReader(File.OpenRead(filePath));
+            toDoEntry.title = titleNew;
+            toDoEntry.description = description;
 
-                List<string> listOfCSVElement = new List<string>();
-
-                while (!reader.EndOfStream)
-                {
-                    var readLine = reader.ReadLine();
-                    var readElement = readLine.Split(',');
-                    foreach (var element in readElement)
-                    {
-                        listOfCSVElement.Add(element);
-                    }
-                }
-                foreach (var itemInList in listOfCSVElement)
-                {
-                    Console.Write(itemInList);
-                    Console.WriteLine();
-                }
-            }
-            else
-            {
-                Console.WriteLine("File doesn't exist");
-            }
+            bDB.UpdateData(toDoEntry, titleOld);
         }
     }
 }

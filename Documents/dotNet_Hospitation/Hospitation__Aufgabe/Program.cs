@@ -1,4 +1,6 @@
-﻿namespace Hospitation__Aufgabe
+﻿using System.Data.SQLite;
+using System;
+namespace Hospitation__Aufgabe
 {
     public class Program
     {
@@ -8,7 +10,7 @@
             Console.Clear();
 
             // Instance of Class CheckToDos
-            ICheckToDoList checkToDos = new CheckToDos();
+
             //IToDoList toDoList = new ToDoList();
 
             Console.WriteLine("Please Enter a Number to Chose.");
@@ -17,38 +19,43 @@
             Console.WriteLine("[1] Check Existing ToDos: ");
             Console.WriteLine("[2] Remove a ToDo: ");
 
-
+            CheckToDos checkToDos = new CheckToDos(); // this is a variables
             // Test if input arguments were supplied:
             if (args[0] == "add" || args[0] == "Add")
             {
                 Console.WriteLine("Here You can Add your ToDos.");
 
                 checkToDos.AddItemToList();
-
-                checkToDos.SaveToCSV();
-            }
-
-            else if (args[0] == "check" || args[0] == "Check")
-            {
-                Console.WriteLine("Here You can Check your all Availible ToDos.");
-
-                checkToDos.ReadExistingToDos();
             }
 
             else if (args[0] == "Remove" || args[0] == "remove")
             {
                 Console.WriteLine("Here You can Remove ToDos.");
 
-                // Remove ToDos 
                 checkToDos.RemoveCompletedToDos();
+
+                // Remove ToDos 
+                //checkToDos.RemoveCompletedToDos();
             }
 
             else if (args[0] == "read" || args[0] == "Read")
             {
                 Console.WriteLine("Here You can Read your ToDos as CSV.");
 
+                checkToDos.ReadExistingToDos();
+
                 // Save ToDos 
-                checkToDos.ReadCSVFile();
+                //checkToDos.ReadCSVFile();
+            }
+
+            else if (args[0] == "update" || args[0] == "Update")
+            {
+                Console.WriteLine("Update Your Database.");
+
+                checkToDos.UpdateToDos();
+
+                // Save ToDos 
+                //checkToDos.ReadCSVFile();
             }
         }
     }

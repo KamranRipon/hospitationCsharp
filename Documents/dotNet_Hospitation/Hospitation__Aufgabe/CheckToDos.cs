@@ -1,9 +1,8 @@
 namespace Hospitation__Aufgabe
 {
-    public class CheckToDos : ICheckToDoList
+    public class CheckToDos
     {
-        IToDoList toDoList = new ToDoList();
-
+        ToDoList toDoList = new ToDoList();
         public void AddItemToList()
         {
             ToDoEntry toDo = new ToDoEntry();
@@ -15,63 +14,39 @@ namespace Hospitation__Aufgabe
             toDo.description = Console.ReadLine();
 
             toDoList.RequestToDos(toDo.title, toDo.description);
-
-            //toDoList.AllToDoList().Add(toDo);
         }
         public void ReadExistingToDos()
         {
-            foreach (var item in toDoList.AllToDoList())
+            Console.WriteLine("Available ToDos");
+
+            foreach (var item in toDoList.ReadElementsFromDB())
             {
-                Console.WriteLine("List Title: {0}, Descripton: {1}", item.title, item.description);
+                Console.WriteLine("Title: {0}, Description: {1}", item.title, item.description);
             }
         }
         public void RemoveCompletedToDos()
         {
-            Console.WriteLine("Which Todos You have Completed ");
+            Console.WriteLine("Please Enter a To Do Title to Remove");
 
-            var itemTitle = Console.ReadLine();
+            string toDoTitle = Console.ReadLine();
 
-            // Check Item Title name
-            toDoList.CheckItemNameForRemove(itemTitle);
+            toDoList.RemoveElementFromDB(toDoTitle);
 
-            do
-            {
-                if (itemTitle == "Quit" || itemTitle == "quit")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Please enter a title of ToDos");
-                    Console.WriteLine("Here is the list of Existing ToDos");
-                    Console.WriteLine();
-                    ReadExistingToDos();
-
-                    Console.WriteLine();
-                    Console.WriteLine("Write \"Quit\" to exit");
-
-                    itemTitle = Console.ReadLine();
-                    toDoList.CheckItemNameForRemove(itemTitle);
-                }
-            } while (itemTitle == "");
-
-            Console.WriteLine("Remaining ToDos are: ");
-            Console.WriteLine();
-
-            toDoList.RemoveItem(itemTitle);
-
-            // Remove an Item from List
             ReadExistingToDos();
         }
 
-        public void SaveToCSV()
+        public void UpdateToDos()
         {
-            toDoList.GenerateCsv(toDoList.AllToDoList(), @"csvFile2.csv");
-        }
+            Console.WriteLine("Please Enter a To Do Title to Update");
+            Console.WriteLine("Please Enter Old Title to replace");
+            string titleOle = Console.ReadLine();
 
-        public void ReadCSVFile()
-        {
-            toDoList.ReadingCSVFile(@"csvFile.csv");
+            Console.WriteLine("Please Enter New Title and a description");
+
+            string newTitle = Console.ReadLine();
+            string newDescription = Console.ReadLine();
+
+            toDoList.UpdateElementToDB(titleOle, newTitle, newDescription);
         }
     }
 }
