@@ -1,5 +1,7 @@
 ﻿using System.Data.SQLite;
 using System;
+
+using System.Globalization;
 namespace Hospitation__Aufgabe
 {
     public class Program
@@ -7,11 +9,8 @@ namespace Hospitation__Aufgabe
         public static void Main(String[] args)
         {
             // Clear Console
-            Console.Clear();
+            //Console.Clear();
 
-            // Instance of Class CheckToDos
-
-            //IToDoList toDoList = new ToDoList();
 
             Console.WriteLine("Please Enter a Number to Chose.");
             Console.WriteLine();
@@ -33,19 +32,58 @@ namespace Hospitation__Aufgabe
                 Console.WriteLine("Here You can Remove ToDos.");
 
                 checkToDos.RemoveCompletedToDos();
-
-                // Remove ToDos 
-                //checkToDos.RemoveCompletedToDos();
             }
 
-            else if (args[0] == "read" || args[0] == "Read")
+            // else if (args[0] == "read" || args[0] == "Read")
+            // {
+            //     Console.WriteLine("Here You can Read your ToDos as CSV.");
+
+            //     checkToDos.ReadExistingToDos();
+            // }
+
+            else if (args[0] == "today")
             {
                 Console.WriteLine("Here You can Read your ToDos as CSV.");
 
-                checkToDos.ReadExistingToDos();
+                checkToDos.ReadCurrentToDos();
+            }
 
-                // Save ToDos 
-                //checkToDos.ReadCSVFile();
+            else if (args[0] == "read")
+            {
+                if (args.Length > 1)
+                {
+                    DateTime date;
+                    bool dateTimeParse;
+                    string newDate = args[1];
+                    // do
+                    // {
+                    //     Console.WriteLine("Please Enter a date in this formate 'MM-dd-yyyy'");
+                    //     Console.Write("Date: ");
+                    //     //string newDate = Console.ReadLine();
+
+                    //     dateTimeParse = DateTime.TryParseExact(newDate, "MM-dd-yyyy", null, DateTimeStyles.None, out date);
+                    // } while (!dateTimeParse);
+
+                    dateTimeParse = DateTime.TryParseExact(newDate, "MM-dd-yyyy", null, DateTimeStyles.None, out date);
+
+                    if (dateTimeParse)
+                    {
+                        DateTime.TryParseExact(newDate, "MM-dd-yyyy", null, DateTimeStyles.None, out date);
+                        checkToDos.ReadgivendateToDos(date);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Date formate is wrong, please enter a date as 'MM-dd-yyyy'");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("Here You can Read your ToDos as CSV.");
+
+                    checkToDos.ReadExistingToDos();
+                }
             }
 
             else if (args[0] == "update" || args[0] == "Update")

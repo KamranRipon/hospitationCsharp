@@ -4,5 +4,6 @@ namespace Hospitation__Aufgabe
     {
         public string title { set; get; }
         public string description { set; get; }
+        public DateTime date { set; get; }
     }
 }

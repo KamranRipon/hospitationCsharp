@@ -1,31 +1,28 @@
-<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>780</x><y>500</y><w>210</w><h>110</h></coordinates><panel_attributes>Class ToDoEntry
---
-+title: string
-+description: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>490</y><w>210</w><h>200</h></coordinates><panel_attributes>Class ToDoList
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>710</x><y>560</y><w>210</w><h>110</h></coordinates><panel_attributes>Class ToDoEntry
 --
 +title: string
 +description: string
-+toDoList: List
++date: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>500</y><w>210</w><h>180</h></coordinates><panel_attributes>Class ToDoList
+--
++toDo: ToDoEntry
+-bDB: BuildDB
++title: string
++description: string
 --
 +ToDoList (string , string): void
 +RequestToDos(string , string): void
-+AllToDoList: List
-+RemoveItemInt: void
-+RemoveItem: void
-+CheckItemNameForRemove: string
-+GenerateCsv: void
-+ReadingCSVFile: void
++ReadElementsFromDB: List
++RemoveElementFromDB(string, string): void
++UpdateElementToDB(string, string, string): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>220</y><w>210</w><h>130</h></coordinates><panel_attributes>Class CheckToDos
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>210</y><w>210</w><h>160</h></coordinates><panel_attributes>Class CheckToDos
---
-+toDoList: IToDoList
++toDoList: ToDoList
 --
 +AddItemToList: void
 +ReadExistingToDos: void
 +RemoveCompletedToDos: void
-+SaveToCSV: void
-+ReadCSVFile: void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLInterface</id><coordinates><x>80</x><y>180</y><w>220</w><h>180</h></coordinates><panel_attributes>IToDoList
++UpdateToDos: void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLInterface</id><coordinates><x>80</x><y>220</y><w>220</w><h>180</h></coordinates><panel_attributes>IToDoList
 --
 +RequestToDos: void
 +AllToDoList : List
@@ -33,26 +30,28 @@
 +CheckItemNameForRemove: string
 +GenerateCsv : void
 +ReadingCSVFile: void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>10</y><w>140</w><h>120</h></coordinates><panel_attributes>Class Program
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>20</y><w>140</w><h>120</h></coordinates><panel_attributes>Class Program
 
 --
 +Main: void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>550</y><w>240</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>360</y><w>30</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>120</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLInterface</id><coordinates><x>90</x><y>500</y><w>200</w><h>160</h></coordinates><panel_attributes>ICheckToDoList
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>610</y><w>170</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;150;10</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>340</y><w>30</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>130</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLInterface</id><coordinates><x>90</x><y>510</y><w>200</w><h>160</h></coordinates><panel_attributes>ICheckToDoList
 --
 +ReadExistingToDos(): void
 +RemoveCompletedToDos() : List
 +AddItemToList() : void
 +SaveToCSV: string
 +ReadCSVFile() : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>570</x><y>580</y><w>60</w><h>40</h></coordinates><panel_attributes>1..1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>500</x><y>370</y><w>60</w><h>40</h></coordinates><panel_attributes>1..1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>720</x><y>570</y><w>60</w><h>40</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>30</y><w>210</w><h>120</h></coordinates><panel_attributes>Class Database
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>570</x><y>640</y><w>60</w><h>40</h></coordinates><panel_attributes>1..1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>510</x><y>350</y><w>60</w><h>40</h></coordinates><panel_attributes>1..1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>650</x><y>560</y><w>60</w><h>40</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>40</y><w>210</w><h>120</h></coordinates><panel_attributes>Class Database
 --
 +myConnection: SQLiteConnection
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>220</y><w>210</w><h>190</h></coordinates><panel_attributes>Class BuildDB
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>230</y><w>240</w><h>150</h></coordinates><panel_attributes>+Class BuildDB
 --
-+BuildDB: IBuildDB
++databaseObject : Database
 --
-+InsertData: void
---
++InsertData(ToDoEntry): void
++ReadData: List&lt;ToDoEntry&gt;
++RemoveData(ToDoEntry ): void
++UpdateData(ToDoEntry , string): void
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>140</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>150</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>910</x><y>230</y><w>60</w><h>40</h></coordinates><panel_attributes>1..1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>910</x><y>120</y><w>60</w><h>40</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>370</y><w>190</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;160;170;160;170;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>510</x><y>460</y><w>60</w><h>40</h></coordinates><panel_attributes>1..1</panel_attributes><additional_attributes></additional_attributes></element></diagram>
